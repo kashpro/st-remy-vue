@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'Gotham Pro';
+  src: local('GothamPro'),
+    url('../assets/fonts/GothamPro.woff2') format('woff2'),
+    url('../assets/fonts/GothamPro.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; 
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  src: local('PT Serif Bold'), local('PTSerif-Bold'),
+    url('../assets/fonts/PTSerif-Bold.woff2') format('woff2'),
+    url('../assets/fonts/PTSerif-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+font-face generator:
+https://transfonter.org/
+*/
+
+/*
+https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
+
+100 Thin (Hairline)
+200 Extra Light (Ultra Light)
+300 Light
+400 Normal
+500 Medium
+600 Semi Bold (Demi Bold)
+700 Bold
+800 Extra Bold (Ultra Bold)
+900 Black (Heavy)
+*/
