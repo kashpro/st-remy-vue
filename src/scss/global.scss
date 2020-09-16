@@ -1,0 +1,76 @@
+/* development colors */
+$temp1: rgba(#ff0032, 0.3); // pink
+$temp2: rgba(#00ff32, 0.3); // green
+$temp3: rgba(#6464ff, 0.3); // blue
+$temp4: rgba(#ffff32, 0.3); // yellow
+$temp5: rgba(#ff32ff, 0.3); // magenta
+$temp6: rgba(#32ffff, 0.3); // cyan
+
+.c1 {background-color: $temp1;} // pink
+.c2 {background-color: $temp2;} // green
+.c3 {background-color: $temp3;} // blue
+.c4 {background-color: $temp4;} // yellow
+.c5 {background-color: $temp5;} // magenta
+.c6 {background-color: $temp6;} // cyan
+
+$main-font: "Gotham Pro", sans-serif;
+$second-font: "PT Serif", serif;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  min-height: 0;
+  min-width: 0;
+}
+
+body {
+  font-size: 18px;
+  font-family: $main-font;
+  font-weight: 400;
+  font-style: normal;
+  color: #ffffff;
+  background-color: #000000;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3 ,h4, h5, h6{
+  margin: 0;
+  padding: 0;
+}
+
+button, input, select {
+  outline: none;
+}
+
+// html {
+//   scroll-behavior: smooth; // плавный скролл
+// }
+
+// html {
+//   user-select: none; // autoprefixer check
+// }
+
+body {
+  -webkit-tap-highlight-color: transparent; // убрать синий БГ при таче
+}
