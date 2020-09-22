@@ -1,33 +1,8 @@
 <template>
   <div class="story">
-    <div class="story__image story__image--wh400">
-      <img :src="modalData.imgBefore" alt="before image">
-      <img :src="modalData.imgAfter" alt="after image">
-    </div>
-    <div class="story__box1">
-      <div class="story__head">История дружбы:</div>
-      <div class="story__share">
-        <ul class="story__social">
-          <li><a class="social-link social-link--ok social-link--mr15" title="Одноклассники" :href="modalData.okLink">ok.ru</a></li>
-          <li><a class="social-link social-link--vk" title="Вконтакте" :href="modalData.vkLink">vk.com</a></li>
-        </ul>
-      </div>
-      <p class="story__text">{{ modalData.text }}</p>
-      <span class="story__author">{{ modalData.author }}</span>
-      <span class="story__date">{{ modalData.date }}</span>
-    </div>
+    <slot name="default"></slot>
   </div>
 </template>
-
-<script>
-  import {mapGetters} from "vuex";
-
-  export default {
-    computed: {
-      ...mapGetters(["modalData"]),
-    },
-  }
-</script>
 
 <style lang="scss">
   .story {

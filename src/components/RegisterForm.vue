@@ -9,9 +9,7 @@
       <label class="modal__label"><span>Дата рождения *</span><input type="date" class="modal__input" name="birthday"></label>
       <label class="modal__label"><span>Пароль *</span><input type="password" class="modal__input" name="password"></label>
       <div class="modal__box1">
-        <!-- <button type="submit" class="btn modal__btn regform__btn">Регистрация</button> -->
         <Button type="submit" class="modal__btn regform__btn">Регистрация</Button>
-        
         <input id="person" class="modal__check" name="person" type="checkbox" hidden>
         <label class="modal__check-label" for="person">«Согласен(на) на обработку персональных данных»</label>
         <input id="rules" class="modal__check" name="rules" type="checkbox" hidden>
@@ -26,8 +24,8 @@
         </ul>
       </div>
     </form>
-    <button class="modal__link modal__link--mr" @click="loginBtnClickHandler">Войти</button>
-    <button class="modal__link" @click="restoreBtnClickHandler">Забыли пароль?</button>
+    <button class="modal__link modal__link--mr" @click="openLoginForm">Войти</button>
+    <button class="modal__link" @click="openRestoreForm">Забыли пароль?</button>
   </div>
 </template>
 
@@ -42,11 +40,11 @@
       };
     }, 
     methods: {
-      loginBtnClickHandler() {
-        this.$store.dispatch("openCommonModal", {type: "LoginForm",});
+      openLoginForm() {
+        this.$store.dispatch("openModal", {type: "LoginForm",});
       },
-      restoreBtnClickHandler() {
-        this.$store.dispatch("openCommonModal", {type: "RestoreForm",});
+      openRestoreForm() {
+        this.$store.dispatch("openModal", {type: "RestoreForm",});
       },
       async submitHandler() {
         try {

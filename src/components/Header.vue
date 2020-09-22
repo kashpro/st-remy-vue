@@ -7,21 +7,12 @@
         </router-link>
       </div>
       <Nav class="header__nav"></Nav>
-      
-      <!-- <nav class="nav header__nav">
-        <router-link class="nav-link" active-class="nav-link--active" to="/" exact>Главная</router-link>
-        <a class="nav-link" :href="rulesFileLink" target="blank">Правила конкурса</a>
-        <router-link class="nav-link" active-class="nav-link--active" to="/gallery" exact>Галерея</router-link>
-        <router-link class="nav-link" active-class="nav-link--active" to="/winners" exact>Победители</router-link>
-        <a class="nav-link" href="/admin.html" target="blank">Админ</a>
-      </nav> -->
       <div class="login header__login">
         <a class="login__name hide" @click.prevent="isUserMenuOpen = !isUserMenuOpen">Пантелеймон Константинопольский</a>
         <ul v-if="isUserMenuOpen" class="login__list" ref="loginList">
           <li class="login__item" @click="closeUserMenu"><router-link tag="span" to="/profile">Профиль</router-link></li>
           <li class="login__item" @click="closeUserMenu"><span>Выйти</span></li>
         </ul>
-        <!-- <button class="btn login__btn" @click="openLoginForm">Войти</button> -->
         <Button class="login__btn" @click.native="openLoginForm">Войти</Button>
       </div>
     </div>
@@ -41,7 +32,8 @@
     },
     methods: {
       openLoginForm() {
-        this.$store.dispatch("openCommonModal", {type: "LoginForm",});
+        this.$store.dispatch("openModal", {type: "LoginForm",});
+        // this.$store.dispatch("openCommonModal", {type: "LoginForm",});
       },
       closeUserMenuKeyboard(e) {
         if (e.code === "Escape" || e.keyCode === 27) { //e.keyCode - deprecated

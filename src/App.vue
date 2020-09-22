@@ -2,13 +2,15 @@
   <div id="app">
     <component v-if="layout" :is="layout"></component>
     <router-view v-else></router-view>
-    <CommonModal></CommonModal>
+    <!-- <CommonModal></CommonModal> -->
+    <Modal></Modal>
   </div> 
 </template>
 
 <script>
   import HomeLayout from "@/views/layouts/HomeLayout.vue";
-  import CommonModal from "@/components/CommonModal.vue";
+  // import CommonModal from "@/components/CommonModal.vue";
+  import Modal from "@/components/Modal.vue";
 
   export default {
     computed: {
@@ -16,6 +18,6 @@
         return this.$route.meta.layout;
       },
     },
-    components: {HomeLayout, CommonModal,},
+    components: {HomeLayout, /* CommonModal, */ Modal,},
   }
 </script>
