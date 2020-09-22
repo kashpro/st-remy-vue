@@ -1,11 +1,11 @@
 <template>
   <div class="logform">
     <h2 class="modal__head">Авторизоваться</h2>
-    <form class="modal__form">
+    <form class="modal__form" @submit.prevent="submitHandler">
       <label class="modal__label"><span>Почта или телефон *</span><input type="text" class="modal__input" name="login"></label>
       <label class="modal__label"><span>Пароль *</span><input type="password" class="modal__input" name="password"></label>
       <div class="modal__box1">
-        <button type="submit" class="btn modal__btn logform__btn" @click.prevent="submitHandler">Войти</button>
+        <Button type="submit" class="modal__btn logform__btn">Войти</Button>
       </div>
       <div class="modal__box2">
         <span class="modal__text">Войти через социальные сети:</span>
@@ -21,7 +21,10 @@
 </template>
 
 <script>
+  import Button from "@/components/Button.vue";
+  
   export default {
+    components: {Button,},
     methods: {
       registerBtnClickHandler() {
         this.$store.dispatch("openCommonModal", {type: "RegisterForm",});

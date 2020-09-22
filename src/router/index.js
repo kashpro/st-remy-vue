@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/start',
     name: 'Start',
-    meta: {},
+    meta: {layout: null,},
     component: () => import('@/views/Start.vue'),
   },
   {
@@ -36,14 +36,9 @@ const routes = [
   },
   { 
     path: '*',
+    meta: {layout: null,},
     component: () => import('@/views/404.vue'),
   },
-  // {
-  //   path: '/rules',
-  //   name: 'Rules',
-  //   meta: {layout: "Home",},
-  //   component: () => import('@/views/Rules.vue'),
-  // },
 ];
 
 const router = new VueRouter({

@@ -2,15 +2,15 @@
   <section class="feedback">
     <div class="container feedback__container">
       <h2 class="feedback__head">Обратная связь</h2>
-      <form class="feedback__form">
+      <form class="feedback__form" @submit.prevent="sendFeedback">
         <input name="name" class="feedback__input" type="text" placeholder="Имя *">
         <input name="email" class="feedback__input" type="email" placeholder="E-mail *">
         <div class="feedback__box1">
           <textarea name="text" class="feedback__textarea" placeholder="Сообщение *"></textarea>
           <ThemeInput :name="'theme'" class="feedback__theme"></ThemeInput>
         </div>
-        
-        <button type="submit" class="btn feedback__btn">Отправить</button>
+        <Button class="feedback__btn" type="submit">Отправить</Button>
+        <!-- <button type="submit" class="btn feedback__btn">Отправить</button> -->
     </form>
     </div>
   </section>
@@ -18,18 +18,21 @@
 
 <script>
   import ThemeInput from "@/components/ThemeInput.vue";
+  import Button from "@/components/Button.vue";
 
   export default {
-    components: {ThemeInput,},
+    components: {ThemeInput, Button,},
+    methods: {
+      sendFeedback() {
+        console.log("send feedback");
+      }
+    },
   }
 </script>
 
 <style lang="scss">
   .feedback {
     margin-bottom: 150px;
-    &__container {
-
-    }
     &__head {
       font-size: 30px;
       font-weight: 700;

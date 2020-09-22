@@ -48,7 +48,7 @@
         display: block;
         content: "";
         background-color: #ccb16f;
-        width: 120%;
+        width: calc(100% + 20px);
         height: 0px;
         bottom: -18px;
         transform: translateX(-50%);
