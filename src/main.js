@@ -1,10 +1,16 @@
 /* Стили */
 import "@/scss/main.scss";
 
+/* Vue */
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+
+/* Utils */
+import development from '@/utils/development.util.js';
+
+development.addWindowStatsElement();
 
 Vue.config.productionTip = false;
 
