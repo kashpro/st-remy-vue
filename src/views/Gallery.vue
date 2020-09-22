@@ -111,7 +111,7 @@
         </li> <!-- Конец итема -->
       </ul>
     </div>
-    <StoryModal>
+    <!-- <StoryModal>
       <template v-slot:main>
       <div class="story__image story__image--wh400">
         <img src="@/assets/images/gallery-03.jpg" alt="before image">
@@ -130,19 +130,30 @@
         <span class="story__date">2018/2018</span>
       </div>
       </template>
-    </StoryModal>
+    </StoryModal> -->
   </section>
 </template>
 
 <script>
-  import StoryModal from "@/components/StoryModal.vue";
+  // import StoryModal from "@/components/StoryModal.vue";
   import Button from "@/components/Button.vue";
 
   export default {
-    components: {StoryModal, Button,},
+    components: {/* StoryModal, */ Button,},
     methods: {
       showStory() {
-        this.$store.dispatch("openStoryModal");
+        this.$store.dispatch("openModal", {
+          type: "Story",
+          data: {
+            imgBefore: "https://cs12.pikabu.ru/post_img/2020/09/21/0/160063895715505179.webp",
+            imgAfter: "https://cs10.pikabu.ru/post_img/2020/08/10/2/159702086118344152.jpg",
+            okLink: "https://ok.ru",
+            vkLink: "https://vk.com",
+            text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eaque fugiat fuga repellat fugit et hic vel, nihil voluptas quidem illum corrupti porro cumque corporis, numquam sint eius dicta quas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eaque fugiat fuga repellat fugit et hic vel, nihil voluptas quidem illum corrupti porro cumque corporis, numquam sint eius dicta quas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eaque fugiat fuga repellat fugit et hic vel, nihil voluptas quidem illum corrupti porro cumque corporis, numquam sint eius dicta quas.",
+            author: "Константинопольский Пантелеймон",
+            date: "2018/2018",
+          },
+        });
       }
     },
   }

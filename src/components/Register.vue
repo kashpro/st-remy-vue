@@ -17,7 +17,7 @@
     components: {Button,},
     methods: {
       openRegisterForm() {
-        this.$store.dispatch("openCommonModal", {type: "RegisterForm",});
+        this.$store.dispatch("openModal", {type: "RegisterForm",});
       }
     }
   }

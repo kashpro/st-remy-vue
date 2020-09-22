@@ -5,34 +5,52 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    commonModalType: "",
-    isCommonModalOpen: false,
-    isStoryModalOpen: false,
-    head: "",
-    message: "",
+    // commonModalType: "",
+    // isCommonModalOpen: false,
+    // isStoryModalOpen: false,
+    // head: "",
+    // message: "",
+    //
+    isModalOpen: false,
+    modalType: "",
+    modalData: {},
   },
   mutations: {
-    setCommonModalType: (state, type) => {state.commonModalType = type;},
-    setIsCommonModalOpen: (state, flag) => {state.isCommonModalOpen = flag;},
-    setIsStoryModalOpen: (state, flag) => {state.isStoryModalOpen = flag;},
-    setMessage: (state, message) => {state.message = message;},
-    setHead: (state, head) => {state.head = head;},
+    // setCommonModalType: (state, type) => {state.commonModalType = type;},
+    // setIsCommonModalOpen: (state, flag) => {state.isCommonModalOpen = flag;},
+    // setIsStoryModalOpen: (state, flag) => {state.isStoryModalOpen = flag;},
+    // setMessage: (state, message) => {state.message = message;},
+    // setHead: (state, head) => {state.head = head;},
+    //
+    setModalData: (state, data) => {state.modalData = data;},
+    setModalType: (state, type) => {state.modalType = type;},
+    setIsModalOpen: (state, flag) => {state.isModalOpen = flag;},
   },
   actions: {
-    openCommonModal: ({commit}, {type, head, message}) => {
-      if (head) {commit("setHead", head);}
-      if (message) {commit("setMessage", message);}
-      commit("setCommonModalType", type);
-      commit("setIsStoryModalOpen", false);
-      commit("setIsCommonModalOpen", true);
-    },
-    closeCommonModal: ({commit}) => {commit("setIsCommonModalOpen", false);},
+    // openCommonModal: ({commit}, {type, head, message}) => {
+    //   if (head) {commit("setHead", head);}
+    //   if (message) {commit("setMessage", message);}
+    //   commit("setCommonModalType", type);
+    //   commit("setIsStoryModalOpen", false);
+    //   commit("setIsCommonModalOpen", true);
+    // },
+    // closeCommonModal: ({commit}) => {commit("setIsCommonModalOpen", false);},
     
-    openStoryModal: ({commit}) => {
-      commit("setIsCommonModalOpen", false);
-      commit("setIsStoryModalOpen", true);
+    // openStoryModal: ({commit}) => {
+    //   commit("setIsCommonModalOpen", false);
+    //   commit("setIsStoryModalOpen", true);
+    // },
+    // closeStoryModal: ({commit}) => {commit("setIsStoryModalOpen", false);},
+    //
+    openModal: ({commit}, {type, data}) => {
+      if (data) {commit("setModalData", data);}
+      commit("setModalType", type);
+      commit("setIsModalOpen", true);
     },
-    closeStoryModal: ({commit}) => {commit("setIsStoryModalOpen", false);},
+    closeModal: ({commit}) => {
+      commit("setIsModalOpen", false);
+    },
+    /////////////////////////////
     registerNewUSer: async (context, data) => {
       try {
          const res = await fetch("https://st-remy.django.the-uweb.ru/auth/users/", {
@@ -63,11 +81,15 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    commonModalType: state => state.commonModalType,
-    isCommonModalOpen: state => state.isCommonModalOpen,
-    isStoryModalOpen: state => state.isStoryModalOpen,
-    head: state => state.head,
-    message: state => state.message,
+    // commonModalType: state => state.commonModalType,
+    // isCommonModalOpen: state => state.isCommonModalOpen,
+    // isStoryModalOpen: state => state.isStoryModalOpen,
+    // head: state => state.head,
+    // message: state => state.message,
+    //
+    isModalOpen: state => state.isModalOpen,
+    modalType: state => state.modalType,
+    modalData: state => state.modalData,
   },
   modules: {
 

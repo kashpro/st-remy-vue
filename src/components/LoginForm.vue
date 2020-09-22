@@ -2,7 +2,7 @@
   <div class="logform">
     <h2 class="modal__head">Авторизоваться</h2>
     <form class="modal__form" @submit.prevent="submitHandler">
-      <label class="modal__label"><span>Почта или телефон *</span><input type="text" class="modal__input" name="login"></label>
+      <label class="modal__label"><span>Почта или телефон *</span><input type="text" class="modal__input" name="login"></label> <!-- телефон походу уйдет -->
       <label class="modal__label"><span>Пароль *</span><input type="password" class="modal__input" name="password"></label>
       <div class="modal__box1">
         <Button type="submit" class="modal__btn logform__btn">Войти</Button>
@@ -15,8 +15,8 @@
         </ul>
       </div>
     </form>
-    <button class="modal__link modal__link--mr" @click="registerBtnClickHandler">Регистрация</button>
-    <button class="modal__link" @click="restoreBtnClickHandler">Забыли пароль?</button>
+    <button class="modal__link modal__link--mr" @click="openRegisterForm">Регистрация</button>
+    <button class="modal__link" @click="openRestoreForm">Забыли пароль?</button>
   </div>
 </template>
 
@@ -26,11 +26,11 @@
   export default {
     components: {Button,},
     methods: {
-      registerBtnClickHandler() {
-        this.$store.dispatch("openCommonModal", {type: "RegisterForm",});
+      openRegisterForm() {
+        this.$store.dispatch("openModal", {type: "RegisterForm",});
       },
-      restoreBtnClickHandler() {
-        this.$store.dispatch("openCommonModal", {type: "RestoreForm",});
+      openRestoreForm() {
+        this.$store.dispatch("openModal", {type: "RestoreForm",});
       },
       async submitHandler() {
         try {
