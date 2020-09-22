@@ -3,5 +3,10 @@
 @import "./helpers.scss";
 @import "./global.scss";
 
-/* blocks */
+@import "~slick-carousel/slick/slick.scss";
 
+/* blocks */
+@import "./blocks/btn.scss";
+@import "./blocks/nav-link.scss";
+@import "./blocks/social-link.scss";
+@import "./blocks/modal.scss";

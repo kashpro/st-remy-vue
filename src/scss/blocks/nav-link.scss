@@ -1,0 +1,37 @@
+.nav-link {
+  position: relative;
+  display: block;
+  opacity: 0.75;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  &:not(:last-child) {
+    margin-right: 50px;
+  }
+  &::before {
+    transition: all 0.2s ease;
+    position: absolute;
+    display: block;
+    content: "";
+    background-color: #ccb16f;
+    width: 120%;
+    height: 0px;
+    bottom: -18px;
+    transform: translateX(-50%);
+    left: 50%;
+  }
+  &:hover {
+    opacity: 1;
+    &::before {
+      bottom: -8px;
+      height: 2px;
+    }
+  }
+  &--active {
+    opacity: 1;
+    cursor: default;
+    &::before {
+      bottom: -8px;
+      height: 2px;
+    }
+  }
+}

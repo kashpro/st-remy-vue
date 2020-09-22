@@ -1,7 +1,21 @@
 <template>
-
+  <div id="app">
+    <component v-if="layout" :is="layout"></component>
+    <router-view v-else></router-view>
+    <CommonModal></CommonModal>
+  </div> 
 </template>
 
-<style lang="scss">
+<script>
+  import HomeLayout from "@/views/layouts/HomeLayout.vue";
+  import CommonModal from "@/components/CommonModal.vue";
 
-</style>
+  export default {
+    computed: {
+      layout() {
+        return this.$route.meta.layout;
+      },
+    },
+    components: {HomeLayout, CommonModal,},
+  }
+</script>
