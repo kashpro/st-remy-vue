@@ -21,7 +21,8 @@
           <li class="login__item" @click="closeUserMenu"><router-link tag="span" to="/profile">Профиль</router-link></li>
           <li class="login__item" @click="closeUserMenu"><span>Выйти</span></li>
         </ul>
-        <button class="btn login__btn" @click="openLoginForm">Войти</button>
+        <!-- <button class="btn login__btn" @click="openLoginForm">Войти</button> -->
+        <Button class="login__btn" @click.native="openLoginForm">Войти</Button>
       </div>
     </div>
   </header>
@@ -29,9 +30,10 @@
 
 <script>
   import Nav from "@/components/Nav.vue";
+  import Button from "@/components/Button.vue";
 
   export default {
-    components: {Nav},
+    components: {Nav, Button,},
     data() {
       return {
         isUserMenuOpen: false,

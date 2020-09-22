@@ -1,7 +1,6 @@
 <template>
   <div class="modal" :class="{'modal--show': isCommonModalOpen}" @click.self="closeCommonModal">
     <div class="modal__content">
-      {{ commonModalType }}
       <div class="modal__close" @click.self="closeCommonModal"></div>
         <component :is="commonModalType">
           <!-- <slot></slot> -->
@@ -42,9 +41,6 @@
         }
       },
     },
-    updated() {
-      console.log(this.commonModalType);
-    }
   }
 </script>
 

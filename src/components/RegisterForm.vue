@@ -1,7 +1,7 @@
 <template>
   <div class="regform">
     <h2 class="modal__head">Зарегистрироваться</h2>
-    <form class="modal__form">
+    <form class="modal__form"  @submit.prevent="submitHandler">
       <label class="modal__label"><span>Имя *</span><input type="text" class="modal__input" name="firstname"></label>
       <label class="modal__label"><span>Фамилия *</span><input type="text" class="modal__input" name="secondname"></label>
       <label class="modal__label"><span>E-mail *</span><input type="email" class="modal__input" name="email"></label>
@@ -9,7 +9,8 @@
       <label class="modal__label"><span>Дата рождения *</span><input type="date" class="modal__input" name="birthday"></label>
       <label class="modal__label"><span>Пароль *</span><input type="password" class="modal__input" name="password"></label>
       <div class="modal__box1">
-        <button type="submit" class="btn modal__btn regform__btn" @click.prevent="submitHandler">Регистрация</button>
+        <!-- <button type="submit" class="btn modal__btn regform__btn">Регистрация</button> -->
+        <Button type="submit" class="modal__btn regform__btn">Регистрация</Button>
         
         <input id="person" class="modal__check" name="person" type="checkbox" hidden>
         <label class="modal__check-label" for="person">«Согласен(на) на обработку персональных данных»</label>
@@ -31,7 +32,10 @@
 </template>
 
 <script>
+  import Button from "@/components/Button.vue";
+
   export default {
+    components: {Button,},
     data() {
       return {
         rulesFileLink: CONFIG.RULES_FILE_LINK,

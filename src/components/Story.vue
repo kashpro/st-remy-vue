@@ -1,6 +1,6 @@
 <template>
   <div class="story">
-    <slot></slot>
+    <slot name="default"></slot>
   </div>
 </template>
 
