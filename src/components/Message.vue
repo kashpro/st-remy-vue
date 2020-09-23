@@ -1,7 +1,8 @@
 <template>
   <div class="message">
-    <h3 v-if=" modalData.head" class="modal__head message__head">{{ modalData.head }}</h3>
-    <p  v-if=" modalData.text" class="modal__text message__text">{{ modalData.text }}</p>
+    <ModalHead v-if="modalData.head" class="message__modal-head">{{ modalData.head }}</ModalHead>
+    <!-- <h3 v-if=" modalData.head" class="modal__head message__head">{{ modalData.head }}</h3> -->
+    <p v-if=" modalData.text" class="message__text">{{ modalData.text }}</p>
   </div>
 </template>
 
@@ -17,8 +18,11 @@ import {mapGetters} from "vuex";
 
 <style lang="scss">
   .message {
-    // &__head {
-    //   margin-bottom: 0;
-    // }
+    &__modal-head {
+      margin-bottom: 30px;
+    }
+    &__text {
+      text-align: center;
+    }
   }
 </style>
