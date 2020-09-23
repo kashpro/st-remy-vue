@@ -136,10 +136,10 @@
 
 <script>
   // import StoryModal from "@/components/StoryModal.vue";
-  import Button from "@/components/Button.vue";
+  // import Button from "@/components/Button.vue";
 
   export default {
-    components: {/* StoryModal, */ Button,},
+    // components: {/* StoryModal, */ Button,},
     methods: {
       showStory() {
         this.$store.dispatch("openModal", {

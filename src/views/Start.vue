@@ -5,8 +5,11 @@
       <h1 class="start__head">Привет!</h1>
       <span class="start__subhead">Для доступа необходимо подтвердить возраст.*</span>
       <span class="start__text">Дата рождения:</span>
-      <input type="date" class="start__input">
-      <Button disabled class="btn start__btn">Перейти на сайт</Button>
+      <form class="start__form" @submit.prevent="checkAge">
+        <input type="date" class="start__input" v-model="age">
+        <Button type="submit" class="start__btn">Перейти на сайт</Button>
+      </form>
+      
       <div class="start__note">*Сайт содержит информацию для лиц совершеннолетнего возраста. Сведения, размещенные на сайте, не являются рекламой, носят исключительно информационный и развлекательный характер, и предназначены только для личного использования.</div>
     </div>
   </div>
@@ -14,7 +17,32 @@
 
 <script>
 export default {
-  
+    data() {
+      return {
+        age: "2000-01-01",
+      };
+    },
+  methods: {
+    checkAge() {
+      const date1 = Date.now();
+      const date2 = new Date(this.age).getTime();
+      const diff = date1 - date2;
+      const year18InMs = 1000 * 60 * 60 * 24 * 365 * 18;
+      // const diffTime = new Date(diff);
+      // const diffYear = diffTime.getFullYear();
+      // const initYear = new Date(0).getFullYear();
+      // const years = diffYear - initYear;
+      if (diff >= year18InMs) {
+        this.$router.push("/");
+        localStorage.setItem("agePass", true);
+      } else {
+        this.$store.dispatch("openModal", {
+          type: "Message",
+          data: this.$messages.YOUNG_ACCESS_DENIED_MESSAGE,
+        });
+      }
+    }
+  }
 }
 </script>
 
@@ -65,6 +93,11 @@ export default {
       max-width: 930px;
       text-align: center;
       margin-bottom: 50px;
+    }
+    &__form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     &__input {
       padding: 12px 10px 12px 18px;

@@ -1,7 +1,7 @@
 <template>
   <div class="message">
-    <h3 class="modal__head message__head">{{ head }}</h3>
-    <p class="modal__text message__text">{{ message }}</p>
+    <h3 v-if=" modalData.head" class="modal__head message__head">{{ modalData.head }}</h3>
+    <p  v-if=" modalData.text" class="modal__text message__text">{{ modalData.text }}</p>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import {mapGetters} from "vuex";
 
   export default {
     computed: {
-      ...mapGetters(["head", "message",]),
+      ...mapGetters(["modalData",]),
     }    
   }
 </script>

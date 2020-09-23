@@ -21,10 +21,10 @@
 
 <script>
   import Nav from "@/components/Nav.vue";
-  import Button from "@/components/Button.vue";
+  // import Button from "@/components/Button.vue";
 
   export default {
-    components: {Nav, Button,},
+    components: {Nav, /*Button*/},
     data() {
       return {
         isUserMenuOpen: false,

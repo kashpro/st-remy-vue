@@ -14,9 +14,10 @@
   import LoginForm from "@/components/LoginForm.vue";
   import RestoreForm from "@/components/RestoreForm.vue";
   import Story from "@/components/Story.vue";
+  import Message from "@/components/Message.vue";
 
   export default {
-    components: {RegisterForm, LoginForm, RestoreForm, Story,},
+    components: {RegisterForm, LoginForm, RestoreForm, Story, Message,},
     methods: {
       closeModal() {
         this.$store.dispatch("closeModal");
