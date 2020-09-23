@@ -18,10 +18,10 @@
 
 <script>
   import ThemeInput from "@/components/ThemeInput.vue";
-  import Button from "@/components/Button.vue";
+  // import Button from "@/components/Button.vue";
 
   export default {
-    components: {ThemeInput, Button,},
+    components: {ThemeInput, /*Button,*/},
     methods: {
       sendFeedback() {
         console.log("send feedback");

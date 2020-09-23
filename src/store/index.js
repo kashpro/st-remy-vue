@@ -66,18 +66,30 @@ export default new Vuex.Store({
       }
     },
     login: async (context, data) => {
-      try {
-         const res = await fetch("https://st-remy.django.the-uweb.ru/auth/token/login/", {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-          },
-        }); 
-        return await res.json();
-      } catch(err) {
-        throw err;
-      }
+      // try {
+      //    const res = await fetch("https://st-remy.django.the-uweb.ru/auth/token/login/", {
+      //     method: "POST",
+      //     body: JSON.stringify(data),
+      //     headers: {
+      //       'Content-Type': 'application/json;charset=utf-8',
+      //     },
+      //   }); 
+      //   return await res.json();
+      // } catch(err) {
+      //   throw err;
+      // }
+
+        try {
+          const res = await fetch("https://st-remy.django.the-uweb.ru/auth/users/me/?limit=1&offset=1", {
+           headers: {
+             // 'Content-Type': 'application/json;charset=utf-8',
+             "Authorization": "Token 2186f0fa544647de0f41c639a84e93387412affe",
+           },
+         }); 
+         return await res.json();
+       } catch(err) {
+         throw err;
+       }
     },
   },
   getters: {

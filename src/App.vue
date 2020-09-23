@@ -19,5 +19,10 @@
       },
     },
     components: {HomeLayout, /* CommonModal, */ Modal,},
+    beforeMount() {
+      if (JSON.parse(localStorage.getItem("agePass")) !== true) {
+        this.$router.push("/start");
+      } 
+    }
   }
 </script>

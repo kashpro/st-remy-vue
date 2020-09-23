@@ -28,10 +28,10 @@
 
 <script>
   import ImageField from "@/components/ImageField.vue";
-  import Button from "@/components/Button.vue";
+  // import Button from "@/components/Button.vue";
 
   export default {
-    components: {ImageField, Button,},
+    components: {ImageField, /*Button,*/},
     methods: {
       sendHistory() {
         console.log("hist");
