@@ -3,8 +3,8 @@
     <ul class="nav__list">
       <li class="nav__item"><router-link class="nav__link" active-class="nav__link--active" to="/" exact>Главная</router-link></li>
       <li class="nav__item"><a class="nav__link" :href="rulesFileLink" target="blank">Правила конкурса</a></li>
-      <li class="nav__item"><router-link class="nav__link" active-class="nav__link--active" to="/gallery" exact>Галерея</router-link></li>
-      <li class="nav__item"><router-link class="nav__link" active-class="nav__link--active" to="/winners" exact>Победители</router-link></li>
+      <li class="nav__item"><router-link class="nav__link" active-class="nav__link--active" to="/gallery">Галерея</router-link></li>
+      <li class="nav__item"><router-link class="nav__link" active-class="nav__link--active" to="/winners">Победители</router-link></li>
       <li class="nav__item"><a class="nav__link" href="/admin.html" target="blank">Админ</a></li>
     </ul>
   </nav>

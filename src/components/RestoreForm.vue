@@ -1,29 +1,44 @@
 <template>
   <div class="resform">
-    <!-- <h2 class="modal__head">Восстановление пароля</h2> -->
     <ModalHead class="resform__modal-head">Восстановление пароля</ModalHead>
-    <!-- <form class="resform__form modal__form" @submit.prevent="sendRestore"> -->
     <ModalForm class="resform__modal-form" @submit.native.prevent="sendRestore">
-      <!-- <label class="modal__label resform__label"><span>Почта</span><input type="email" class="modal__input" name="email"></label> -->
-      <ModalInput class="resform__modal-input" text="E-mail *" name="email" type="email"></ModalInput>
+      <ModalInput class="resform__modal-input" text="E-mail *" name="email" type="email" v-model="email" :small="emailInvalid"></ModalInput>
       <div class="modal__box1">
-        <!-- <button type="submit" class="btn modal__btn resform__btn">Восстановить пароль</button> -->
         <Button type="submit" class="resform__btn">Восстановить пароль</Button>
       </div>
     </ModalForm>
-    <!-- </form> -->
   </div>
 </template>
 
 <script>
-  // import Button from "@/components/Button.vue";
-  
+  import {email, required} from "vuelidate/lib/validators";
+  import {emailInvalid} from "@/utils/validations.mixin.js";
+
   export default {
-    // components: {Button,},
+     mixins: [emailInvalid],
+     validations: {
+      email: {required, email},
+    },
+    data() {
+      return {
+        email: "",
+      };
+    },
+    // computed: {
+    //   emailInvalid() {
+    //     if (this.$v.email.$dirty && !this.$v.email.required) {return this.$messages.FORM_EMAIL_FIELD_REQUIRED;} 
+    //     if (this.$v.email.$dirty && !this.$v.email.email) {return this.$messages.FORM_EMAIL_FIELD_INCORRECT;} 
+    //     return false;
+    //   },
+    // },
     methods: {
       sendRestore() {
+        if (this.$v.$invalid) {
+          this.$v.$touch();
+          return;
+        }
         console.log("restore");
-      }
+      },
     },
   }
 </script>

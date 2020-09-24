@@ -1,52 +1,89 @@
 <template>
   <div class="regform">
-    <!-- <h2 class="modal__head">Зарегистрироваться</h2> -->
     <ModalHead class="regform__modal-head">Зарегистрироваться</ModalHead>
-    <!-- <form class="modal__form" @submit.prevent="submitHandler"> -->
     <ModalForm class="regform__modal-form" @submit.native.prevent="sendRegister">
-      <!-- <label class="modal__label"><span>Имя *</span><input type="text" class="modal__input" name="firstname"></label> -->
-      <!-- <label class="modal__label"><span>Фамилия *</span><input type="text" class="modal__input" name="secondname"></label> -->
-      <!-- <label class="modal__label"><span>E-mail *</span><input type="email" class="modal__input" name="email"></label> -->
-      <!-- <label class="modal__label"><span>Телефон *</span><input type="phone" class="modal__input" name="phone"></label> -->
-      <!-- <label class="modal__label"><span>Дата рождения *</span><input type="date" class="modal__input" name="birthday"></label> -->
-      <!-- <label class="modal__label"><span>Пароль *</span><input type="password" class="modal__input" name="password"></label> -->
-      <ModalInput class="regform__modal-input" text="Имя *" name="firstname" type="text"></ModalInput>
-      <ModalInput class="regform__modal-input" text="Фамилия *" name="secondname" type="text"></ModalInput>
-      <ModalInput class="regform__modal-input" text="E-mail *" name="email" type="email"></ModalInput>
-      <ModalInput class="regform__modal-input" text="Телефон *" name="phone" type="phone"></ModalInput>
-      <ModalInput class="regform__modal-input" text="Дата рождения *" name="birthday" type="date"></ModalInput>
-      <ModalInput class="regform__modal-input" text="Пароль *" name="password" type="password"></ModalInput>
+      <ModalInput class="regform__modal-input" text="Имя *" name="firstname" type="text" v-model="firstname" :small="firstnameInvalid"></ModalInput>
+      <ModalInput class="regform__modal-input" text="Фамилия *" name="secondname" type="text" v-model="secondname" :small="secondnameInvalid"></ModalInput>
+      <ModalInput class="regform__modal-input" text="E-mail *" name="email" type="email" v-model="email" :small="emailInvalid"></ModalInput>
+      <ModalInput class="regform__modal-input" text="Телефон *" name="phone" type="phone" v-model="phone" :small="phoneInvalid"></ModalInput>
+      <ModalInput class="regform__modal-input" text="Дата рождения *" name="birthday" type="date" v-model="birth" :small="birthInvalid"></ModalInput>
+      <ModalInput class="regform__modal-input" text="Пароль *" name="password" type="password" v-model="password" :small="passwordInvalid"></ModalInput>
       <div class="regform__box1">
         <Button type="submit" class="regform__btn">Регистрация</Button>
-        <input id="person" class="regform__check" name="person" type="checkbox" hidden>
+        <input id="person" class="regform__check" :class="{'regform__check--invalid': $v.isPersonalChecked.$dirty && !$v.isPersonalChecked.booleanValidator}" name="person" type="checkbox" v-model="isPersonalChecked" hidden>
         <label class="regform__check-label" for="person">«Согласен(на) на обработку персональных данных»</label>
-        <input id="rules" class="regform__check" name="rules" type="checkbox" hidden>
+        <input id="rules" class="regform__check" :class="{'regform__check--invalid': $v.isRulesChecked.$dirty && !$v.isRulesChecked.booleanValidator}" name="rules" type="checkbox" v-model="isRulesChecked" hidden>
         <label class="regform__check-label" for="rules">«С <ModalLink :href="rulesFileLink" target="blank">правилами</ModalLink> ознакомлен(а)»</label>
       </div>
       <ModalSocial class="regform__modal-social"></ModalSocial>
-      <!-- <div class="modal__box2">
-        <span class="modal__text">Войти через социальные сети:</span>
-        <ul class="modal__list">
-          <li class="modal__item"><SocialLink class="social-link--ok social-link--mr15" title="Одноклассники" href="https://ok.ru">Одноклассники</SocialLink></li>
-          <li class="modal__item"><SocialLink class="social-link--vk" title="Вконтакте" href="https://vk.com">Вконтакте</SocialLink></li>
-        </ul>
-      </div> -->
     </ModalForm>
-    <!-- </form> -->
     <ModalLink class="regform__modal-link" @click.native="openLoginForm">Войти</ModalLink>
     <ModalLink class="regform__modal-link" @click.native="openRestoreForm">Забыли пароль?</ModalLink>
-    <!-- <button class="modal-link--mr" @click="openLoginForm">Войти</button> -->
-    <!-- <button @click="openRestoreForm">Забыли пароль?</button> -->
   </div>
 </template>
 
 <script>
-  // import Button from "@/components/Button.vue";
-  export default {
-    // components: {Button,},
+  import {email, required, minLength} from "vuelidate/lib/validators";
+  import {phoneValidator, birthValidator, booleanValidator} from "@/utils/validators.util.js";
+  import {firstnameInvalid, secondnameInvalid, emailInvalid, passwordInvalid, phoneInvalid, birthInvalid} from "@/utils/validations.mixin.js";
+
+export default {
+    mixins: [firstnameInvalid, secondnameInvalid, emailInvalid, passwordInvalid, phoneInvalid, birthInvalid],
+    validations: {
+      firstname: {required},
+      secondname: {required},
+      email: {required, email},
+      phone: {required, phoneValidator},
+      birth: {required, birthValidator},
+      password: {required, minLength: minLength(CONFIG.PASSWORD_MIN_LENGTH),},
+      isPersonalChecked: {booleanValidator},
+      isRulesChecked: {booleanValidator},
+    },
+    computed: {
+      requestData() {
+        return null;
+      },
+      // firstnameInvalid() {
+      //   if (this.$v.firstname.$dirty && !this.$v.firstname.required) {return this.$messages.FORM_FIRSTNAME_FIELD_REQUIRED;}
+      //   return false;
+      // },
+      // secondnameInvalid() {
+      //   if (this.$v.secondname.$dirty && !this.$v.secondname.required) {return this.$messages.FORM_SECONDNAME_FIELD_REQUIRED;} 
+      //   return false;
+      // },
+      // emailInvalid() {
+      //   if (this.$v.email.$dirty && !this.$v.email.required) {return this.$messages.FORM_EMAIL_FIELD_REQUIRED;} 
+      //   if (this.$v.email.$dirty && !this.$v.email.email) {return this.$messages.FORM_EMAIL_FIELD_INCORRECT;} 
+      //   return false;
+      // },
+      // passwordInvalid() {
+      //   if (this.$v.password.$dirty && !this.$v.password.required) {return this.$messages.FORM_PASSWORD_FIELD_REQUIRED;} 
+      //   if (this.$v.password.$dirty && !this.$v.password.minLength) {return this.$messages.FORM_PASSWORD_FIELD_SHORT.first + this.$v.password.$params.minLength.min + this.$messages.FORM_PASSWORD_FIELD_SHORT.second;} 
+      //   return false;
+      // },
+      // phoneInvalid() {
+      //   if (this.$v.phone.$dirty && !this.$v.phone.required) {return this.$messages.FORM_PHONE_FIELD_REQUIRED;}
+      //   if (this.$v.phone.$dirty && !this.$v.phone.phoneValidator) {return this.$messages.FORM_PHONE_FIELD_INCORRECT;} 
+      //   return false;
+      // },
+      // birthInvalid() {
+      //   if (this.$v.birth.$dirty && !this.$v.birth.required) {return this.$messages.FORM_BIRTH_FIELD_REQUIRED;}
+      //   if (this.$v.birth.$dirty && !this.$v.birth.birthValidator) {return this.$messages.FORM_BIRTH_FIELD_INCORRECT;} 
+      //   return false;
+      // },
+    },
     data() {
       return {
         rulesFileLink: CONFIG.RULES_FILE_LINK,
+        firstname: "",
+        secondname: "",
+        email: "",
+        password: "",
+        phone: "",
+        birth: "",
+        isPersonalChecked: false,
+        isRulesChecked: false,
+        // birth: "1920-01-01", //дата не проставляется на старте
       };
     }, 
     methods: {
@@ -57,6 +94,12 @@
         this.$store.dispatch("openModal", {type: "RestoreForm",});
       },
       async sendRegister() {
+        if (this.$v.$invalid) {
+          this.$v.$touch();
+          return;
+        }
+        console.log("register");
+        return;
         try {
           const response = await this.$store.dispatch("registerNewUSer", {
             "email": "dk83@mail.ru",
@@ -73,23 +116,6 @@
         } catch(err) {
           alert(err);
         }
-        // if (this.$v.$invalid) {
-        //   this.$v.$touch();
-        //   return;
-        // }
-        // try {
-        //   const category = await this.$store.dispatch("createCategory", {
-        //     title: this.title,
-        //     limit: this.limit,
-        //   });
-        //   this.title = "";
-        //   this.limit = 100;
-        //   this.$v.$reset();
-        //   this.$message("Категория создана");
-        //   this.$emit("created", category);
-        // } catch(err) {
-
-        // }
       },
     },
   }
@@ -149,6 +175,11 @@
       cursor: pointer;
       &:checked + .regform__check-label::after{
         opacity: 1;
+      }
+      &--invalid {
+        + .regform__check-label::before {
+          border: 1px solid #ff0000;
+        }
       }
     }
     &__modal-social {

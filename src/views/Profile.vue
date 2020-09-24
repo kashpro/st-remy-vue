@@ -14,7 +14,8 @@
           <div class="editor__description">
             <span class="editor__text" >История дружбы (описание):</span>
             <label for="description" class="editor__label">Напишите краткую историю о том, как вы сделали эти фотографии.</label>
-              <textarea name="desc" id="description" class="editor__textarea" placeholder="Введите текст от 140 до 4000 символов:"></textarea>
+            <textarea name="desc" id="description" class="editor__textarea" v-model="desc" placeholder="Введите текст от 140 до 4000 символов:"></textarea>
+            <small v-if="descInvalid" class="editor__small">{{ descInvalid }}</small>
           </div>
           <div class="editor__buttons">
             <Button class="editor__btn" type="submit" @click.native.prevent="sendHistory">Отправить на модерацию</Button>
@@ -28,15 +29,46 @@
 
 <script>
   import ImageField from "@/components/ImageField.vue";
-  // import Button from "@/components/Button.vue";
+  import {required, minLength, maxLength} from "vuelidate/lib/validators";
+  import {descInvalid} from "@/utils/validations.mixin.js";
 
   export default {
-    components: {ImageField, /*Button,*/},
+    mixins: [descInvalid],
+    components: {ImageField},
+    validations: {
+      desc: {required, minLength: minLength(CONFIG.STORY_DESC_MIN_LENGTH), maxLength:maxLength(CONFIG.STORY_DESC_MAX_LENGTH) },
+    },
+    data() {
+      return {
+        desc: "",
+      }
+    },
+    // computed: {
+    //   descInvalid() {
+    //     if (this.$v.desc.$dirty && !this.$v.desc.required) {return this.$messages.FORM_MESSAGE_FIELD_REQUIRED;} 
+    //     if (this.$v.desc.$dirty && (!this.$v.desc.minLength || !this.$v.desc.maxLength)) {
+    //       return (this.$messages.FORM_DESC_FIELD_LENGTH.first +
+    //              this.$v.desc.$params.minLength.min + 
+    //              this.$messages.FORM_DESC_FIELD_LENGTH.second +
+    //              this.$v.desc.$params.maxLength.max +
+    //              this.$messages.FORM_DESC_FIELD_LENGTH.third
+    //       );} 
+    //     return false;
+    //   },
+    // },
     methods: {
       sendHistory() {
+        if (this.$v.$invalid) {
+          this.$v.$touch();
+          return;
+        }
         console.log("hist");
       },
       sendDraft() {
+        if (this.$v.$invalid) {
+          this.$v.$touch();
+          return;
+        }
         console.log("draft");
       }
     }
@@ -91,6 +123,7 @@
       margin-bottom: 60px;
     }
     &__description {
+      position: relative;
       flex: 0 1 1394px;
       margin: 0 auto;
       display: flex;
@@ -106,10 +139,16 @@
     &__label {
       margin-bottom: 20px;
     }
+    &__small {
+      position: absolute;
+      color: #ff0000;
+      left: 0;
+      bottom: 55px;
+    }
     &__textarea {
       width: 100%;
       resize: none;
-      padding: 20px 25px 100px 25px;
+      padding: 20px 25px;
       border: none;
       background-color: #ffffff;
       border-radius: 5px;

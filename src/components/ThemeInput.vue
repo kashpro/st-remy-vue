@@ -1,10 +1,10 @@
 <template>
   <div class="theme">
-    <p class="theme__head" @click="isOpen = !isOpen">{{ current }}</p>
+    <p class="theme__head" @click="isOpen = !isOpen">{{ current || "Выберите тему" }}</p>
     <ul class="theme__list" :class="{'theme__list--collapse': !isOpen}">
       <li v-for="(theme, index) in themes" :key="index" class="theme__item" @click="selectTheme(theme)"><p>{{ theme }}</p></li>
     </ul>
-    <input type="hidden" :name="name" :value="current">
+    <!-- <input type="hidden" :name="name" :value="current"> -->
   </div>
 </template>
 
@@ -13,21 +13,20 @@ export default {
   props: ["name"],
   data() {
     return {
-      current: "Выберите тему",
+      current: "",
       isOpen: false,
-      themes: [
-        "Как зарегистрироваться на сайте",
-        "Технические проблемы с сайтом",
-        "Как удалить свои персональные данные",
-        "Нет ответа по обратной связи",
-        "Прошу связаться со мной",
-      ],
+      themes: this.$messages.FEEDBACK_THEMES,
     }
   },
   methods: {
     selectTheme(theme) {
       this.current = theme;
       this.isOpen = false;
+    },
+  },
+  watch: {
+    current() {
+      this.$emit('input', this.current);
     }
   }
 }

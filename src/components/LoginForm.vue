@@ -1,38 +1,46 @@
 <template>
   <div class="logform">
-    <!-- <h2 class="modal__head">Авторизоваться</h2> -->
     <ModalHead class="logform__modal-head">Авторизоваться</ModalHead>
-    <!-- <form class="modal__form" @submit.prevent="submitHandler"> -->
     <ModalForm class="logform__modal-form" @submit.native.prevent="sendLogin">
-      <!-- <label class="modal__label"><span>Почта или телефон *</span><input type="text" class="modal__input" name="login"></label> телефон походу уйдет -->
-      <!-- <label class="modal__label"><span>Пароль *</span><input type="password" class="modal__input" name="password"></label> -->
-      <ModalInput class="logform__modal-input" text="Почта??? или телефон??? *" name="login" type="text"></ModalInput>
-      <ModalInput class="logform__modal-input" text="Пароль *" name="password" type="password"></ModalInput>
+      <ModalInput class="logform__modal-input" text="E-mail *" name="email" type="email" v-model="email" :small="emailInvalid"></ModalInput>
+      <ModalInput class="logform__modal-input" text="Пароль *" name="password" type="password" v-model="password" :small="passwordInvalid"></ModalInput>
       <div class="logform__box1">
         <Button type="submit" class="modal__btn logform__btn">Войти</Button>
       </div>
       <ModalSocial class="logform__modal-social"></ModalSocial>
-      <!-- <div class="modal__box2">
-        <span class="modal__text">Войти через социальные сети:</span>
-        <ul class="modal__list">
-          <li class="modal__item"><a class="social-link social-link--ok social-link--mr15" href="https://ya.ru"></a></li>
-          <li class="modal__item"><a class="social-link social-link--vk" href="https://ya.ru"></a></li>
-        </ul>
-      </div> -->
-    <!-- </form> -->
     </ModalForm>
-    <!-- <button class="modal__link modal__link--mr" @click="openRegisterForm">Регистрация</button>
-    <button class="modal__link" @click="openRestoreForm">Забыли пароль?</button> -->
     <ModalLink class="logform__modal-link" @click.native="openRegisterForm">Регистрация</ModalLink>
     <ModalLink class="logform__modal-link" @click.native="openRestoreForm">Забыли пароль?</ModalLink>
   </div>
 </template>
 
 <script>
-  // import Button from "@/components/Button.vue";
-  
+  import {email, required,} from "vuelidate/lib/validators";
+  import {emailInvalid, passwordInvalidForLogin} from "@/utils/validations.mixin.js";
+
   export default {
-    // components: {Button,},
+    mixins: [emailInvalid, passwordInvalidForLogin],
+    validations: {
+      email: {required, email},
+      password: {required},
+    },
+    data() {
+      return {
+        email: "",
+        password: "",
+      };
+    },
+    // computed: {
+      // emailInvalid() {
+      //   if (this.$v.email.$dirty && !this.$v.email.required) {return this.$messages.FORM_EMAIL_FIELD_REQUIRED;} 
+      //   if (this.$v.email.$dirty && !this.$v.email.email) {return this.$messages.FORM_EMAIL_FIELD_INCORRECT;} 
+      //   return false;
+      // },
+      // passwordInvalid() {
+      //   if (this.$v.password.$dirty && !this.$v.password.required) {return this.$messages.FORM_PASSWORD_FIELD_REQUIRED;} 
+      //   return false;
+      // },
+    // },
     methods: {
       openRegisterForm() {
         this.$store.dispatch("openModal", {type: "RegisterForm",});
@@ -41,6 +49,10 @@
         this.$store.dispatch("openModal", {type: "RestoreForm",});
       },
       async sendLogin() {
+        if (this.$v.$invalid) {
+          this.$v.$touch();
+          return;
+        }
         try {
           const response = await this.$store.dispatch("login", {
             "username": "kashpro",

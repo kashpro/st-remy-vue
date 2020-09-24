@@ -3,14 +3,21 @@
     <div class="container feedback__container">
       <h2 class="feedback__head">Обратная связь</h2>
       <form class="feedback__form" @submit.prevent="sendFeedback">
-        <input name="name" class="feedback__input" type="text" placeholder="Имя *">
-        <input name="email" class="feedback__input" type="email" placeholder="E-mail *">
+        <div class="feedback__input-field">
+          <input name="name" class="feedback__input" type="text" placeholder="Имя *" v-model="name">
+          <small v-if="nameInvalid" class="feedback__small1">{{ nameInvalid }}</small>
+        </div>
+        <div class="feedback__input-field">
+          <input name="email" class="feedback__input" type="email" placeholder="E-mail *" v-model="email">
+          <small v-if="emailInvalid" class="feedback__small1">{{ emailInvalid }}</small>
+        </div>
         <div class="feedback__box1">
-          <textarea name="text" class="feedback__textarea" placeholder="Сообщение *"></textarea>
-          <ThemeInput :name="'theme'" class="feedback__theme"></ThemeInput>
+          <textarea name="text" class="feedback__textarea" placeholder="Сообщение *" v-model="message"></textarea>
+          <ThemeInput :name="'theme'" class="feedback__theme" v-model="theme"></ThemeInput>
+          <small v-if="messageInvalid" class="feedback__small2">{{ messageInvalid }}</small>
+          <small v-if="themeInvalid" class="feedback__small3">{{ themeInvalid }}</small>
         </div>
         <Button class="feedback__btn" type="submit">Отправить</Button>
-        <!-- <button type="submit" class="btn feedback__btn">Отправить</button> -->
     </form>
     </div>
   </section>
@@ -18,14 +25,53 @@
 
 <script>
   import ThemeInput from "@/components/ThemeInput.vue";
-  // import Button from "@/components/Button.vue";
+  import {email, required} from "vuelidate/lib/validators";
+  import {nameInvalid, emailInvalid, messageInvalid, themeInvalid} from "@/utils/validations.mixin.js";
 
   export default {
-    components: {ThemeInput, /*Button,*/},
+    mixins: [nameInvalid, emailInvalid, messageInvalid, themeInvalid],
+    components: {ThemeInput},
+    validations: {
+      name: {required},
+      email: {required, email},
+      message: {required},
+      theme: {required},
+    },
+    // computed: {
+    //   nameInvalid() {
+    //     if (this.$v.name.$dirty && !this.$v.name.required) {return this.$messages.FORM_FIRSTNAME_FIELD_REQUIRED;}
+    //     return false;
+    //   },
+    //   emailInvalid() {
+    //     if (this.$v.email.$dirty && !this.$v.email.required) {return this.$messages.FORM_EMAIL_FIELD_REQUIRED;} 
+    //     if (this.$v.email.$dirty && !this.$v.email.email) {return this.$messages.FORM_EMAIL_FIELD_INCORRECT;} 
+    //     return false;
+    //   },
+    //   messageInvalid() {
+    //     if (this.$v.message.$dirty && !this.$v.message.required) {return this.$messages.FORM_MESSAGE_FIELD_REQUIRED;} 
+    //     return false;
+    //   },
+    //   themeInvalid() {
+    //     if (this.$v.theme.$dirty && !this.$v.theme.required) {return this.$messages.FORM_THEME_FIELD_REQUIRED;}
+    //     return false;
+    //   },
+    // },
+    data() {
+      return {
+        name: "",
+        email: "",
+        message: "",
+        theme: "",
+      };
+    },
     methods: {
-      sendFeedback() {
+      async sendFeedback() {
+        if (this.$v.$invalid) {
+          this.$v.$touch();
+          return;
+        }
         console.log("send feedback");
-      }
+      },
     },
   }
 </script>
@@ -46,9 +92,34 @@
       display: flex;
       flex-wrap: wrap;
     }
-    &__input {
+    &__input-field {
+      position: relative;
       flex: 1 1 40%;
       margin-bottom: 30px;
+      &:first-child {
+        margin-right: 30px;
+      }
+    }
+    &__small1 {
+      position: absolute;
+      color: #ff0000;
+      bottom: -18px;
+      left: 0;
+    }
+    &__small2 {
+      position: absolute;
+      color: #ff0000;
+      left: 0;
+      bottom: -18px;
+    }
+    &__small3 {
+      position: absolute;
+      color: #ff0000;
+      right: 0;
+      bottom: -18px;
+    }
+    &__input {
+      width: 100%;
       padding: 20px 25px;
       border: none;
       border-radius: 5px;
@@ -56,9 +127,6 @@
       color: #000000;
       &::placeholder {
         color: #ffffff;
-      }
-      &:first-child {
-        margin-right: 30px;
       }
     }
     &__box1 {

@@ -10,7 +10,10 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-/* Utils */
+import Vuelidate from "vuelidate";
+Vue.use(Vuelidate);
+
+/* Utils & Plugins */
 import development from '@/utils/development.util.js';
 development.addWindowStatsElement();
 import messagePlugin from '@/utils/messages.util.js';

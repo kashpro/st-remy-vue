@@ -51,7 +51,7 @@ export default new Vuex.Store({
       commit("setIsModalOpen", false);
     },
     /////////////////////////////
-    registerNewUSer: async (context, data) => {
+    registerNewUser: async (context, data) => {
       try {
          const res = await fetch("https://st-remy.django.the-uweb.ru/auth/users/", {
           method: "POST",
