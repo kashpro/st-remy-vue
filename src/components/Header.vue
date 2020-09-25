@@ -8,14 +8,6 @@
       </div>
       <Nav class="header__nav"></Nav>
       <Login class="header__login"></Login>
-      <!-- <div class="login header__login">
-        <a class="login__name hide" @click.prevent="isUserMenuOpen = !isUserMenuOpen">Пантелеймон Константинопольский</a>
-        <ul v-if="isUserMenuOpen" class="login__list" ref="loginList">
-          <li class="login__item" @click="closeUserMenu"><router-link tag="span" to="/profile">Профиль</router-link></li>
-          <li class="login__item" @click="closeUserMenu"><span>Выйти</span></li>
-        </ul>
-        <Button class="login__btn" @click.native="openLoginForm">Войти</Button>
-      </div> -->
     </div>
   </header>
 </template>
@@ -23,38 +15,9 @@
 <script>
   import Nav from "@/components/Nav.vue";
   import Login from "@/components/Login.vue";
-  // import Button from "@/components/Button.vue";
-
+  
   export default {
-    components: {Nav, Login,/*Button*/},
-    // data() {
-    //   return {
-    //     isUserMenuOpen: false,
-    //   };
-    // },
-    // methods: {
-    //   openLoginForm() {
-    //     this.$store.dispatch("openModal", {type: "LoginForm",});
-    //     // this.$store.dispatch("openCommonModal", {type: "LoginForm",});
-    //   },
-    //   closeUserMenuKeyboard(e) {
-    //     if (e.code === "Escape" || e.keyCode === 27) { //e.keyCode - deprecated
-    //       this.closeUserMenu();
-    //     }
-    //   },
-    //   closeUserMenu() {
-    //     this.isUserMenuOpen = false;
-    //   }
-    // },
-    // watch: {
-    //   isUserMenuOpen() {
-    //     if (this.isUserMenuOpen) {
-    //       window.addEventListener("keyup", this.closeUserMenuKeyboard);
-    //     } else {
-    //       window.removeEventListener("keyup", this.closeUserMenuKeyboard);
-    //     }
-    //   },
-    // },
+    components: {Nav, Login},
   }
 </script>
 

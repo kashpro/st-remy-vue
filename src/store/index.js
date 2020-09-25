@@ -1,109 +1,51 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import auth from './auth.js';
+import modal from './modal.js';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    // commonModalType: "",
-    // isCommonModalOpen: false,
-    // isStoryModalOpen: false,
-    // head: "",
-    // message: "",
-    //
-    isModalOpen: false,
-    modalType: "",
-    modalData: {},
+    // isModalOpen: false,
+    // modalType: "",
+    // modalData: {},
+    // alertData: {},
+    // isAlertOpen: false,
   },
   mutations: {
-    // setCommonModalType: (state, type) => {state.commonModalType = type;},
-    // setIsCommonModalOpen: (state, flag) => {state.isCommonModalOpen = flag;},
-    // setIsStoryModalOpen: (state, flag) => {state.isStoryModalOpen = flag;},
-    // setMessage: (state, message) => {state.message = message;},
-    // setHead: (state, head) => {state.head = head;},
-    //
-    setModalData: (state, data) => {state.modalData = data;},
-    setModalType: (state, type) => {state.modalType = type;},
-    setIsModalOpen: (state, flag) => {state.isModalOpen = flag;},
+    // setModalData: (state, data) => {state.modalData = data;},
+    // setAlertData: (state, data) => {state.alertData = data;},
+    // setModalType: (state, type) => {state.modalType = type;},
+    // setIsModalOpen: (state, flag) => {state.isModalOpen = flag;},
+    // setIsAlertOpen: (state, flag) => {state.isAlertOpen = flag;},
   },
   actions: {
-    // openCommonModal: ({commit}, {type, head, message}) => {
-    //   if (head) {commit("setHead", head);}
-    //   if (message) {commit("setMessage", message);}
-    //   commit("setCommonModalType", type);
-    //   commit("setIsStoryModalOpen", false);
-    //   commit("setIsCommonModalOpen", true);
+    // openModal: ({commit}, {type, data}) => {
+    //   if (data) {commit("setModalData", data);}
+    //   commit("setModalType", type);
+    //   commit("setIsModalOpen", true);
     // },
-    // closeCommonModal: ({commit}) => {commit("setIsCommonModalOpen", false);},
-    
-    // openStoryModal: ({commit}) => {
-    //   commit("setIsCommonModalOpen", false);
-    //   commit("setIsStoryModalOpen", true);
+    // closeModal: ({commit}) => {
+    //   commit("setIsModalOpen", false);
     // },
-    // closeStoryModal: ({commit}) => {commit("setIsStoryModalOpen", false);},
-    //
-    openModal: ({commit}, {type, data}) => {
-      if (data) {commit("setModalData", data);}
-      commit("setModalType", type);
-      commit("setIsModalOpen", true);
-    },
-    closeModal: ({commit}) => {
-      commit("setIsModalOpen", false);
-    },
-    /////////////////////////////
-    registerNewUser: async (context, data) => {
-      try {
-         const res = await fetch("https://st-remy.django.the-uweb.ru/auth/users/", {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-          },
-        }); 
-        return await res.json();
-      } catch(err) {
-        throw err;
-      }
-    },
-    login: async (context, data) => {
-      // try {
-      //    const res = await fetch("https://st-remy.django.the-uweb.ru/auth/token/login/", {
-      //     method: "POST",
-      //     body: JSON.stringify(data),
-      //     headers: {
-      //       'Content-Type': 'application/json;charset=utf-8',
-      //     },
-      //   }); 
-      //   return await res.json();
-      // } catch(err) {
-      //   throw err;
-      // }
-
-        try {
-          const res = await fetch("https://st-remy.django.the-uweb.ru/auth/users/me/?limit=1&offset=1", {
-           headers: {
-             // 'Content-Type': 'application/json;charset=utf-8',
-             "Authorization": "Token 2186f0fa544647de0f41c639a84e93387412affe",
-           },
-         }); 
-         return await res.json();
-       } catch(err) {
-         throw err;
-       }
-    },
+    // openAlert: ({commit}, data) => {
+    //   if (data) {commit("setAlertData", data);}
+    //   commit("setIsAlertOpen", true);
+    // },
+    // closeAlert: ({commit}) => {
+    //   commit("setIsAlertOpen", false);
+    // },
   },
   getters: {
-    // commonModalType: state => state.commonModalType,
-    // isCommonModalOpen: state => state.isCommonModalOpen,
-    // isStoryModalOpen: state => state.isStoryModalOpen,
-    // head: state => state.head,
-    // message: state => state.message,
-    //
-    isModalOpen: state => state.isModalOpen,
-    modalType: state => state.modalType,
-    modalData: state => state.modalData,
+    // isAlertOpen: state => state.isAlertOpen,
+    // isModalOpen: state => state.isModalOpen,
+    // modalType: state => state.modalType,
+    // modalData: state => state.modalData,
+    // alertData: state => state.alertData,
   },
   modules: {
-
+    auth,
+    modal,
   },
 });

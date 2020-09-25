@@ -4,7 +4,7 @@
     <div class="container banner__container">
       <h1 class="banner__head">Дружба не стареет!</h1>
       <p class="banner__text">Сегодня мы создаем новые воспоминания со старыми друзьями, сравнивая "тогда" и "сейчас". Что изменилось в мире, и как изменились мы сами, единственное, что остается неизменным - это наша дружба!</p>
-      <Register></Register>
+      <Register v-if="!userInfo"></Register>
     </div>
   </section>
 </template>
@@ -12,9 +12,13 @@
 <script>
   import Carousel from "@/components/Carousel.vue";
   import Register from "@/components/Register.vue";
+  import {mapGetters} from "vuex";
 
   export default {
     components: {Carousel, Register},
+    computed: {
+      ...mapGetters(["userInfo"]),
+    }
   }
 </script>
 

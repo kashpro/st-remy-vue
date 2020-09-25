@@ -96,14 +96,14 @@ body {
   }
 }
 
-.hide {
-  display: none !important;
-}
+// .hide {
+//   display: none !important;
+// }
 
-.fade {
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
+// .fade {
+//   visibility: hidden !important;
+//   opacity: 0 !important;
+// }
 
 .visually-hidden {
   position: absolute;
@@ -114,8 +114,4 @@ body {
   padding: 0;
   clip: rect(0 0 0 0);
   overflow: hidden;
-}
-
-.invalid {
-  color: red;
 }

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from "@/store/index.js";
 
 Vue.use(VueRouter);
 
@@ -7,31 +8,31 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    meta: {layout: "HomeLayout", headerPos: "abs",},
+    meta: {layout: "HomeLayout", headerPos: "abs"},
     component: () => import('@/views/Home.vue'),
   },
   {
     path: '/start',
     name: 'Start',
-    meta: {layout: null,},
+    meta: {layout: null},
     component: () => import('@/views/Start.vue'),
   },
   {
     path: '/gallery',
     name: 'Gallery',
-    meta: {layout: "HomeLayout",},
+    meta: {layout: "HomeLayout"},
     component: () => import('@/views/Gallery.vue'),
   },
   {
     path: '/winners',
     name: 'Winners',
-    meta: {layout: "HomeLayout",},
+    meta: {layout: "HomeLayout"},
     component: () => import('@/views/Winners.vue'),
   },
   {
     path: '/profile',
     name: 'Profile',
-    meta: {layout: "HomeLayout",},
+    meta: {layout: "HomeLayout", auth: true},
     component: () => import('@/views/Profile.vue'),
   },
   { 
@@ -44,6 +45,16 @@ const routes = [
 const router = new VueRouter({
   routes,
   mode: "history",
+});
+
+router.beforeEach( (to, from, next) => {
+  const currentUser = store.getters.userInfo;
+  const requireAuth = to.matched.some(record => record.meta.auth);
+  if (requireAuth && !currentUser) {
+    next(from);
+  } else {
+    next();
+  }
 });
 
 export default router;

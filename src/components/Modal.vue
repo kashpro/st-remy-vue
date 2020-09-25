@@ -23,7 +23,7 @@
         this.$store.dispatch("closeModal");
       },
       closeModalKeyboard(e) {
-        if (e.code === "Escape" || e.keyCode === 27) { //e.keyCode - deprecated
+        if (e.code === "Escape" || e.keyCode === 27) {
           this.closeModal();
         }
       },

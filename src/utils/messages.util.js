@@ -30,7 +30,8 @@ const messages = {
     "Нет ответа по обратной связи",
     "Прошу связаться со мной",
   ],
-  
+  ALERT_LOGOUT_SUCCESS: "Вы успешно вышли",
+  ALERT_SERVER_ERROR: "Внутрення ошибка сервера"
 };
 
 export default {

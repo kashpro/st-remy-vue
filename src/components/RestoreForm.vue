@@ -2,7 +2,7 @@
   <div class="resform">
     <ModalHead class="resform__modal-head">Восстановление пароля</ModalHead>
     <ModalForm class="resform__modal-form" @submit.native.prevent="sendRestore">
-      <ModalInput class="resform__modal-input" text="E-mail *" name="email" type="email" v-model="email" :small="emailInvalid"></ModalInput>
+      <ModalInput class="resform__modal-input" text="E-mail *" type="email" v-model="email" :small="emailInvalid"></ModalInput>
       <div class="modal__box1">
         <Button type="submit" class="resform__btn">Восстановить пароль</Button>
       </div>
@@ -24,13 +24,6 @@
         email: "",
       };
     },
-    // computed: {
-    //   emailInvalid() {
-    //     if (this.$v.email.$dirty && !this.$v.email.required) {return this.$messages.FORM_EMAIL_FIELD_REQUIRED;} 
-    //     if (this.$v.email.$dirty && !this.$v.email.email) {return this.$messages.FORM_EMAIL_FIELD_INCORRECT;} 
-    //     return false;
-    //   },
-    // },
     methods: {
       sendRestore() {
         if (this.$v.$invalid) {

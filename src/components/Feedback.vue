@@ -37,25 +37,6 @@
       message: {required},
       theme: {required},
     },
-    // computed: {
-    //   nameInvalid() {
-    //     if (this.$v.name.$dirty && !this.$v.name.required) {return this.$messages.FORM_FIRSTNAME_FIELD_REQUIRED;}
-    //     return false;
-    //   },
-    //   emailInvalid() {
-    //     if (this.$v.email.$dirty && !this.$v.email.required) {return this.$messages.FORM_EMAIL_FIELD_REQUIRED;} 
-    //     if (this.$v.email.$dirty && !this.$v.email.email) {return this.$messages.FORM_EMAIL_FIELD_INCORRECT;} 
-    //     return false;
-    //   },
-    //   messageInvalid() {
-    //     if (this.$v.message.$dirty && !this.$v.message.required) {return this.$messages.FORM_MESSAGE_FIELD_REQUIRED;} 
-    //     return false;
-    //   },
-    //   themeInvalid() {
-    //     if (this.$v.theme.$dirty && !this.$v.theme.required) {return this.$messages.FORM_THEME_FIELD_REQUIRED;}
-    //     return false;
-    //   },
-    // },
     data() {
       return {
         name: "",

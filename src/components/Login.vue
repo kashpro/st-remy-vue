@@ -1,20 +1,26 @@
 <template>
   <div class="login">
-    <a class="login__name hide" @click.prevent="isUserMenuOpen = !isUserMenuOpen">Пантелеймон Константинопольский</a>
+    <a v-if="userInfo" class="login__name" @click.prevent="isUserMenuOpen = !isUserMenuOpen">Пантелеймон Константинопольский</a>
     <ul v-if="isUserMenuOpen" class="login__list" ref="loginList">
       <li class="login__item" @click="closeUserMenu"><router-link tag="span" to="/profile">Профиль</router-link></li>
-      <li class="login__item" @click="closeUserMenu"><span>Выйти</span></li>
+      <li class="login__item" @click="logout"><span>Выйти</span></li>
     </ul>
-    <Button class="login__btn" @click.native="openLoginForm">Войти</Button>
+    <Button v-if="!userInfo" class="login__btn" @click.native="openLoginForm">Войти</Button>
   </div>
 </template>
 
 <script>
+  import {mapGetters} from "vuex";
+  import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
+
   export default {
     data() {
       return {
         isUserMenuOpen: false,
       };
+    },
+    computed: {
+      ...mapGetters(["userInfo"]),
     },
     methods: {
       openLoginForm() {
@@ -28,6 +34,21 @@
       },
       closeUserMenu() {
         this.isUserMenuOpen = false;
+      },
+      async logout() {
+        this.closeUserMenu();
+        try {
+          const response = await this.$store.dispatch("logout", localStorage.getItem("token")); //разлогинились
+          localStorage.removeItem("token"); //удаляем токен из локалстораджа
+          this.$store.commit("clearUserInfo"); //удаляем юзер-инфо из склада
+          if (this.$route.name === "Profile") { //если сидим в профиле - редирект на главную
+            this.$router.push("/");
+          } else { //иначе сообщение об успешном выходе
+            this.$store.dispatch("openAlert", {type: "success", text: this.$messages.ALERT_LOGOUT_SUCCESS});
+          }
+        } catch(err) {
+          apiErrorHandler.call(this, err);
+        }
       }
     },
     watch: {

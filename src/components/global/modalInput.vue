@@ -1,15 +1,14 @@
 <template>
   <label class="modal-input">
     <span>{{ text }}</span>
-    <!-- <input :type="type" class="modal-input__input" :name="name" v-model="value" @input="$emit('input', $event)"> -->
-    <input :type="type" class="modal-input__input" :name="name" @input="$emit('input', $event.target.value)">
+    <input :type="type" :value="value" class="modal-input__input" @input="$emit('input', $event.target.value)">
     <small v-if="small" class="modal-input__small">{{ small }}</small>
   </label>
 </template>
 
 <script>
   export default {
-    props: ["text", "name", "type", "small"], 
+    props: ["text", "type", "small", "value"], 
   }
 </script>
 
