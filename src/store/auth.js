@@ -49,7 +49,15 @@ export default {
       } catch(err) {
         throw err;
       }
-    }
+    },
+    sendRestore: async (_, data) => {
+      try {
+        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_RESTORE_PASS_API}`, data, {timeout: 10000});
+        return response;
+      } catch(err) {
+        throw err;
+      }
+    },
   },
   getters: {
     userInfo: state => state.userInfo,

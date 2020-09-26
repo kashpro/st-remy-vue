@@ -3,14 +3,14 @@
     <div class="container profile__container">
       <h1 class="profile__head">Личный кабинет</h1>
       <p class="profile__text">Регистрируйся и принимай участие в конкурсе от St.Remy. Стань победителем, получи подарок для себя и своих друзей!</p>
-      <p class="profile__name">Константин Константинопольский</p>
+      <p class="profile__name">{{ fullName }}</p>
 
       <div class="editor profile__editor">
         <h2 class="editor__head">Редактор истории</h2>
         <div class="editor__line"></div>
         <form class="editor__form">
-          <ImageField class="editor__imagefield" text="Фотография №1 (тогда)" id="before" imagePath="img/stremy-01.jpg" selectName="before-year" :min="1920" :initial="1990"></ImageField>
-          <ImageField class="editor__imagefield" text="Фотография №2 (сейчас)" id="after" imagePath="img/stremy-02.jpg" selectName="after-year" :min="1930" :initial="2000"></ImageField>
+          <ImageField class="editor__imagefield" text="Фотография №1 (тогда)" id="before" imagePath="img/stremy-01.jpg" v-model="before"></ImageField>
+          <ImageField class="editor__imagefield" text="Фотография №2 (сейчас)" id="after" imagePath="img/stremy-02.jpg" v-model="after"></ImageField>
           <div class="editor__description">
             <span class="editor__text" >История дружбы (описание):</span>
             <label for="description" class="editor__label">Напишите краткую историю о том, как вы сделали эти фотографии.</label>
@@ -18,8 +18,8 @@
             <small v-if="descInvalid" class="editor__small">{{ descInvalid }}</small>
           </div>
           <div class="editor__buttons">
-            <Button class="editor__btn" type="submit" @click.native.prevent="sendHistory">Отправить на модерацию</Button>
-            <Button class="btn--secondary editor__btn" type="submit" @click.native.prevent="sendDraft">Сохранить черновик</Button>
+            <Button class="editor__btn" type="submit" @click.native.prevent="sendHistory(false)">Отправить на модерацию</Button>
+            <Button class="btn--secondary editor__btn" type="submit" @click.native.prevent="sendHistory(true)">Сохранить черновик</Button>
           </div>
         </form>
       </div>
@@ -31,6 +31,8 @@
   import ImageField from "@/components/ImageField.vue";
   import {required, minLength, maxLength} from "vuelidate/lib/validators";
   import {descInvalid} from "@/utils/validations.mixin.js";
+  import {mapGetters} from "vuex";
+  import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
   export default {
     mixins: [descInvalid],
@@ -40,29 +42,39 @@
     },
     data() {
       return {
+        before: {image: null, date: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE},
+        after: {image: null, date: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE},
         desc: "",
       }
     },
-    // computed: {
-    //   descInvalid() {
-    //     if (this.$v.desc.$dirty && !this.$v.desc.required) {return this.$messages.FORM_MESSAGE_FIELD_REQUIRED;} 
-    //     if (this.$v.desc.$dirty && (!this.$v.desc.minLength || !this.$v.desc.maxLength)) {
-    //       return (this.$messages.FORM_DESC_FIELD_LENGTH.first +
-    //              this.$v.desc.$params.minLength.min + 
-    //              this.$messages.FORM_DESC_FIELD_LENGTH.second +
-    //              this.$v.desc.$params.maxLength.max +
-    //              this.$messages.FORM_DESC_FIELD_LENGTH.third
-    //       );} 
-    //     return false;
-    //   },
-    // },
+    computed: {
+      ...mapGetters(["userInfo"]),
+      fullName() {
+        return `${this.userInfo.profile.first_name} ${this.userInfo.profile.surname}`;
+      },
+    },
     methods: {
-      sendHistory() {
+      async sendHistory(draft) {
         if (this.$v.$invalid) {
           this.$v.$touch();
           return;
         }
-        console.log("hist");
+        try {
+          const data = new FormData();
+          data.append("desc", this.desc);
+          data.append("draft", draft);
+          data.append("images", this.before.image);
+          data.append("images", this.after.image);
+          data.append("years", this.before.date);
+          data.append("years", this.after.date);
+
+          const response = await this.$store.dispatch("sendHistory", data);
+          // this.$v.$reset();
+          this.$store.dispatch("openAlert", {type: "success", text: this.$messages.HISTORY_CREATED});
+        } catch(err) {
+          apiErrorHandler.call(this, err);
+        }
+        
       },
       sendDraft() {
         if (this.$v.$invalid) {

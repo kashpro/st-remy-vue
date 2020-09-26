@@ -4,16 +4,16 @@
       <h2 class="feedback__head">Обратная связь</h2>
       <form class="feedback__form" @submit.prevent="sendFeedback">
         <div class="feedback__input-field">
-          <input name="name" class="feedback__input" type="text" placeholder="Имя *" v-model="name">
+          <input class="feedback__input" type="text" placeholder="Имя *" v-model="name">
           <small v-if="nameInvalid" class="feedback__small1">{{ nameInvalid }}</small>
         </div>
         <div class="feedback__input-field">
-          <input name="email" class="feedback__input" type="email" placeholder="E-mail *" v-model="email">
+          <input class="feedback__input" type="email" placeholder="E-mail *" v-model="email">
           <small v-if="emailInvalid" class="feedback__small1">{{ emailInvalid }}</small>
         </div>
         <div class="feedback__box1">
-          <textarea name="text" class="feedback__textarea" placeholder="Сообщение *" v-model="message"></textarea>
-          <ThemeInput :name="'theme'" class="feedback__theme" v-model="theme"></ThemeInput>
+          <textarea class="feedback__textarea" placeholder="Сообщение *" v-model="message"></textarea>
+          <ThemeInput class="feedback__theme" v-model="theme"></ThemeInput>
           <small v-if="messageInvalid" class="feedback__small2">{{ messageInvalid }}</small>
           <small v-if="themeInvalid" class="feedback__small3">{{ themeInvalid }}</small>
         </div>
@@ -27,6 +27,7 @@
   import ThemeInput from "@/components/ThemeInput.vue";
   import {email, required} from "vuelidate/lib/validators";
   import {nameInvalid, emailInvalid, messageInvalid, themeInvalid} from "@/utils/validations.mixin.js";
+  import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
   export default {
     mixins: [nameInvalid, emailInvalid, messageInvalid, themeInvalid],
@@ -51,7 +52,19 @@
           this.$v.$touch();
           return;
         }
-        console.log("send feedback");
+        try {
+          const data = {
+            email: this.email,
+            name: this.name,
+            message: this.message,
+            theme: this.theme,
+          };
+          const response = await this.$store.dispatch("sendFeedback", data);
+          this.$v.$reset();
+          this.$store.dispatch("openAlert", {type: "success", text: this.$messages.FEEDBACK_SENT});
+        } catch(err) {
+          apiErrorHandler.call(this, err);
+        }
       },
     },
   }

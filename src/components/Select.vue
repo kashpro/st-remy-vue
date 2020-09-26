@@ -10,27 +10,30 @@
     <ul v-show="isOpen" class="select__list">
       <li v-for="index in (max-min)" class="select__item" :key="index" @click="selectValue(index)">{{ max-index }}</li>
     </ul>
-    <input type="hidden" :name="name" :value="current">
+    <!-- <input type="hidden" :name="name" :value="current"> -->
+    <input type="hidden" :value="current">
+
   </div>
 </template>
 
 <script>
   export default {
     props: {
-      "min": {
-        default: 1920,
-      },
+      // "min": {
+      //   default: 1920,
+      // },
       "max": {
         default: new Date().getFullYear() + 1,
       },
-      "initial": {
-        default: 1980,
-      },
-      "name": {},
+      // "initial": {
+      //   default: 1980,
+      // },
+      // "name": {},
     },
     data() {
       return {
-        current: this.initial,
+        min: CONFIG.IMAGE_DATE_SELECT_MIN_VALUE,
+        current: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
         isOpen: false,
       };
     },
@@ -38,6 +41,7 @@
       selectValue(index) {
         this.current = this.max - index;
         this.isOpen = false;
+        this.$emit("input", this.current);
       },
       closeSelectKeyboard(e) {
         if (e.code === "Escape" || e.keyCode === 27) { //e.keyCode - deprecated

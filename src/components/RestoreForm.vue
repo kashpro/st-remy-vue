@@ -13,6 +13,7 @@
 <script>
   import {email, required} from "vuelidate/lib/validators";
   import {emailInvalid} from "@/utils/validations.mixin.js";
+  import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
   export default {
      mixins: [emailInvalid],
@@ -25,12 +26,18 @@
       };
     },
     methods: {
-      sendRestore() {
+      async sendRestore() {
         if (this.$v.$invalid) {
           this.$v.$touch();
           return;
         }
-        console.log("restore");
+        try {
+          const response = await this.$store.dispatch("sendRestore", {email: this.email});
+          this.$store.dispatch("closeModal");//закрыли модалку
+          this.$store.dispatch("openAlert", {type: "success", text: this.$messages.RESTORE_SENT});
+        } catch(err) {
+          apiErrorHandler.call(this, err);
+        }
       },
     },
   }

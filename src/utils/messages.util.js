@@ -31,7 +31,11 @@ const messages = {
     "Прошу связаться со мной",
   ],
   ALERT_LOGOUT_SUCCESS: "Вы успешно вышли",
-  ALERT_SERVER_ERROR: "Внутрення ошибка сервера"
+  ALERT_SERVER_ERROR: "Внутренняя ошибка сервера",
+  FEEDBACK_SENT: "Ваше сообщение успешно отправлено",
+  RESTORE_SENT: "Вам на почту отправлено письмо с дальнейшими инструкциями",
+  HISTORY_CREATED: "Ваша история отправлена на модерацию",
+  REQUEST_TOO_LARGE: "Размер запроса слишком большой",
 };
 
 export default {

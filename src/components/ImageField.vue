@@ -1,7 +1,8 @@
 <template>
   <div class="imagefield">
     <p class="imagefield__label-text">{{ text }}</p>
-    <input type="file" :name="id" hidden :id="id" accept=".jpg, .jpeg, .png, .gif, .svg" @change="onChangeHandler" ref="fileInput">
+    <!-- <input type="file" :name="id" hidden :id="id" accept=".jpg, .jpeg, .png, .gif, .svg" @change="onChangeHandler" ref="fileInput"> -->
+    <input type="file" hidden required :id="id" accept=".jpg, .jpeg, .png, .gif, .svg" @input="onChangeHandler">
     <label class="imagefield__label" :for="id">
         <img v-if="!image" :src="`${this.publicPath}${this.imagePath}`" alt="placehoder">
         <img v-else :src="image" :alt="id">
@@ -10,7 +11,9 @@
     </label>
     <div class="imagefield__year">
       <span class="imagefield__select-text">Укажите год, когда сделана фотография</span>
-      <Select :min="min" :initial="initial" :name="selectName"></Select>
+      <Select v-model="year"></Select>
+      <!-- <Select :initial="initial" :name="selectName" v-model="year"></Select> -->
+
     </div>
   </div>
 </template>
@@ -18,18 +21,20 @@
 <script>
   import Select from "@/components/Select.vue";
   export default {
-    props: ["text", "id", "imagePath", "selectName", "min", "initial",],
+    // props: ["text", "id", "imagePath", "selectName", "initial",],
+    props: ["text", "id", "imagePath"],
     components: {Select,},
     data() {
       return {
         publicPath: process.env.BASE_URL,
         file: null,
+        year: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
       };
     },
     methods: {
-      onChangeHandler() {
-	      const fileInput = this.$refs.fileInput;
-        this.file = fileInput.files[0];
+      onChangeHandler(e) {
+        this.file = e.target.files[0];
+        this.$emit('input', {image: this.file, date: this.year});
       },
     },
     computed: {
@@ -38,6 +43,11 @@
           return window.URL.createObjectURL(this.file);
         }
       },
+    },
+    watch: {
+      year() {
+        this.$emit('input', {image: this.file, date: this.year});
+      }
     },
   }
 </script>

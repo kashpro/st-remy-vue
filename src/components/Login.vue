@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <a v-if="userInfo" class="login__name" @click.prevent="isUserMenuOpen = !isUserMenuOpen">Пантелеймон Константинопольский</a>
+    <a v-if="userInfo" class="login__name" @click.prevent="isUserMenuOpen = !isUserMenuOpen">{{ fullName }}</a>
     <ul v-if="isUserMenuOpen" class="login__list" ref="loginList">
       <li class="login__item" @click="closeUserMenu"><router-link tag="span" to="/profile">Профиль</router-link></li>
       <li class="login__item" @click="logout"><span>Выйти</span></li>
@@ -21,6 +21,9 @@
     },
     computed: {
       ...mapGetters(["userInfo"]),
+      fullName() {
+        return `${this.userInfo.profile.first_name} ${this.userInfo.profile.surname}`;
+      },
     },
     methods: {
       openLoginForm() {

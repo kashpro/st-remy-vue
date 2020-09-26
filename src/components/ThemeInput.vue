@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  props: ["name"],
+  // props: ["name"],
   data() {
     return {
       current: "",
