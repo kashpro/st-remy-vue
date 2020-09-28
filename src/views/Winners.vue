@@ -53,8 +53,13 @@
       </ul>
     </div>
   </div>
-  
 </template>
+
+<script>
+  export default {
+    name: "Winners",
+  }
+</script>
 
 <style lang="scss">
   .winners {
@@ -75,9 +80,6 @@
       margin: 0 auto;
       text-align: center;
       margin-bottom: 50px;
-    }
-    &__list {
-
     }
     &__item {
       display: flex;

@@ -8,6 +8,12 @@
   </div>
 </template>
 
+<script>
+  export default {
+    name: "ModalSocial",
+  }
+</script>
+
 <style lang="scss">
   .modal-social {
     // flex: 0 1 47%;

@@ -6,42 +6,41 @@
         <svg x="0px" y="0px" viewBox="0 0 256 256" style="enable-background:new 0 0 256 256;" xml:space="preserve"><polygon points="225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093"/></svg>
       </span>
     </div>
-    
     <ul v-show="isOpen" class="select__list">
       <li v-for="index in (max-min)" class="select__item" :key="index" @click="selectValue(index)">{{ max-index }}</li>
     </ul>
     <!-- <input type="hidden" :name="name" :value="current"> -->
     <input type="hidden" :value="current">
-
   </div>
 </template>
 
 <script>
+  import {mapGetters} from "vuex";
+
   export default {
-    props: {
-      // "min": {
-      //   default: 1920,
-      // },
-      "max": {
-        default: new Date().getFullYear() + 1,
+    name: "Select",
+    props: ["id"],
+    computed: {
+      ...mapGetters(["beforeYear", "afterYear"]),
+      current() {
+        return this[this.key];
       },
-      // "initial": {
-      //   default: 1980,
-      // },
-      // "name": {},
     },
     data() {
       return {
+        key: this.id + "Year",
+        max: new Date().getFullYear() + 1,
         min: CONFIG.IMAGE_DATE_SELECT_MIN_VALUE,
-        current: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
         isOpen: false,
       };
     },
     methods: {
       selectValue(index) {
-        this.current = this.max - index;
+        const value = this.max - index;
         this.isOpen = false;
-        this.$emit("input", this.current);
+        // this.$emit("input", this.current);
+        // const key = this.id + "Year";
+        this.$store.dispatch("setValue", {value: value, key: this.key});
       },
       closeSelectKeyboard(e) {
         if (e.code === "Escape" || e.keyCode === 27) { //e.keyCode - deprecated
@@ -51,7 +50,6 @@
       closeSelect() {
         this.isOpen = false;
       }
-
     },
     watch: {
       isOpen() {
@@ -73,14 +71,13 @@
     display: inline-block;
     position: relative;
     &:hover {
-        background-color: rgba(#ffffff, 0.3);
+        background-color: rgba(#ffffff, 0.5);
       }
     &__value {
       width: 58px;
       text-align: center;
       padding: 3px 5px;
       display: inline-block;
-      
     }
     &__icon {
       &--rotate {
@@ -100,17 +97,18 @@
       position: absolute;
       left: 0;
       top: 100%;
-      max-height: 150px;
+      max-height: 175px;
       overflow-y: auto;
       overflow-x: hidden;
     }
     &__item {
       text-align: center;
       border-bottom: 1px solid #ffffff;
+      background-color: #000000;
       padding: 3px 5px;
       cursor: pointer;
       &:hover {
-        background-color: rgba(#ffffff, 0.3);
+        background-color: #666666;
       }
     }
     &__face {

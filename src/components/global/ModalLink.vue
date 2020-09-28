@@ -2,6 +2,12 @@
   <a class="modal-link"><slot></slot></a>
 </template>
 
+<script>
+  export default {
+    name: "ModalLink",
+  }
+</script>
+
 <style lang="scss">
   .modal-link {
     transition: all 0.2s ease;

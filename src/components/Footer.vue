@@ -7,12 +7,9 @@
         <div class="footer__copyright"><p>© 2018-{{ new Date().getFullYear() }} E. ReMY MARTIN & CO<br>PLEASE DRINK RESPONSIBLY</p></div>
       </div>
       <div class="footer__social">
-        <!-- <a class="social-link social-link--contacts social-link--mr40" title="Контакты" href="">Контакты</a> -->
         <SocialLink class="social-link--contacts social-link--mr40" title="Контакты" href="https://ya.ru">Контакты</SocialLink>
         <SocialLink class="social-link--ok social-link--mr15" title="Одноклассники" href="https://ok.ru">Одноклассники</SocialLink>
         <SocialLink class="social-link--vk" title="Вконтакте" href="https://vk.com">Вконтакте</SocialLink>
-        <!-- <a class="social-link social-link--ok social-link--mr15" title="Одноклассники" href="">ok.ru</a> -->
-        <!-- <a class="social-link social-link--vk" title="Вконтакте"  href="">vk.com</a> -->
       </div>
     </div>
   </footer>
@@ -22,6 +19,7 @@
   import Nav from "@/components/Nav.vue";
 
   export default {
+    name: "Footer",
     components: {Nav},
   }
 </script>

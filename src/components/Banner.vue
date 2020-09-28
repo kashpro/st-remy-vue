@@ -15,10 +15,11 @@
   import {mapGetters} from "vuex";
 
   export default {
+    name: "Banner",
     components: {Carousel, Register},
     computed: {
       ...mapGetters(["userInfo"]),
-    }
+    },
   }
 </script>
 

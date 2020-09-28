@@ -4,6 +4,12 @@
   </button>
 </template>
 
+<script>
+  export default {
+    name: "Button",
+  }
+</script>
+
 <style lang="scss">
   .btn {
   transition: all 0.2s ease;

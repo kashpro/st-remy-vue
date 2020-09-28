@@ -47,14 +47,52 @@ const router = new VueRouter({
   mode: "history",
 });
 
-router.beforeEach( (to, from, next) => {
-  const currentUser = store.getters.userInfo;
+// router.beforeEach( (to, from, next) => {
+//   const currentUser = store.getters.userInfo;
+//   const requireAuth = to.matched.some(record => record.meta.auth);
+//   if (requireAuth && !currentUser) {
+//     next(from);
+//   } else {
+//     next();
+//   }
+// });
+
+router.beforeEach( async (to, from, next) => {
   const requireAuth = to.matched.some(record => record.meta.auth);
-  if (requireAuth && !currentUser) {
-    next(from);
+  if (!localStorage.getItem("token") && requireAuth) {
+    next("/");
   } else {
     next();
+    // try {
+      // const userInfo = await store.dispatch("getUserInfo", localStorage.getItem("token"));
+      // next();
+    // } catch(err) {
+      // if (requireAuth) {
+      //   next("/");
+      // }
+      // next();
+    // }
   }
+  
 });
 
 export default router;
+
+
+// router.beforeEach( async (to, from, next) => {
+//   const requireAuth = to.matched.some(record => record.meta.auth);
+//   if (!localStorage.getItem("token") && requireAuth) {
+//     next("/");
+//   } else {
+//     try {
+//       const userInfo = await store.dispatch("getUserInfo", localStorage.getItem("token"));
+//       next();
+//     } catch(err) {
+//       if (requireAuth) {
+//         next("/");
+//       }
+//       next();
+//     }
+//   }
+  
+// });

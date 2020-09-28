@@ -111,35 +111,12 @@
         </li> <!-- Конец итема -->
       </ul>
     </div>
-    <!-- <StoryModal>
-      <template v-slot:main>
-      <div class="story__image story__image--wh400">
-        <img src="@/assets/images/gallery-03.jpg" alt="before image">
-        <img src="@/assets/images/gallery-01.jpg" alt="after image">
-      </div>
-      <div class="story__box1">
-        <div class="story__head">История дружбы:</div>
-        <div class="story__share">
-          <ul class="story__social">
-            <li><a class="social-link social-link--ok social-link--mr15" title="Одноклассники" href="">ok.ru</a></li>
-            <li><a class="social-link social-link--vk" title="Вконтакте" href="">vk.com</a></li>
-          </ul>
-        </div>
-        <p class="story__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eaque fugiat fuga repellat fugit et hic vel, nihil voluptas quidem illum corrupti porro cumque corporis, numquam sint eius dicta quas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eaque fugiat fuga repellat fugit et hic vel, nihil voluptas quidem illum corrupti porro cumque corporis, numquam sint eius dicta quas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eaque fugiat fuga repellat fugit et hic vel, nihil voluptas quidem illum corrupti porro cumque corporis, numquam sint eius dicta quas.</p>
-        <span class="story__author">Константинопольский Пантелеймон</span>
-        <span class="story__date">2018/2018</span>
-      </div>
-      </template>
-    </StoryModal> -->
   </section>
 </template>
 
 <script>
-  // import StoryModal from "@/components/StoryModal.vue";
-  // import Button from "@/components/Button.vue";
-
   export default {
-    // components: {/* StoryModal, */ Button,},
+    name: "Gallery",
     methods: {
       showStory() {
         this.$store.dispatch("openModal", {
@@ -154,7 +131,7 @@
             date: "2018/2018",
           },
         });
-      }
+      },
     },
   }
 </script>
@@ -269,7 +246,6 @@
     }
     &__likes {
       margin-left: 5px;
-      
     }
   }
 </style>

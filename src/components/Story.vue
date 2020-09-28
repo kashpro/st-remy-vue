@@ -23,6 +23,7 @@
   import {mapGetters} from "vuex";
 
   export default {
+    name: "Story",
     computed: {
       ...mapGetters(["modalData"]),
     },

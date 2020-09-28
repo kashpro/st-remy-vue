@@ -17,6 +17,7 @@
   import Login from "@/components/Login.vue";
   
   export default {
+    name: "Header",
     components: {Nav, Login},
   }
 </script>
@@ -45,45 +46,4 @@
       flex-shrink: 0;
     }
   }
-  // .login {
-  //   flex-shrink: 0;
-  //   width: 350px;
-  //   position: relative;
-  //   display: flex;
-  //   justify-content: flex-end;
-  //   align-items: center;
-  //   &__list {
-  //     position: absolute;
-  //   }
-  //   &__name {
-  //     cursor: pointer;
-  //     color: #cbb073;
-  //     transition: all 0.2s ease;
-  //     &:hover {
-  //       color: #ffffff;
-  //     }
-  //   }
-  //   &__btn {
-  //     flex-shrink: 0;
-  //   }
-  //   &__list {
-  //     width: 200px;
-  //     right: 0;
-  //     bottom: -60px;
-  //   }
-  //   &__item {
-  //     transition: all 0.2s ease;
-  //     cursor: pointer;
-  //     padding: 10px 30px;
-  //     color: #cbb073;
-  //     background-color: #363636;
-  //     text-align: center;
-  //     &:not(:last-child) {
-  //       border-bottom: 1px solid #cbb073;
-  //     }
-  //     &:hover {
-  //       color: #ffffff;
-  //     }
-  //   }
-  // }
 </style>

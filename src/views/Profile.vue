@@ -4,17 +4,16 @@
       <h1 class="profile__head">Личный кабинет</h1>
       <p class="profile__text">Регистрируйся и принимай участие в конкурсе от St.Remy. Стань победителем, получи подарок для себя и своих друзей!</p>
       <p class="profile__name">{{ fullName }}</p>
-
       <div class="editor profile__editor">
         <h2 class="editor__head">Редактор истории</h2>
         <div class="editor__line"></div>
         <form class="editor__form">
-          <ImageField class="editor__imagefield" text="Фотография №1 (тогда)" id="before" imagePath="img/stremy-01.jpg" v-model="before"></ImageField>
-          <ImageField class="editor__imagefield" text="Фотография №2 (сейчас)" id="after" imagePath="img/stremy-02.jpg" v-model="after"></ImageField>
+          <ImageField class="editor__imagefield" text="Фотография №1 (тогда)" id="before" imagePath="img/stremy-01.jpg" :small="beforeImageInvalid"></ImageField>
+          <ImageField class="editor__imagefield" text="Фотография №2 (сейчас)" id="after" imagePath="img/stremy-02.jpg" :small="afterImageInvalid"></ImageField>
           <div class="editor__description">
             <span class="editor__text" >История дружбы (описание):</span>
             <label for="description" class="editor__label">Напишите краткую историю о том, как вы сделали эти фотографии.</label>
-            <textarea name="desc" id="description" class="editor__textarea" v-model="desc" placeholder="Введите текст от 140 до 4000 символов:"></textarea>
+            <textarea id="description" class="editor__textarea" v-model="desc" placeholder="Введите текст от 140 до 4000 символов:"></textarea>
             <small v-if="descInvalid" class="editor__small">{{ descInvalid }}</small>
           </div>
           <div class="editor__buttons">
@@ -30,27 +29,31 @@
 <script>
   import ImageField from "@/components/ImageField.vue";
   import {required, minLength, maxLength} from "vuelidate/lib/validators";
-  import {descInvalid} from "@/utils/validations.mixin.js";
+  import {descInvalid, beforeImageInvalid, afterImageInvalid} from "@/utils/validations.mixin.js";
   import {mapGetters} from "vuex";
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
+  import {sizeValidator} from "@/utils/validators.util.js";
 
   export default {
-    mixins: [descInvalid],
+    name: "Profile",
+    mixins: [descInvalid, beforeImageInvalid, afterImageInvalid],
     components: {ImageField},
     validations: {
-      desc: {required, minLength: minLength(CONFIG.STORY_DESC_MIN_LENGTH), maxLength:maxLength(CONFIG.STORY_DESC_MAX_LENGTH) },
+      desc: {required, minLength: minLength(CONFIG.STORY_DESC_MIN_LENGTH), maxLength:maxLength(CONFIG.STORY_DESC_MAX_LENGTH)},
+      beforeImage: {required, sizeValidator},
+      afterImage: {required, sizeValidator},
     },
     data() {
       return {
-        before: {image: null, date: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE},
-        after: {image: null, date: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE},
         desc: "",
       }
     },
     computed: {
-      ...mapGetters(["userInfo"]),
+      ...mapGetters(["userInfo", "beforeImage", "afterImage", "beforeYear", "afterYear"]),
       fullName() {
-        return `${this.userInfo.profile.first_name} ${this.userInfo.profile.surname}`;
+        if (this.userInfo) {
+          return `${this.userInfo.profile.first_name} ${this.userInfo.profile.surname}`;
+        }
       },
     },
     methods: {
@@ -63,27 +66,24 @@
           const data = new FormData();
           data.append("desc", this.desc);
           data.append("draft", draft);
-          data.append("images", this.before.image);
-          data.append("images", this.after.image);
-          data.append("years", this.before.date);
-          data.append("years", this.after.date);
+          data.append("images", this.beforeImage);
+          data.append("images", this.afterImage);
+          data.append("years", this.beforeYear);
+          data.append("years", this.afterYear);
 
           const response = await this.$store.dispatch("sendHistory", data);
-          // this.$v.$reset();
+          this.$store.dispatch("setValue", {key: "beforeImage", value: null});
+          this.$store.dispatch("setValue", {key: "afterImage", value: null});
+          this.$store.dispatch("setValue", {key: "beforeYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
+          this.$store.dispatch("setValue", {key: "afterYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
+          this.desc = "";
+          this.$v.$reset();
           this.$store.dispatch("openAlert", {type: "success", text: this.$messages.HISTORY_CREATED});
         } catch(err) {
           apiErrorHandler.call(this, err);
         }
-        
       },
-      sendDraft() {
-        if (this.$v.$invalid) {
-          this.$v.$touch();
-          return;
-        }
-        console.log("draft");
-      }
-    }
+    },
   }
 </script>
 
@@ -133,6 +133,8 @@
     &__imagefield {
       flex: 1 1 50%;
       margin-bottom: 60px;
+      position: relative;
+      z-index: 10;
     }
     &__description {
       position: relative;

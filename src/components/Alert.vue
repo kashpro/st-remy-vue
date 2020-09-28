@@ -10,6 +10,7 @@
   import {mapGetters} from "vuex";
 
   export default {
+    name: "Alert",
     computed: {
       ...mapGetters(["isAlertOpen", "alertData"]),
       typeClass() {
@@ -20,7 +21,6 @@
         }
       }
     },
-    
     methods: {
       closeAlert() {
         this.$store.dispatch("closeAlert");
@@ -35,7 +35,7 @@
       isAlertOpen() {
         if (this.isAlertOpen) {
           document.addEventListener("click", this.closeAlert);
-          setTimeout( () => {window.addEventListener("keyup", this.closeAlertKeyboard);}, 0);
+          setTimeout(() => {window.addEventListener("keyup", this.closeAlertKeyboard);}, 0);
         } else {
           window.removeEventListener("keyup", this.closeAlertKeyboard);
           document.removeEventListener("click", this.closeAlert);
@@ -55,7 +55,6 @@
     z-index: 10000;
     opacity: 0;
     top: -100px;
-    // height: 50px;
     display: flex;
     align-items: center;
     padding: 15px 10px;

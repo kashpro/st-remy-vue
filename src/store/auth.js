@@ -11,7 +11,7 @@ export default {
   actions: {
     registerUser: async (_, data) => {
       try {
-        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_REGISTER_API}`, data, {timeout: 10000});
+        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_REGISTER_API}`, data, {timeout: CONFIG.SERVER_API_TIMEOUT});
         return response;
       } catch(err) {
         throw err;
@@ -22,7 +22,7 @@ export default {
     },
     loginUser: async (_, data) => {
       try {
-        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_LOGIN_API}`, data, {timeout: 10000});
+        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_LOGIN_API}`, data, {timeout: CONFIG.SERVER_API_TIMEOUT});
         return response;
       } catch(err) {
         throw err;
@@ -31,7 +31,7 @@ export default {
     getUserInfo: async (_, token) => {
       try {
         let response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_USER_INFO_API}`, {
-          timeout: 10000,
+          timeout: CONFIG.SERVER_API_TIMEOUT,
           headers: {Authorization: `Token ${token}`},
         });
         return response;
@@ -42,7 +42,7 @@ export default {
     logout: async (_, token) => {
       try {
         let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_LOGOUT_API}`, null, {
-          timeout: 10000,
+          timeout: CONFIG.SERVER_API_TIMEOUT,
           headers: {Authorization: `Token ${token}`},
         });
         return response;
@@ -52,7 +52,7 @@ export default {
     },
     sendRestore: async (_, data) => {
       try {
-        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_RESTORE_PASS_API}`, data, {timeout: 10000});
+        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_RESTORE_PASS_API}`, data, {timeout: CONFIG.SERVER_API_TIMEOUT});
         return response;
       } catch(err) {
         throw err;

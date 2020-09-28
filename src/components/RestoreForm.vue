@@ -16,6 +16,7 @@
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
   export default {
+    name: "RestoreForm",
      mixins: [emailInvalid],
      validations: {
       email: {required, email},
@@ -33,7 +34,7 @@
         }
         try {
           const response = await this.$store.dispatch("sendRestore", {email: this.email});
-          this.$store.dispatch("closeModal");//закрыли модалку
+          this.$store.dispatch("closeModal");
           this.$store.dispatch("openAlert", {type: "success", text: this.$messages.RESTORE_SENT});
         } catch(err) {
           apiErrorHandler.call(this, err);

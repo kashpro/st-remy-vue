@@ -9,37 +9,37 @@
         <input type="date" class="start__input" v-model="age">
         <Button type="submit" class="start__btn">Перейти на сайт</Button>
       </form>
-      
       <div class="start__note">*Сайт содержит информацию для лиц совершеннолетнего возраста. Сведения, размещенные на сайте, не являются рекламой, носят исключительно информационный и развлекательный характер, и предназначены только для личного использования.</div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+  export default {
+    name: "Start",
     data() {
       return {
         age: CONFIG.START_DEFAULT_BIRTH_DATE,
       };
     },
-  methods: {
-    checkAge() {
-      const birthDate = new Date(this.age);
-      const now = new Date();
-      const age = now.getFullYear() - birthDate.getFullYear();
-      const diff = now.setFullYear(1972) < birthDate.setFullYear(1972) ? age - 1 : age;
-      if (diff >= 18) {
-        this.$router.push("/");
-        localStorage.setItem("agePass", true);
-      } else {
-        this.$store.dispatch("openModal", {
-          type: "Message",
-          data: this.$messages.YOUNG_ACCESS_DENIED_MESSAGE,
-        });
+    methods: {
+      checkAge() {
+        const birthDate = new Date(this.age);
+        const now = new Date();
+        const age = now.getFullYear() - birthDate.getFullYear();
+        const diff = now.setFullYear(1972) < birthDate.setFullYear(1972) ? age - 1 : age;
+        if (diff >= 18) {
+          this.$router.push("/");
+          localStorage.setItem("agePass", true);
+        } else {
+          this.$store.dispatch("openModal", {
+            type: "Message",
+            data: this.$messages.YOUNG_ACCESS_DENIED_MESSAGE,
+          });
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss">
@@ -106,11 +106,5 @@ export default {
         color: rgba(#ffffff, 0.5);
       }
     }
-    // &__btn {
-    //   &[disabled] {
-    //     color: #000000;
-    //     cursor: default;
-    //   }
-    // }
   }
 </style>

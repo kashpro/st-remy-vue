@@ -28,7 +28,8 @@
   import {firstnameInvalid, secondnameInvalid, emailInvalid, passwordInvalid, phoneInvalid, birthInvalid} from "@/utils/validations.mixin.js";
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
-export default {
+  export default {
+    name: "RegisterForm",
     mixins: [firstnameInvalid, secondnameInvalid, emailInvalid, passwordInvalid, phoneInvalid, birthInvalid],
     validations: {
       firstname: {required},
@@ -36,7 +37,7 @@ export default {
       email: {required, email},
       phone: {required, phoneValidator},
       birth: {required, birthValidator},
-      password: {required, minLength: minLength(CONFIG.PASSWORD_MIN_LENGTH),},
+      password: {required, minLength: minLength(CONFIG.PASSWORD_MIN_LENGTH)},
       isPersonalChecked: {booleanValidator},
       isRulesChecked: {booleanValidator},
     },
@@ -88,7 +89,7 @@ export default {
           };
           const registerResponse = await this.$store.dispatch("registerUser", regData);//зарегали юзера
           const loginResponse = await this.$store.dispatch("loginUser", loginData);//залогинились
-          localStorage.setItem("token", token); //сохранили токен   
+          localStorage.setItem("token", loginResponse.data.auth_token); //сохранили токен   
           this.$store.dispatch("setUserInfo", registerResponse.data); //сохранили юзер-инфо
           this.$store.dispatch("closeModal");//закрыли модалку
           this.$router.push("/profile"); //редирект на профайл

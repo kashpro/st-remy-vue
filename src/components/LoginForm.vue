@@ -20,6 +20,7 @@
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
   export default {
+    name: "LoginForm",
     mixins: [emailInvalid, passwordInvalidForLogin],
     validations: {
       email: {required, email},
@@ -27,7 +28,7 @@
     },
     data() {
       return {
-        email: "",
+        email: localStorage.getItem("lastLoginEmail") || "",
         password: "",
       };
     },
@@ -53,11 +54,12 @@
           localStorage.setItem("token", loginResponse.data.auth_token); //сохранили токен
           this.$store.dispatch("setUserInfo", response.data); //сохранили юзер-инфо
           this.$store.dispatch("closeModal"); //закрыли модалку
+          localStorage.setItem("lastLoginEmail", this.email);
           this.$router.push("/profile");  //редирект на профайл
         } catch(err) {
            apiErrorHandler.call(this, err);
         }
-      }
+      },
     },
   }
 </script>

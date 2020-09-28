@@ -1,4 +1,5 @@
 export function apiErrorHandler(err) {
+  console.log(err.response.data);
   // ошибка 413, нет respose
   if (!err.response) {
     this.$store.dispatch("openAlert", {type: "error", text: this.$messages.ALERT_SERVER_ERROR});
@@ -23,9 +24,9 @@ function parseObject(object) {
     if (Array.isArray(field)) {
       result = result.concat(field.map( (value) => {return `${key}: ${value}`} ));
     }
-    if (typeof field === "string") {
-      result.push(`${key}: ${field}`);
-    }
+    // if (typeof field === "string") {
+    //   result.push(`${key}: ${field}`);
+    // }
     if (typeof field === "object") {
       result = result.concat(parseObject(field));
     }  

@@ -10,13 +10,14 @@
 
 <script>
 export default {
+  name: "ThemeInput",
   // props: ["name"],
   data() {
     return {
       current: "",
       isOpen: false,
       themes: this.$messages.FEEDBACK_THEMES,
-    }
+    };
   },
   methods: {
     selectTheme(theme) {
@@ -27,7 +28,7 @@ export default {
   watch: {
     current() {
       this.$emit('input', this.current);
-    }
+    },
   }
 }
 </script>
@@ -70,5 +71,4 @@ export default {
       }
     }
   }
- 
 </style>

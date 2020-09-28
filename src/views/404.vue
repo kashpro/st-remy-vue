@@ -11,22 +11,19 @@
 </template>
 
 <script>
-  // import Button from "@/components/Button.vue";
-
   export default {
-    // components: {Button,},
+    name: "404",
     methods: {
       goBack() {
         this.$router.go(-1);
-      }
-    }
+      },
+    },
   }
 </script>
 
 <style lang="scss">
   .notfound {
     height: 100vh;
-    
     &__container {
       display: flex;
       // flex-direction: column;
@@ -51,9 +48,6 @@
       font-size: 36px;
       font-weight: bold;
       margin-bottom: 75px;
-    }
-    &__btn {
-
     }
   }
 </style>

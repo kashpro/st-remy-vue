@@ -11,10 +11,8 @@
 </template>
 
 <script>
-  // import Button from "@/components/Button.vue";
-
   export default {
-    // components: {Button,},
+    name: "Register",
     methods: {
       openRegisterForm() {
         this.$store.dispatch("openModal", {type: "RegisterForm",});

@@ -8,6 +8,7 @@
 
 <script>
   export default {
+    name: "ModalInput",
     props: ["text", "type", "small", "value"], 
   }
 </script>

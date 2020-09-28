@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  name: "Promo",
     data() {
       return {
         promoVkLink: CONFIG.PROMO_VK_LINK,

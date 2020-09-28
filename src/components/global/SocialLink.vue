@@ -2,6 +2,12 @@
   <a class="social-link"><slot></slot></a>
 </template>
 
+<script>
+  export default {
+    name: "SocialLink",
+  }
+</script>
+
 <style lang="scss">
   .social-link {
     opacity: 0.75;

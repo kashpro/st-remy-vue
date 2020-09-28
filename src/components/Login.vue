@@ -2,7 +2,8 @@
   <div class="login">
     <a v-if="userInfo" class="login__name" @click.prevent="isUserMenuOpen = !isUserMenuOpen">{{ fullName }}</a>
     <ul v-if="isUserMenuOpen" class="login__list" ref="loginList">
-      <li class="login__item" @click="closeUserMenu"><router-link tag="span" to="/profile">Профиль</router-link></li>
+      <!-- <li class="login__item" @click="closeUserMenu"><router-link tag="span" to="/profile">Профиль</router-link></li> -->
+      <li class="login__item" @click="goToProfile"><span>Профиль</span></li>
       <li class="login__item" @click="logout"><span>Выйти</span></li>
     </ul>
     <Button v-if="!userInfo" class="login__btn" @click.native="openLoginForm">Войти</Button>
@@ -14,6 +15,7 @@
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
   export default {
+    name: "Login",
     data() {
       return {
         isUserMenuOpen: false,
@@ -38,21 +40,25 @@
       closeUserMenu() {
         this.isUserMenuOpen = false;
       },
+      goToProfile() {
+        this.closeUserMenu();
+        this.$router.push("/profile");
+      },
       async logout() {
         this.closeUserMenu();
         try {
           const response = await this.$store.dispatch("logout", localStorage.getItem("token")); //разлогинились
           localStorage.removeItem("token"); //удаляем токен из локалстораджа
-          this.$store.commit("clearUserInfo"); //удаляем юзер-инфо из склада
           if (this.$route.name === "Profile") { //если сидим в профиле - редирект на главную
             this.$router.push("/");
           } else { //иначе сообщение об успешном выходе
             this.$store.dispatch("openAlert", {type: "success", text: this.$messages.ALERT_LOGOUT_SUCCESS});
           }
+          this.$store.commit("clearUserInfo"); //удаляем юзер-инфо из склада
         } catch(err) {
           apiErrorHandler.call(this, err);
         }
-      }
+      },
     },
     watch: {
       isUserMenuOpen() {

@@ -1,8 +1,7 @@
 <template>
-  <div class="modal" :class="{'modal--show': isModalOpen}" @click.self="closeModal"> <!-- белый туман -->
-    <div class="modal__content"> <!-- черный прямоугольник -->
-      <div class="modal__close" @click.self="closeModal"></div> <!-- Крестик -->
-      <!-- тут различные компоненты: форма логина, форма реги, форма рестора, крупное сообщение, история из галереи -->
+  <div class="modal" :class="{'modal--show': isModalOpen}" @click.self="closeModal">
+    <div class="modal__content">
+      <div class="modal__close" @click.self="closeModal"></div>
       <component :is="modalType"></component>
     </div>
   </div>
@@ -17,7 +16,8 @@
   import Message from "@/components/Message.vue";
 
   export default {
-    components: {RegisterForm, LoginForm, RestoreForm, Story, Message,},
+    name: "Modal",
+    components: {RegisterForm, LoginForm, RestoreForm, Story, Message},
     methods: {
       closeModal() {
         this.$store.dispatch("closeModal");

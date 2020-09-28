@@ -12,6 +12,7 @@
 
 <script>
   export default {
+    name: "Nav",
     data() {
       return {
         rulesFileLink: CONFIG.RULES_FILE_LINK,

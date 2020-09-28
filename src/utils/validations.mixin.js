@@ -107,3 +107,23 @@ export const descInvalid = {
     },
   }
 }
+
+export const beforeImageInvalid = {
+  computed: {
+    beforeImageInvalid() {
+      if (this.$v.beforeImage.$dirty && !this.$v.beforeImage.required) {return this.$messages.FORM_IMAGE_FIELD_REQUIRED;}
+      if (this.$v.beforeImage.$dirty && !this.$v.beforeImage.sizeValidator) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
+      return false;
+    },
+  }
+}
+
+export const afterImageInvalid = {
+  computed: {
+    afterImageInvalid() {
+      if (this.$v.afterImage.$dirty && !this.$v.afterImage.required) {return this.$messages.FORM_IMAGE_FIELD_REQUIRED;}
+      if (this.$v.afterImage.$dirty && !this.$v.afterImage.sizeValidator) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
+      return false;
+    },
+  }
+}

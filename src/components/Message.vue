@@ -9,8 +9,9 @@
 import {mapGetters} from "vuex";
 
   export default {
+    name: "Message",
     computed: {
-      ...mapGetters(["modalData",]),
+      ...mapGetters(["modalData"]),
     }    
   }
 </script>

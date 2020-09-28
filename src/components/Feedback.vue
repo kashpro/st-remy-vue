@@ -30,6 +30,7 @@
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
   export default {
+    name: "Feedback",
     mixins: [nameInvalid, emailInvalid, messageInvalid, themeInvalid],
     components: {ThemeInput},
     validations: {
