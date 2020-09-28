@@ -13,6 +13,9 @@ import store from './store';
 import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
+import VueMeta from "vue-meta";
+Vue.use(VueMeta);
+
 /* Utils & Plugins */
 import development from '@/utils/development.util.js';
 development.addWindowStatsElement();

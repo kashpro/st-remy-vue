@@ -38,7 +38,7 @@ const routes = [
   { 
     path: '*',
     meta: {layout: null,},
-    component: () => import('@/views/404.vue'),
+    component: () => import('@/views/Page404.vue'),
   },
 ];
 

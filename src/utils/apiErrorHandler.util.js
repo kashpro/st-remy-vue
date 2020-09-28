@@ -23,13 +23,12 @@ function parseObject(object) {
     const field = object[key];
     if (Array.isArray(field)) {
       result = result.concat(field.map( (value) => {return `${key}: ${value}`} ));
-    }
-    // if (typeof field === "string") {
-    //   result.push(`${key}: ${field}`);
-    // }
-    if (typeof field === "object") {
+    } else if (typeof field === "object") {
       result = result.concat(parseObject(field));
-    }  
+    }
+    if (typeof field === "string") {
+      result.push(`${key}: ${field}`);
+    }
   }
   return result;
 }

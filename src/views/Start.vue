@@ -15,8 +15,11 @@
 </template>
 
 <script>
+  import MetaInfo from "@/utils/metaInfo.mixin.js";
+
   export default {
     name: "Start",
+    mixins: [MetaInfo],
     data() {
       return {
         age: CONFIG.START_DEFAULT_BIRTH_DATE,

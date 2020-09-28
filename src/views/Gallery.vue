@@ -115,8 +115,11 @@
 </template>
 
 <script>
+  import MetaInfo from "@/utils/metaInfo.mixin.js";
+
   export default {
     name: "Gallery",
+    mixins: [MetaInfo],
     methods: {
       showStory() {
         this.$store.dispatch("openModal", {

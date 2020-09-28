@@ -11,8 +11,11 @@
 </template>
 
 <script>
+  import MetaInfo from "@/utils/metaInfo.mixin.js";
+
   export default {
-    name: "404",
+    name: "Page404",
+    mixins: [MetaInfo],
     methods: {
       goBack() {
         this.$router.go(-1);

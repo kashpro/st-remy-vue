@@ -42,7 +42,7 @@
       },
       goToProfile() {
         this.closeUserMenu();
-        this.$router.push("/profile");
+        this.$router.push("/profile", () => {});
       },
       async logout() {
         this.closeUserMenu();

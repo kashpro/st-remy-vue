@@ -56,8 +56,11 @@
 </template>
 
 <script>
+  import MetaInfo from "@/utils/metaInfo.mixin.js";
+
   export default {
     name: "Winners",
+    mixins: [MetaInfo],
   }
 </script>
 

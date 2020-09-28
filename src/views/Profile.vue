@@ -33,10 +33,11 @@
   import {mapGetters} from "vuex";
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
   import {sizeValidator} from "@/utils/validators.util.js";
+  import MetaInfo from "@/utils/metaInfo.mixin.js";
 
   export default {
     name: "Profile",
-    mixins: [descInvalid, beforeImageInvalid, afterImageInvalid],
+    mixins: [descInvalid, beforeImageInvalid, afterImageInvalid, MetaInfo],
     components: {ImageField},
     validations: {
       desc: {required, minLength: minLength(CONFIG.STORY_DESC_MIN_LENGTH), maxLength:maxLength(CONFIG.STORY_DESC_MAX_LENGTH)},
@@ -78,7 +79,8 @@
           this.$store.dispatch("setValue", {key: "afterYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
           this.desc = "";
           this.$v.$reset();
-          this.$store.dispatch("openAlert", {type: "success", text: this.$messages.HISTORY_CREATED});
+          const message = draft ? this.$messages.DRAFT_CREATED : this.$messages.HISTORY_CREATED;
+          this.$store.dispatch("openAlert", {type: "success", text: message});
         } catch(err) {
           apiErrorHandler.call(this, err);
         }
