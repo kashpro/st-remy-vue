@@ -64,8 +64,10 @@
       isUserMenuOpen() {
         if (this.isUserMenuOpen) {
           window.addEventListener("keyup", this.closeUserMenuKeyboard);
+          setTimeout(() => {document.addEventListener("click", this.closeUserMenu);}, 0); //this.$nextTick - не подходит
         } else {
           window.removeEventListener("keyup", this.closeUserMenuKeyboard);
+          document.removeEventListener("click", this.closeUserMenu);
         }
       },
     },
@@ -89,6 +91,9 @@
       transition: all 0.2s ease;
       &:hover {
         color: #ffffff;
+      }
+      @media (max-width: 1719px) {
+        font-size: 16px;
       }
     }
     &__btn {

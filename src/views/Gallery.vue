@@ -164,6 +164,9 @@
       grid-gap: 80px 50px;
       justify-content: center;
       margin-bottom: 100px;
+      @media (max-width: 1719px) {
+        grid-template-columns: repeat(auto-fill, 560px);
+      }
     }
     &__item {
       display: flex;
@@ -178,6 +181,10 @@
       line-height: 0;
       cursor: pointer;
       transition: all 0.3s ease;
+      @media (max-width: 1719px) {
+        width: 560px;
+        height: 560px;
+      }
       &:hover {
         border: 6px solid #ffffff;
         filter: brightness(1.2);

@@ -34,6 +34,7 @@
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
   import {sizeValidator} from "@/utils/validators.util.js";
   import MetaInfo from "@/utils/metaInfo.mixin.js";
+  import axios from "axios";
 
   export default {
     name: "Profile",
@@ -86,6 +87,10 @@
         }
       },
     },
+    mounted() {
+      let response = axios.get("https://st-remy.django.the-uweb.ru/api/v1/history/my/?limit=100&offset=0", {headers: {Authorization: `Token ${localStorage.getItem("token")}`}});
+      console.log(response);
+    }
   }
 </script>
 
@@ -145,6 +150,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      @media (max-width: 1719px) {
+        flex: 0 1 1100px;
+      }
     }
     &__text {
       font-family: "PT Serif", serif;

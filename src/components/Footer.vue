@@ -37,9 +37,16 @@
     overflow-y: visible;
     display: flex;
     align-items: flex-end;
+    @media (max-width: 1719px) {
+      background-position: calc(50% + 505px) -176px;
+      height: 570px;
+    }
     &__container {
       height: 280px;
       display: flex;
+      @media (max-width: 1719px) {
+        height: 200px;
+      }
     }
     &__box {
       flex-grow: 1;
@@ -56,11 +63,17 @@
     }
     &__nav {
       margin-top: 100px;
+      @media (max-width: 1719px) {
+        margin-top: 45px;
+      }
     }
     &__copyright {
       text-align: center;
       margin-bottom: 20px;
       opacity: 0.75;
+      @media (max-width: 1719px) {
+        font-size: 14px;
+      }
     }
     &__social {
       width: 120px;

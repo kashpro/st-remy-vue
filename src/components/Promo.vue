@@ -43,6 +43,9 @@ export default {
       max-width: 200px;
       flex-shrink: 0;
       margin-right: 120px;
+      @media (max-width: 1719px) {
+        margin-right: 80px;
+      }
     }
     &__link {
       color: #d8bd67;
@@ -76,6 +79,9 @@ export default {
       }
       &:not(:last-child) {
         margin-bottom: 50px;
+      }
+      @media (max-width: 1719px) {
+        font-size: 16px;
       }
     }
     &__images {

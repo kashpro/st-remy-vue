@@ -28,11 +28,18 @@
       justify-content: center;
       align-items: center;
       height: 100%;
+      @media (max-width: 1719px) {
+        font-size: 16px;
+      }
     }
     &__item {
       &:not(:last-child) {
         margin-right: 50px;
+        @media (max-width: 1719px) {
+          margin-right: 35px;
+        }
       }
+
     }
     &__link {
       position: relative;

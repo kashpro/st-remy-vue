@@ -45,12 +45,19 @@
       text-transform: uppercase;
       font-family: "PT Serif", serif;
       margin-bottom: 40px;
+      @media (max-width: 1719px) {
+        font-size: 60px;
+        margin-bottom: 25px;
+      }
     }
     &__text {
       max-width: 680px;
       line-height: 26px;
       text-align: center;
       margin-bottom: 75px;
+      @media (max-width: 1719px) {
+        margin-bottom: 45px;
+      }
     }
   }
 </style>

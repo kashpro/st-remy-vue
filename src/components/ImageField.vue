@@ -72,12 +72,16 @@
       line-height: 0;
       border-radius: 10px;
       overflow: hidden;
-      width: 592px;
-      height: 403px;
+      max-width: 592px;
+      max-height: 592px;
       cursor: pointer;
       transition: all 0.2s ease;
       margin-bottom: 15px;
       border: 6px solid #cbb073;
+      @media (max-width: 1719px) {
+        max-width: 500px;
+        max-height: 500px;
+      }
       &:hover {
         img {
           filter: brightness(1.2);

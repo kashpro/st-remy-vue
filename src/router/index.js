@@ -44,6 +44,8 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+  base: process.env.NODE_ENV === "production" ? "/06-stremy/" : "/",
+  // base: "/06-stremy/",
   mode: "history",
 });
 

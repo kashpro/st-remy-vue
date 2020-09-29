@@ -35,6 +35,9 @@
     &__logo {
       flex-shrink: 0;
       width: 350px;
+      @media (max-width: 1719px) {
+        width: 320px;
+      }
     }
     &--abs {
       position: absolute;
@@ -44,6 +47,9 @@
     }
     &__login {
       flex-shrink: 0;
+      @media (max-width: 1719px) {
+        width: 320px;
+      }
     }
   }
 </style>
