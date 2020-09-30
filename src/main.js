@@ -2,6 +2,7 @@
 import "normalize.css/normalize.css";
 import "@/scss/fonts.scss";
 import "@/scss/global.scss";
+import "@/scss/pagination.scss";
 import "slick-carousel/slick/slick.scss";
 
 /* Vue */
@@ -15,6 +16,9 @@ Vue.use(Vuelidate);
 
 import VueMeta from "vue-meta";
 Vue.use(VueMeta);
+
+import Paginate from 'vuejs-paginate';
+Vue.component('paginate', Paginate);
 
 /* Utils & Plugins */
 import development from '@/utils/development.util.js';

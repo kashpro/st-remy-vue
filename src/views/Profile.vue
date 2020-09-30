@@ -29,33 +29,53 @@
         </form> -->
       </div>
       <div class="profile__stories-box">
-        <h2 class="profile__head2">Мои истории дружбы</h2>
+        <h2 class="profile__head2" id="stories">Мои истории дружбы</h2>
         <ul class="profile__list">
-          <li v-for="story in userStories" class="profile__item" :key="story.id">
+          <!-- <li v-for="story in userStories" class="profile__item" :key="story.id">
+            <div class="profile__line"></div>
+            <ProfileStory :story="story"></ProfileStory>
+          </li> -->
+          <li v-for="story in items" class="profile__item" :key="story.id">
             <div class="profile__line"></div>
             <ProfileStory :story="story"></ProfileStory>
           </li>
         </ul>
+        <paginate
+          v-model="page"
+          :pageCount="pageCount"
+          :clickHandler="pageChangeHandler"
+          prevText="Назад"
+          nextText="Вперед"
+          containerClass="pagination"
+          pageLinkClass="pagination__link"
+          prevLinkClass="pagination__link"
+          nextLinkClass="pagination__link"
+          active-class="pagination__link pagination__link--active"
+          disabled-class="pagination__link pagination__link--disabled"
+          :noLiSurround="true"
+        >
+        </paginate>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import ImageField from "@/components/ImageField.vue";
+  // import ImageField from "@/components/ImageField.vue";
   import ProfileStory from "@/components/ProfileStory.vue";
-  import Select from "@/components/Select.vue";
+  // import Select from "@/components/Select.vue";
   // import {required, minLength, maxLength} from "vuelidate/lib/validators";
   // import {descInvalid, beforeImageInvalid, afterImageInvalid} from "@/utils/validations.mixin.js";
   import {mapGetters} from "vuex";
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
   // import {sizeValidator} from "@/utils/validators.util.js";
   import MetaInfo from "@/utils/metaInfo.mixin.js";
-  import axios from "axios";
+  import pagination from "@/utils/pagination.mixin.js";
+  // import axios from "axios";
 
   export default {
     name: "Profile",
-    mixins: [/*descInvalid, beforeImageInvalid, afterImageInvalid,*/ MetaInfo],
+    mixins: [/*descInvalid, beforeImageInvalid, afterImageInvalid,*/ MetaInfo, pagination],
     components: {/*ImageField, Select,*/ ProfileStory},
     // validations: {
     //   desc: {required, minLength: minLength(CONFIG.STORY_DESC_MIN_LENGTH), maxLength:maxLength(CONFIG.STORY_DESC_MAX_LENGTH)},
@@ -65,10 +85,11 @@
     data() {
       return {
         desc: "",
+        hash: "#stories",
       }
     },
     computed: {
-      ...mapGetters(["userInfo", "beforeImage", "afterImage", "beforeYear", "afterYear", "userStories"]),
+      ...mapGetters(["userInfo",/* "beforeImage", "afterImage", "beforeYear", "afterYear",*/ "userStories"]),
       fullName() {
         if (this.userInfo) {
           return `${this.userInfo.profile.first_name} ${this.userInfo.profile.surname}`;
@@ -107,6 +128,8 @@
     async mounted() {
       try {
         await this.$store.dispatch("getUserStories");
+        console.log(this.setupPagination);
+        this.setupPagination(this.userStories);
       } catch(err) {
         apiErrorHandler.call(this, err);
       }
@@ -149,6 +172,9 @@
       background: url("../assets/images/stripe.png") center no-repeat;
       height: 46px;
       background-size: contain;
+    }
+    &__list {
+      margin-bottom: 75px;
     }
     &__item {
       &:not(:last-child) {

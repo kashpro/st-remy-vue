@@ -108,9 +108,9 @@
         .imagefield__icon {
           filter: brightness(1.2);
         }
-        .imagefield__image-text {
-          opacity: 0.5;
-        }
+        // .imagefield__image-text {
+        //   opacity: 0.5;
+        // }
       }
       img {
         transition: all 0.2s ease;
@@ -131,6 +131,7 @@
     }
     &__image-text {
       opacity: 1;
+      //  -webkit-text-stroke: 1px #ffffff;
       transition: all 0.2s ease;
       position: absolute;
       transform: translateX(-50%);

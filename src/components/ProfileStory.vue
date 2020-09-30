@@ -13,6 +13,9 @@
       <div class="profile-story__description">
         <span class="profile-story__text" >История дружбы (описание):</span>
         <label for="description" class="profile-story__label">Напишите краткую историю о том, как вы сделали эти фотографии.</label>
+        <div class="profile-story__box2">
+          <Chip :type="story.desc_status" class="profile-story__chip"></Chip><small class="profile-story__comment">{{ story.desc_comment }}</small>
+        </div>
         <textarea id="description" class="profile-story__textarea" v-model="desc" placeholder="Введите текст от 140 до 4000 символов:"></textarea>
         <small v-if="descInvalid" class="profile-story__small">{{ descInvalid }}</small>
       </div>
@@ -31,10 +34,12 @@
   import {sizeValidator, imageSizeValidator} from "@/utils/validators.util.js";
   import {required, minLength, maxLength} from "vuelidate/lib/validators";
   import {descInvalid, beforeImageInvalid, afterImageInvalid, profileStoryBeforeImageInvalid, profileStoryAfterImageInvalid} from "@/utils/validations.mixin.js";
+  
 
   export default {
     name: "ProfileStory",
     props: ["story"],
+    // mixins: [pagination],
     components: {ImageField, Select, Chip},
     mixins: [descInvalid,/* beforeImageInvalid, afterImageInvalid, */profileStoryBeforeImageInvalid, profileStoryAfterImageInvalid],
     validations: {
@@ -82,6 +87,9 @@
         }
       },
     },
+    // mounted() {
+      // this.setupPagination(this.records);
+    // },
     // async beforeMount() {
     //   let blob = await fetch(`${CONFIG.SERVER_BASE}${this.story.images[0].image}`);
     //   blob = await blob.blob();
@@ -98,6 +106,11 @@
     &__chip {
       margin-bottom: 10px;
       display: inline-block;
+      margin-right: 20px;
+      margin-left: 20px;
+    }
+    &__comment {
+
     }
     &__form {
       display: flex;
@@ -131,7 +144,7 @@
       margin-bottom: 20px;
     }
     &__label {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
     &__small {
       position: absolute;

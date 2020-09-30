@@ -28,7 +28,7 @@
 <style lang="scss">
   .chip {
     border-radius: 3px;
-    background-color: #90f;
+    background-color: #95f;
     color: #000000;
     padding: 5px 10px;
     &--mod {
@@ -41,7 +41,7 @@
       background-color: #f01;
     }
     &--edit {
-      background-color: #10f;
+      background-color: #19f;
     }
   }
 </style>

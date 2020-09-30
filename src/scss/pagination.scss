@@ -1,0 +1,37 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  &__link {
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    min-width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    color: #ffffff;
+    background: #363636;
+    border-radius: 5px;
+    cursor: pointer;
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+    &:hover {
+      background: linear-gradient(to right,#876c4a 0,#f9e0b4 48%,#876c4a 100%);
+      color: #000000;
+    }
+    &--disabled {
+      color: #565656;
+      &:hover {
+        color: #565656;
+        background: #363636;
+        cursor: default;
+      }
+    }
+    &--active {
+      color: #363636;
+      background: #ffffff;
+    }
+  }
+}
