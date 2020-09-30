@@ -29,6 +29,9 @@
     height: 80px;
     width: 100%;
     z-index: 10;
+    @media (max-width: 1279px) {
+      display: none;
+    }
     &__container {
       display: flex;
     }

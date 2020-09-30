@@ -12,11 +12,15 @@ export default new Vuex.Store({
     afterImage: null,
     beforeYear: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
     afterYear: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
+    userStories: [],
   },
   mutations: {
     setValue: (state, data) => {
       state[data.key] = data.value;
-    }
+    },
+    setUserStories: (state, stories) => {
+      state.userStories = stories;
+    },
   },
   actions: {
     setValue: ({commit}, data) => {
@@ -47,12 +51,22 @@ export default new Vuex.Store({
         throw err;
       }
     },
+    getUserStories: async ({commit}) => {
+      try {
+        let response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_USER_STORIES}`, {headers: {Authorization: `Token ${localStorage.getItem("token")}`}});
+        console.log(response);
+        commit("setUserStories", response.data.results);
+      } catch(err) {
+        throw err;
+      }
+    }, 
   },
   getters: {
     beforeImage: state => state.beforeImage,
     afterImage: state => state.afterImage,
     beforeYear: state => state.beforeYear,
     afterYear: state => state.afterYear,
+    userStories: state => state.userStories,
   },
   modules: {
     auth,

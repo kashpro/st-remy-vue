@@ -1,57 +1,46 @@
 <template>
   <div class="select">
-    <span class="select__text">Укажите год, когда сделана фотография</span>
-    <div class="select__box">
-      <div class="select__face" @click="isOpen = !isOpen">
-        <span class="select__value">{{ current }}</span>
-        <span class="select__icon" :class="{'select__icon--rotate': isOpen}">
-          <svg x="0px" y="0px" viewBox="0 0 256 256" style="enable-background:new 0 0 256 256;" xml:space="preserve"><polygon points="225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093"/></svg>
-        </span>
-      </div>
-      <ul v-show="isOpen" class="select__list">
-        <li v-for="index in (max-min)" class="select__item" :key="index" @click="selectValue(index)">{{ max-index }}</li>
-      </ul>
+    <div class="select__face" @click="isOpen = !isOpen">
+      <span class="select__value">{{ current }}</span>
+      <span class="select__icon" :class="{'select__icon--rotate': isOpen}">
+        <svg x="0px" y="0px" viewBox="0 0 256 256" style="enable-background:new 0 0 256 256;" xml:space="preserve"><polygon points="225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093"/></svg>
+      </span>
     </div>
+    <ul v-show="isOpen" class="select__list">
+      <li v-for="index in (max-min)" class="select__item" :key="index" @click="selectValue(index)">{{ max-index }}</li>
+    </ul>
+    <!-- <input type="hidden" :name="name" :value="current"> -->
+    <input type="hidden" :value="current">
   </div>
-
 </template>
 
 <script>
-  // import {mapGetters} from "vuex";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "Select",
-    props: ["id", "story"],
+    props: ["id"],
     computed: {
-      currentYear() {
-        // console.log(this.id === "before" ? this.story.images[0].date : this.story.images[1].date);
-         return this.id === "before" ? this.story.images[0].date : this.story.images[1].date;
+      ...mapGetters(["beforeYear", "afterYear"]),
+      current() {
+        return this[this.key];
       },
-      // ...mapGetters(["beforeYear", "afterYear"]),
-      // current() {
-      //   return this[this.key];
-      // },
     },
     data() {
       return {
-        current: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
-        // key: this.id + "Year",
+        key: this.id + "Year",
         max: new Date().getFullYear() + 1,
         min: CONFIG.IMAGE_DATE_SELECT_MIN_VALUE,
         isOpen: false,
       };
     },
-    mounted() {
-      this.current = this.currentYear;
-    },
     methods: {
       selectValue(index) {
         const value = this.max - index;
         this.isOpen = false;
-        this.current = value;
-        this.$emit("input", value);
+        // this.$emit("input", this.current);
         // const key = this.id + "Year";
-        // this.$store.dispatch("setValue", {value: value, key: this.key});
+        this.$store.dispatch("setValue", {value: value, key: this.key});
       },
       closeSelectKeyboard(e) {
         if (e.code === "Escape" || e.keyCode === 27) { //e.keyCode - deprecated
@@ -63,9 +52,6 @@
       }
     },
     watch: {
-      // currentYear() {
-      //   this.current = this.currentYear;
-      // },
       isOpen() {
         if (this.isOpen) {
           window.addEventListener("keyup", this.closeSelectKeyboard);
@@ -81,17 +67,12 @@
 
 <style lang="scss">
   .select {
-    &__text {
-      margin-right: 15px;
-    }
-    &__box {
-      width: 75px;
-      display: inline-block;
-      position: relative;
-      &:hover {
+    width: 75px;
+    display: inline-block;
+    position: relative;
+    &:hover {
         background-color: rgba(#ffffff, 0.5);
       }
-    }
     &__value {
       width: 58px;
       text-align: center;

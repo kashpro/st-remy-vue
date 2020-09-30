@@ -12,10 +12,12 @@
 
 <script>
   import {mapGetters} from "vuex";
-  import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
+  // import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
+  import logout from "@/utils/logout.mixin.js";
 
   export default {
     name: "Login",
+    mixins: [logout],
     data() {
       return {
         isUserMenuOpen: false,
@@ -44,21 +46,21 @@
         this.closeUserMenu();
         this.$router.push("/profile", () => {});
       },
-      async logout() {
-        this.closeUserMenu();
-        try {
-          const response = await this.$store.dispatch("logout", localStorage.getItem("token")); //разлогинились
-          localStorage.removeItem("token"); //удаляем токен из локалстораджа
-          if (this.$route.name === "Profile") { //если сидим в профиле - редирект на главную
-            this.$router.push("/");
-          } else { //иначе сообщение об успешном выходе
-            this.$store.dispatch("openAlert", {type: "success", text: this.$messages.ALERT_LOGOUT_SUCCESS});
-          }
-          this.$store.commit("clearUserInfo"); //удаляем юзер-инфо из склада
-        } catch(err) {
-          apiErrorHandler.call(this, err);
-        }
-      },
+      // async logout() {
+      //   this.closeUserMenu();
+      //   try {
+      //     const response = await this.$store.dispatch("logout", localStorage.getItem("token")); //разлогинились
+      //     localStorage.removeItem("token"); //удаляем токен из локалстораджа
+      //     if (this.$route.name === "Profile") { //если сидим в профиле - редирект на главную
+      //       this.$router.push("/");
+      //     } else { //иначе сообщение об успешном выходе
+      //       this.$store.dispatch("openAlert", {type: "success", text: this.$messages.ALERT_LOGOUT_SUCCESS});
+      //     }
+      //     this.$store.commit("clearUserInfo"); //удаляем юзер-инфо из склада
+      //   } catch(err) {
+      //     apiErrorHandler.call(this, err);
+      //   }
+      // },
     },
     watch: {
       isUserMenuOpen() {

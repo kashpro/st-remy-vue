@@ -127,3 +127,21 @@ export const afterImageInvalid = {
     },
   }
 }
+
+export const profileStoryBeforeImageInvalid = {
+  computed: {
+    beforeImageInvalid() {
+      if (this.$v.beforeImage.$dirty && !this.$v.beforeImage.imageSizeValidator) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
+      return false;
+    },
+  }
+}
+
+export const profileStoryAfterImageInvalid = {
+  computed: {
+    afterImageInvalid() {
+      if (this.$v.afterImage.$dirty && !this.$v.afterImage.imageSizeValidator) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
+      return false;
+    },
+  }
+}
