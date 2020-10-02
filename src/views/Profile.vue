@@ -27,6 +27,17 @@
             <Button class="btn--secondary editor__btn" type="submit" @click.native.prevent="sendHistory(true)">Сохранить черновик</Button>
           </div>
         </form> -->
+
+
+
+        <form @submit.prevent="sendStory(true)">
+          <input type="file" @input="temp1">
+          <input type="file" @input="temp2">
+          <input type="submit">
+        </form>
+
+
+
       </div>
       <div class="profile__stories-box">
         <h2 class="profile__head2" id="stories">Мои истории дружбы</h2>
@@ -86,6 +97,13 @@
       return {
         desc: "",
         hash: "#stories",
+
+        beforeYear: 1941,
+        afterYear: 1945,
+        tempDesc: "lorem ipsum" + Math.random(),
+        beforeImage: null,
+        afterImage: null,
+
       }
     },
     computed: {
@@ -97,41 +115,55 @@
       },
     },
     // methods: {
-    //   async sendHistory(draft) {
-    //     if (this.$v.$invalid) {
-    //       this.$v.$touch();
-    //       return;
-    //     }
-    //     try {
-    //       const data = new FormData();
-    //       data.append("desc", this.desc);
-    //       data.append("draft", draft);
-    //       data.append("images", this.beforeImage);
-    //       data.append("images", this.afterImage);
-    //       data.append("years", this.beforeYear);
-    //       data.append("years", this.afterYear);
-
-    //       const response = await this.$store.dispatch("sendHistory", data);
-    //       this.$store.dispatch("setValue", {key: "beforeImage", value: null});
-    //       this.$store.dispatch("setValue", {key: "afterImage", value: null});
-    //       this.$store.dispatch("setValue", {key: "beforeYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
-    //       this.$store.dispatch("setValue", {key: "afterYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
-    //       this.desc = "";
-    //       this.$v.$reset();
-    //       const message = draft ? this.$messages.DRAFT_CREATED : this.$messages.HISTORY_CREATED;
-    //       this.$store.dispatch("openAlert", {type: "success", text: message});
-    //     } catch(err) {
-    //       apiErrorHandler.call(this, err);
-    //     }
-    //   },
+      
     // },
+    methods: {
+      temp1(e) {
+        this.beforeImage = e.target.files[0];
+      },
+      temp2(e) {
+        this.afterImage = e.target.files[0];
+      },
+      async sendStory(draft) {
+        // if (this.$v.$invalid) {
+        //   this.$v.$touch();
+        //   return;
+        // }
+        try {
+          const data = new FormData();
+          data.append("desc", this.tempDesc);
+          data.append("draft", draft);
+          data.append("imageBefore", this.beforeImage);
+          data.append("imageAfter", this.afterImage);
+          data.append("yearBefore", this.beforeYear);
+          data.append("yearAfter", this.afterYear);
+
+          const response = await this.$store.dispatch("sendStory", data);
+          // this.$store.dispatch("setValue", {key: "beforeImage", value: null});
+          // this.$store.dispatch("setValue", {key: "afterImage", value: null});
+          // this.$store.dispatch("setValue", {key: "beforeYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
+          // this.$store.dispatch("setValue", {key: "afterYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
+          // this.desc = "";
+          // this.$v.$reset();
+          const message = draft ? this.$messages.DRAFT_CREATED : this.$messages.HISTORY_CREATED;
+          this.$store.dispatch("openAlert", {type: "success", text: message});
+        } catch(err) {
+          apiErrorHandler.call(this, err);
+        }
+      },
+    },
     async mounted() {
       try {
         await this.$store.dispatch("getUserStories");
-        console.log(this.setupPagination);
         this.setupPagination(this.userStories);
       } catch(err) {
         apiErrorHandler.call(this, err);
+      }
+    },
+    watch: {
+      userStories() {
+        // console.log("Watch");
+        this.setupPagination(this.userStories);
       }
     }
   }
@@ -139,6 +171,9 @@
 
 <style lang="scss">
   .profile {
+    @media (max-width: 1719px) {
+      margin-bottom: 40px;
+    }
     position: relative;
     z-index: 15;
     margin-top: 120px;

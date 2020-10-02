@@ -1,5 +1,5 @@
 <template>
-  <section class="feedback">
+  <section class="feedback" id="feedback">
     <div class="container feedback__container">
       <h2 class="feedback__head">Обратная связь</h2>
       <form class="feedback__form" @submit.prevent="sendFeedback">
@@ -74,6 +74,9 @@
 <style lang="scss">
   .feedback {
     margin-bottom: 150px;
+    @media (max-width: 1279px) {
+      margin-bottom: 40px;
+    }
     &__head {
       font-size: 30px;
       font-weight: 700;
@@ -93,6 +96,12 @@
       margin-bottom: 30px;
       &:first-child {
         margin-right: 30px;
+      }
+      @media (max-width: 991px) {
+        flex: 1 1 100%;
+        &:first-child {
+          margin-right: 0;
+        }
       }
     }
     &__small1 {

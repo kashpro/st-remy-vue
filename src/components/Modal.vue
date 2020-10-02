@@ -57,6 +57,8 @@
     visibility: hidden;
     transition: all 0.3s ease;
     &__content {
+      max-height: 90vh;
+      overflow: auto;
       transition: all 0.3s ease;
       position: absolute;
       transform: translate(-50%, -50%);

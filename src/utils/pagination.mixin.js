@@ -18,7 +18,7 @@ export default {
     },
     pageChangeHandler(page) {
       this.$router.push({path: `${this.$route.path}?page=${page}`, hash: this.hash}).catch(() => {});
-      if (this.hash) {setTimeout(() => { location.href = this.$route.hash }, 1);}
+      if (this.hash) {setTimeout(() => { location.href = this.$route.hash }, 0);}
       this.items = this.allItems[page - 1] || this.allItems[0];
     },
   },

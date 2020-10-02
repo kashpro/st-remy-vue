@@ -31,6 +31,9 @@
     height: 56.25vw;
     z-index: 1;
     margin-bottom: 100px;
+    @media (max-width: 991px) {
+      height: 970px;
+    }
     &__container {
       position: relative;
       height: 100%;

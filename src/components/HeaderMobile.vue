@@ -13,7 +13,7 @@
       </div>
     </div>
     <div v-if="isMenuOpen" class="header-mob__menu">
-      <div class="container">
+      <div class="container header-mob__container2">
         <div class="header-mob__box1">
           <div class="header-mob__logo">
             <img src="@/assets/images/logo-01.png" alt="Logo" class="header-mob__image">
@@ -99,12 +99,19 @@
     @media (max-width: 1279px) {
       display: block;
     }
+    &__container2 {
+      height: 100%;
+      overflow: auto;
+    }
     &__box1 {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 20px;
       margin-bottom: 50px;
+      @media (max-width: 1279px) {
+        margin-bottom: 0;
+      }
     }
     &__close {
       // background-color: #109;
@@ -167,6 +174,9 @@
     }
     &__nav {
       margin-bottom: 30px;
+      @media (max-width: 1279px) {
+        margin-bottom: 15px;
+      }
     }
     &__list {
       display: flex;
@@ -210,11 +220,15 @@
       height: 20px;
       background-size: contain;
       margin-bottom: 30px;
+      @media (max-width: 1279px) {
+        margin-bottom: 15px;
+      }
     }
     &__login {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-bottom: 30px;
     }
   }
 </style>

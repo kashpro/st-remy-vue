@@ -4,24 +4,26 @@
     <form class="profile-story__form">
       <div class="profile-story__box1">
         <ImageField class="profile-story__imagefield" id="before" :small="beforeImageInvalid" :story="story" v-model="beforeImage"></ImageField>
-        <Select id="before" class="profile-story__select" :story="story" v-model="beforeYear"></Select>
+        <Select v-if="this.story.draft === true || this.story.img_before.status === 'edit'" id="before" class="profile-story__select" :story="story" v-model="beforeYear"></Select>
+        <div class="profile-story__replacer" v-else>Год, когда сделана фотография: {{ story.img_before.date }}</div>
       </div>
       <div class="profile-story__box1">
         <ImageField class="profile-story__imagefield" id="after" :small="afterImageInvalid" :story="story" v-model="afterImage"></ImageField>
-        <Select id="after" class="profile-story__select" :story="story" v-model="afterYear"></Select>
+        <Select v-if="this.story.draft === true || this.story.img_after.status === 'edit'" id="after" class="profile-story__select" :story="story" v-model="afterYear"></Select>
+        <div class="profile-story__replacer" v-else>Год, когда сделана фотография: {{ story.img_after.date }}</div>
       </div>
       <div class="profile-story__description">
-        <span class="profile-story__text" >История дружбы (описание):</span>
+        <span class="profile-story__text">История дружбы (описание):</span>
         <label for="description" class="profile-story__label">Напишите краткую историю о том, как вы сделали эти фотографии.</label>
         <div class="profile-story__box2">
           <Chip :type="story.desc_status" class="profile-story__chip"></Chip><small class="profile-story__comment">{{ story.desc_comment }}</small>
         </div>
-        <textarea id="description" class="profile-story__textarea" v-model="desc" placeholder="Введите текст от 140 до 4000 символов:"></textarea>
+        <textarea id="description" class="profile-story__textarea" v-model="desc" placeholder="Введите текст от 140 до 4000 символов:" :disabled="!(story.draft === true || story.desc_status === 'edit')"></textarea>
         <small v-if="descInvalid" class="profile-story__small">{{ descInvalid }}</small>
       </div>
       <div class="profile-story__buttons">
-        <Button class="profile-story__btn" type="submit" @click.native.prevent="sendHistory(false)">Отправить на модерацию</Button>
-        <Button class="btn--secondary profile-story__btn" type="submit" @click.native.prevent="sendHistory(true)">Сохранить черновик</Button>
+        <Button v-if="isUnlocked" class="profile-story__btn" type="submit" @click.native.prevent="sendStory(false)">Отправить на модерацию</Button>
+        <Button v-if="story.draft" class="btn--secondary profile-story__btn" type="submit" @click.native.prevent="sendStory(true)">Сохранить черновик</Button>
       </div>
     </form>
   </div>
@@ -34,6 +36,7 @@
   import {sizeValidator, imageSizeValidator} from "@/utils/validators.util.js";
   import {required, minLength, maxLength} from "vuelidate/lib/validators";
   import {descInvalid, beforeImageInvalid, afterImageInvalid, profileStoryBeforeImageInvalid, profileStoryAfterImageInvalid} from "@/utils/validations.mixin.js";
+  import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
   
 
   export default {
@@ -47,6 +50,11 @@
       beforeImage: {imageSizeValidator},
       afterImage: {imageSizeValidator},
     },
+    computed: {
+      isUnlocked() {
+        return this.story.draft === true || this.story.desc_status === "edit" || this.story.img_before.status === "edit" || this.story.img_after.status === "edit";
+      },
+    },
     data() {
       return {
         desc: this.story.desc,
@@ -58,28 +66,28 @@
       };
     },
     methods: {
-      async sendHistory(draft) {
+      async sendStory(draft) {
         if (this.$v.$invalid) {
           this.$v.$touch();
           return;
         }
-        return;
         try {
           const data = new FormData();
           data.append("desc", this.desc);
           data.append("draft", draft);
-          data.append("images", this.beforeImage);
-          data.append("images", this.afterImage);
-          data.append("years", this.beforeYear);
-          data.append("years", this.afterYear);
+          if (this.beforeImage) {data.append("imageBefore", this.beforeImage);}
+          if (this.afterImage) {data.append("imageAfter", this.afterImage);}
+          if (this.beforeYear) {data.append("yearBefore", this.beforeYear);}
+          if (this.afterYear) {data.append("yearAfter", this.afterYear);}
 
-          const response = await this.$store.dispatch("sendHistory", data);
-          this.$store.dispatch("setValue", {key: "beforeImage", value: null});
-          this.$store.dispatch("setValue", {key: "afterImage", value: null});
-          this.$store.dispatch("setValue", {key: "beforeYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
-          this.$store.dispatch("setValue", {key: "afterYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
-          this.desc = "";
+          const response = await this.$store.dispatch("updateStory", {data: data, id: this.story.id});
+          this.beforeImage = null;
+          this.afterImage = null;
+          this.beforeYear = null;
+          this.afterYear = null;
+          //в респонсе объект обновленной истории. В складе заменить историю
           this.$v.$reset();
+          this.$store.dispatch("replaceStory", response.data);
           const message = draft ? this.$messages.DRAFT_CREATED : this.$messages.HISTORY_CREATED;
           this.$store.dispatch("openAlert", {type: "success", text: message});
         } catch(err) {
@@ -87,14 +95,6 @@
         }
       },
     },
-    // mounted() {
-      // this.setupPagination(this.records);
-    // },
-    // async beforeMount() {
-    //   let blob = await fetch(`${CONFIG.SERVER_BASE}${this.story.images[0].image}`);
-    //   blob = await blob.blob();
-    //   this.test = URL.createObjectURL(blob);
-    // }
   }
 </script>
 
@@ -103,6 +103,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    &__replacer { //стили такие же как у .select
+      @media (max-width: 1719px) {
+        font-size: 14px;
+      }
+    }
     &__chip {
       margin-bottom: 10px;
       display: inline-block;

@@ -7,7 +7,7 @@
         <div class="footer__copyright"><p>© 2018-{{ new Date().getFullYear() }} E. ReMY MARTIN & CO<br>PLEASE DRINK RESPONSIBLY</p></div>
       </div>
       <div class="footer__social">
-        <SocialLink class="social-link--contacts social-link--mr40" title="Контакты" href="https://ya.ru">Контакты</SocialLink>
+        <SocialLink class="social-link--contacts social-link--mr40" title="Контакты" href="" @click.prevent.native="goToFeedback">Контакты</SocialLink>
         <SocialLink class="social-link--ok social-link--mr15" title="Одноклассники" href="https://ok.ru">Одноклассники</SocialLink>
         <SocialLink class="social-link--vk" title="Вконтакте" href="https://vk.com">Вконтакте</SocialLink>
       </div>
@@ -21,6 +21,12 @@
   export default {
     name: "Footer",
     components: {Nav},
+    methods: {
+      goToFeedback() {
+        this.$router.push({path: "/", hash: "#feedback"}).catch(() => {});
+        setTimeout(() => { location.href = this.$route.hash }, 0);
+      },
+    },
   }
 </script>
 
@@ -41,11 +47,21 @@
       background-position: calc(50% + 505px) -176px;
       height: 570px;
     }
+    @media (max-width: 1279px) {
+      background: none;
+      margin-top: 0;
+      height: auto;
+    }
     &__container {
       height: 280px;
       display: flex;
       @media (max-width: 1719px) {
         height: 200px;
+      }
+      @media (max-width: 991px) {
+        height: auto;
+        flex-direction: column;
+        align-items: center;
       }
     }
     &__box {
@@ -66,6 +82,10 @@
       @media (max-width: 1719px) {
         margin-top: 45px;
       }
+      @media (max-width: 991px) {
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
     }
     &__copyright {
       text-align: center;
@@ -73,6 +93,9 @@
       opacity: 0.75;
       @media (max-width: 1719px) {
         font-size: 14px;
+      }
+      @media (max-width: 991px) {
+        margin-bottom: 0;
       }
     }
     &__social {

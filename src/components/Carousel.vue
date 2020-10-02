@@ -1,12 +1,19 @@
 <template>
   <div class="carousel js-header-carousel" ref="carousel">
-    <img src="@/assets/images/carousel-01.jpg">
+    <div class="carousel__img carousel__img--1"></div>
+    <div class="carousel__img carousel__img--2"></div>
+    <div class="carousel__img carousel__img--3"></div>
+    <div class="carousel__img carousel__img--4"></div>
+    <div class="carousel__img carousel__img--5"></div>
+    <div class="carousel__img carousel__img--6"></div>
+    <div class="carousel__img carousel__img--7"></div>
+    <!-- <img src="@/assets/images/carousel-01.jpg">
     <img src="@/assets/images/carousel-02.jpg">
     <img src="@/assets/images/carousel-03.jpg">
     <img src="@/assets/images/carousel-04.jpg">
     <img src="@/assets/images/carousel-05.jpg">
     <img src="@/assets/images/carousel-06.jpg">
-    <img src="@/assets/images/carousel-07.jpg">
+    <img src="@/assets/images/carousel-07.jpg"> -->
   </div>
 </template>
 
@@ -42,6 +49,7 @@
   .carousel {
     position: absolute;
     width: 100%;
+    height: 100%;
     &::before {
       width: 100%;
       height: 100%;
@@ -53,5 +61,21 @@
       background-color: rgba(0, 0, 0, 0.3);
       z-index: 7;
     }
+    &__img {
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100%;
+      &--1 {background-image: url("../assets/images/carousel-01.jpg");}
+      &--2 {background-image: url("../assets/images/carousel-02.jpg");}
+      &--3 {background-image: url("../assets/images/carousel-03.jpg");}
+      &--4 {background-image: url("../assets/images/carousel-04.jpg");}
+      &--5 {background-image: url("../assets/images/carousel-05.jpg");}
+      &--6 {background-image: url("../assets/images/carousel-06.jpg");}
+      &--7 {background-image: url("../assets/images/carousel-07.jpg");}
+    }
   }
+  .slick-list, .slick-track, .slick-slide div {
+		height: 100%;
+	}
 </style>

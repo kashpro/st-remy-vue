@@ -21,6 +21,10 @@ export default new Vuex.Store({
     setUserStories: (state, stories) => {
       state.userStories = stories;
     },
+    replaceStory: (state, data) => {
+      // state.userStories[data.index] = data.data;
+      state.userStories.splice(data.index, 1, data.data);
+    }
   },
   actions: {
     setValue: ({commit}, data) => {
@@ -37,7 +41,7 @@ export default new Vuex.Store({
         throw err;
       }
     },
-    sendHistory: async (_, data) => {
+    sendStory: async (_, data) => {
       try {
         let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_CREATE_HISTORY}`, data, {
           timeout: CONFIG.SERVER_API_TIMEOUT,
@@ -51,10 +55,35 @@ export default new Vuex.Store({
         throw err;
       }
     },
+    updateStory: async (_, payload) => {
+      try {
+        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_UPDATE_HISTORY}${payload.id}`, payload.data, {
+          headers: {
+            Authorization: `Token ${localStorage.getItem("token")}`,
+          },
+        });
+       return response;
+        // commit("setUserStories", response.data.results);
+      } catch(err) {
+        throw err;
+      }
+    },
+    replaceStory: ({commit, getters}, data) => {
+      const id = data.id;
+      const userStories = getters.userStories;
+      // console.log(id);
+      // console.log(userStories);
+      const index = userStories.findIndex( (story) => story.id === data.id );
+      // console.log(index);
+      // console.log(data);
+      // console.log(userStories[index]);
+      commit("replaceStory", {data:data, index: index});
+
+    },
     getUserStories: async ({commit}) => {
       try {
         let response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_USER_STORIES}`, {headers: {Authorization: `Token ${localStorage.getItem("token")}`}});
-        console.log(response);
+        console.log(response); //ТАЙМАУТ
         commit("setUserStories", response.data.results);
       } catch(err) {
         throw err;

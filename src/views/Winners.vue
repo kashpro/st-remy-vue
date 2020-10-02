@@ -70,6 +70,9 @@
     z-index: 15;
     margin-top: 120px;
     margin-bottom: 320px;
+    @media (max-width: 1279px) {
+      margin-bottom: 40px;
+    }
     &__head {
       font-size: 36px;
       font-family: "PT Serif", serif;
@@ -101,6 +104,13 @@
     &__line {
       background: url("../assets/images/stripe.png") center no-repeat;
       height: 46px;
+      @media (max-width: 1279px) {
+        height: 26px;
+        background-size: cover;
+      }
+      @media (max-width: 991px) {
+        height: 18px;
+      }
     }
   }
 </style>

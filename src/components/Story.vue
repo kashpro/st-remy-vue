@@ -33,17 +33,32 @@
 <style lang="scss">
   .story {
     display: flex;
+    @media (max-width: 991px) {
+      flex-direction: column;
+      max-width: 620px;
+      margin: 0 auto;
+    }
     &__image {
       flex-shrink: 0;
       width: 500px;
       height: 500px;
       line-height: 0;
-       border: 6px solid #cbb073;
-       margin-right: 30px;
-       &--wh400 {
+      border: 6px solid #cbb073;
+      margin-right: 30px;
+      @media (max-width: 991px) {
+        max-width: 720px;
+        margin-right: 0;
+        align-self: center;
+        margin-bottom: 15px;
+      }
+      &--wh400 {
         width: 400px;
         height: 400px;
-       }
+        @media (max-width: 991px) {
+          width: 620px;
+          height: 620px;
+        }
+      }
       img {
         width: 100%;
         height: 50%;
@@ -58,6 +73,9 @@
       font-weight: 700;
       font-size: 24px;
       margin-bottom: 20px;
+      @media (max-width: 991px) {
+        order: 4;
+      }
     }
     &__text {
       font-size: 16px;
@@ -65,6 +83,9 @@
       max-height: 249px;
       overflow-x: auto;
       margin-bottom: 20px;
+      @media (max-width: 991px) {
+        order: 5;
+      }
     }
     &__share {
       position: relative;
@@ -75,6 +96,10 @@
       transition: all 0.2s ease;
       cursor: pointer;
       opacity: 1;
+      @media (max-width: 991px) {
+        order: 3;
+        margin: 15px 0;
+      }
       &:hover {
         .story__social {
           opacity: 1;
@@ -83,9 +108,15 @@
     }
     &__author {
       font-size: 16px;
+      @media (max-width: 991px) {
+        order: 1;
+      }
     }
     &__date {
       font-size: 16px;
+      @media (max-width: 991px) {
+        order: 2;
+      }
     }
     &__box1 {
      position: relative;

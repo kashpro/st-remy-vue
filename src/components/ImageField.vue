@@ -2,12 +2,12 @@
   <div class="imagefield">
     <p class="imagefield__label-text">{{ text }}</p>
     <p class="imagefield__info"><Chip :type="chip" class="imagefield__chip"></Chip><small class="imagefield__comment">{{ comment }}</small></p>
-    <input type="file" hidden required :id="id" accept=".jpg, .jpeg, .png, .gif, .svg" @input="setImage">
-    <label class="imagefield__label" :for="id">
+    <input type="file" hidden :id="`${id}${story.id}`" accept=".jpg, .jpeg, .png, .gif, .svg" @input="setImage" :disabled="isDisabled">
+    <label class="imagefield__label" :class="{'imagefield__label--enabled': !isDisabled}" :for="`${id}${story.id}`">
       <img v-if="!image" :src="fileFromServer || imagePath" alt="placeholder">
       <img v-else :src="image" :alt="id">
-      <div class=" imagefield__icon"></div>
-      <span class="imagefield__image-text">Загрузить фото</span>
+      <div v-if="!isDisabled" class=" imagefield__icon"></div>
+      <span v-if="!isDisabled" class="imagefield__image-text">Загрузить фото</span>
     </label>
     <small class="imagefield__small" v-if="small">{{ small }}</small>
   </div>
@@ -35,28 +35,31 @@
         return this.id === "before" ? `${this.publicPath}img/stremy-01.jpg` :  `${this.publicPath}img/stremy-02.jpg`;
       },
       fileFromServer() {
-        return this.id === "before" ? `${CONFIG.SERVER_BASE}${this.story.images[0].image}` : `${CONFIG.SERVER_BASE}${this.story.images[1].image}`;
+        return this.id === "before" ? this.story.img_before.image : this.story.img_after.image;
       },
       chip() {
-        return this.id === "before" ? this.story.images[0].status : this.story.images[1].status;
+        return this.id === "before" ? this.story.img_before.status : this.story.img_after.status;
       },
       comment() {
-        return this.id === "before" ? this.story.images[0].comment : this.story.images[1].comment;
+        return this.id === "before" ? this.story.img_before.comment : this.story.img_after.comment;
+      },
+      imageStatus() {
+        return this.id === "before" ? this.story.img_before.status : this.story.img_after.status;
+      },
+      isDisabled() {
+        return !(this.story.draft === true || this.imageStatus === 'edit');
       }
     },
     data() {
       return {
-        // key: this.id + "Image",
         publicPath: process.env.BASE_URL,
         file: null,
-        // year: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
       };
     },
     methods: {
       setImage(e) {
         this.file = e.target.files[0];
         this.$emit('input', this.file);
-        // this.$store.dispatch("setValue", {value: this.file, key: this.key});
       },
     },
   }
@@ -91,7 +94,6 @@
       // max-height: 592px;
       width: 592px;
       height: 592px;
-      cursor: pointer;
       transition: all 0.2s ease;
       margin-bottom: 15px;
       border: 6px solid #cbb073;
@@ -101,16 +103,20 @@
         height: 500px;
         width: 500px;
       }
-      &:hover {
-        img {
-          filter: brightness(1.2);
+      @media (max-width: 1279px) {
+        height: 350px;
+        width: 350px;
+      }
+      &--enabled {
+        cursor: pointer;
+        &:hover {
+          img {
+            filter: brightness(1.2);
+          }
+          .imagefield__icon {
+            filter: brightness(1.2);
+          }
         }
-        .imagefield__icon {
-          filter: brightness(1.2);
-        }
-        // .imagefield__image-text {
-        //   opacity: 0.5;
-        // }
       }
       img {
         transition: all 0.2s ease;

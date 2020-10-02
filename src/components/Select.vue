@@ -25,7 +25,7 @@
     computed: {
       currentYear() {
         // console.log(this.id === "before" ? this.story.images[0].date : this.story.images[1].date);
-         return this.id === "before" ? this.story.images[0].date : this.story.images[1].date;
+         return this.id === "before" ? this.story.img_before.date : this.story.img_after.date;
       },
       // ...mapGetters(["beforeYear", "afterYear"]),
       // current() {
@@ -81,6 +81,9 @@
 
 <style lang="scss">
   .select {
+    @media (max-width: 1719px) {
+      font-size: 14px;
+    }
     &__text {
       margin-right: 15px;
     }

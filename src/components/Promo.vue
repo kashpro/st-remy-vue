@@ -31,9 +31,16 @@ export default {
 <style lang="scss">
   .promo {
     margin-bottom: 150px;
+    @media (max-width: 1279px) {
+      margin-bottom: 40px;
+    }
     &__box1 {
       display: flex;
       margin-bottom: 100px;
+      @media (max-width: 1279px) {
+        flex-direction: column;
+        margin-bottom: 40px;
+      }
     }
     &__phraze {
       color: #d8bd67;
@@ -45,6 +52,9 @@ export default {
       margin-right: 120px;
       @media (max-width: 1719px) {
         margin-right: 80px;
+      }
+      @media (max-width: 1279px) {
+        margin-bottom: 20px;
       }
     }
     &__link {
@@ -66,22 +76,38 @@ export default {
       max-width: 700px;
       margin-bottom: 60px;
       line-height: 40px;
+      @media (max-width: 1279px) {
+        max-width: 100%;
+        margin-bottom: 40px;
+      }
     }
     &__text {
       line-height: 27px;
-      span {
+      &:not(:last-child) {
+        margin-bottom: 50px;
+      }
+      @media (max-width: 1719px) {
+        font-size: 16px;
+      }
+      @media (max-width: 1279px) {
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+      }
+       span {
         font-size: 200px;
         float: left;
         display: block;
         height: 135px;
         position: relative;
         top: 52px;
-      }
-      &:not(:last-child) {
-        margin-bottom: 50px;
-      }
-      @media (max-width: 1719px) {
-        font-size: 16px;
+        @media (max-width: 1279px) {
+          font-size: 16px;
+          float: none;
+          display: inline;
+          height: auto;
+          position: static;
+        }
       }
     }
     &__images {

@@ -151,6 +151,9 @@
       color: #cbb073;
       text-align: center;
       margin-bottom: 25px;
+      @media (max-width: 991px) {
+        font-size: 32px;
+      }
     }
     &__text {
       max-width: 490px;
@@ -166,6 +169,10 @@
       margin-bottom: 100px;
       @media (max-width: 1719px) {
         grid-template-columns: repeat(auto-fill, 560px);
+      }
+      @media (max-width: 991px) {
+        grid-template-columns: repeat(auto-fill, 720px);
+        grid-gap: 120px 0px;
       }
     }
     &__item {
@@ -184,6 +191,10 @@
       @media (max-width: 1719px) {
         width: 560px;
         height: 560px;
+      }
+      @media (max-width: 991px) {
+        width: 720px;
+        height: 720px;
       }
       &:hover {
         border: 6px solid #ffffff;
