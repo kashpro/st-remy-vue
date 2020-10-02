@@ -24,8 +24,12 @@
     props: ["id", "story"],
     computed: {
       currentYear() {
-        // console.log(this.id === "before" ? this.story.images[0].date : this.story.images[1].date);
-         return this.id === "before" ? this.story.img_before.date : this.story.img_after.date;
+        if (this.story) {
+          return this.id === "before" ? this.story.img_before.date : this.story.img_after.date;
+        } else {
+          return CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE;
+        }
+         
       },
       // ...mapGetters(["beforeYear", "afterYear"]),
       // current() {
@@ -34,7 +38,7 @@
     },
     data() {
       return {
-        current: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
+        current: null,//CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
         // key: this.id + "Year",
         max: new Date().getFullYear() + 1,
         min: CONFIG.IMAGE_DATE_SELECT_MIN_VALUE,

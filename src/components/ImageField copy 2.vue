@@ -1,9 +1,9 @@
 <template>
   <div class="imagefield">
     <p class="imagefield__label-text">{{ text }}</p>
-    <p v-if="story" class="imagefield__info"><Chip :type="chip" class="imagefield__chip"></Chip><small class="imagefield__comment">{{ comment }}</small></p>
-    <input type="file" hidden :id="story ? `${id}${story.id}` : id" accept=".jpg, .jpeg, .png, .gif, .svg" @input="setImage" :disabled="isDisabled">
-    <label class="imagefield__label" :class="{'imagefield__label--enabled': !isDisabled}" :for="story ? `${id}${story.id}` : id">
+    <p class="imagefield__info"><Chip :type="chip" class="imagefield__chip"></Chip><small class="imagefield__comment">{{ comment }}</small></p>
+    <input type="file" hidden :id="`${id}${story.id || ''}`" accept=".jpg, .jpeg, .png, .gif, .svg" @input="setImage" :disabled="isDisabled">
+    <label class="imagefield__label" :class="{'imagefield__label--enabled': !isDisabled}" :for="`${id}${story.id || ''}`">
       <img v-if="!image" :src="fileFromServer || imagePath" alt="placeholder">
       <img v-else :src="image" :alt="id">
       <div v-if="!isDisabled" class=" imagefield__icon"></div>
@@ -19,7 +19,7 @@
 
   export default {
     name: "ImageField",
-    props: ["id", "small", "story", "rotator"],
+    props: {"id": {}, "small": {}, "story": {}},
     components: {Chip},
     computed: {
       // ...mapGetters(["beforeImage", "afterImage"]),
@@ -32,7 +32,7 @@
         return this.id === "before" ? "Фотография №1 (тогда)" : "Фотография №2 (сейчас)";
       },
       imagePath() {
-        return this.id === "before" ? `${this.publicPath}img/stremy-01.jpg` : `${this.publicPath}img/stremy-02.jpg`;
+        return this.id === "before" ? `${this.publicPath}img/stremy-01.jpg` :  `${this.publicPath}img/stremy-02.jpg`;
       },
       fileFromServer() {
         if (this.story) {
@@ -66,7 +66,7 @@
         if (this.story) {
           return !(this.story.draft === true || this.imageStatus === 'edit');
         } else {
-          return false;
+          return null;
         }
       }
     },
@@ -82,11 +82,6 @@
         this.$emit('input', this.file);
       },
     },
-    watch: {
-      rotator() {
-        this.file = null;
-      }
-    }
   }
 </script>
 

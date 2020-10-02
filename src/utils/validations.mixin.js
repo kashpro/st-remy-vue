@@ -108,10 +108,48 @@ export const descInvalid = {
   }
 }
 
+// export const beforeImageInvalidHard = {
+//   computed: {
+//     beforeImageInvalidHard() {
+//       if (this.$v.beforeImage.$dirty && !this.$v.beforeImage.required) {return this.$messages.FORM_IMAGE_FIELD_REQUIRED;}
+//       if (this.$v.beforeImage.$dirty && !this.$v.beforeImage.sizeValidatorHard) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
+//       return false;
+//     },
+//   }
+// }
+
+// export const afterImageInvalidHard = {
+//   computed: {
+//     afterImageInvalidHard() {
+//       if (this.$v.afterImage.$dirty && !this.$v.afterImage.required) {return this.$messages.FORM_IMAGE_FIELD_REQUIRED;}
+//       if (this.$v.afterImage.$dirty && !this.$v.afterImage.sizeValidatorHard) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
+//       return false;
+//     },
+//   }
+// }
+
+// export const beforeImageInvalidSoft = {
+//   computed: {
+//     beforeImageInvalidSoft() {
+//       if (this.$v.beforeImage.$dirty && !this.$v.beforeImage.sizeValidatorSoft) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
+//       return false;
+//     },
+//   }
+// }
+
+// export const afterImageInvalidSoft = {
+//   computed: {
+//     afterImageInvalidSoft() {
+//       if (this.$v.afterImage.$dirty && !this.$v.afterImage.sizeValidatorSoft) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
+//       return false;
+//     },
+//   }
+// }
+
+
 export const beforeImageInvalid = {
   computed: {
     beforeImageInvalid() {
-      if (this.$v.beforeImage.$dirty && !this.$v.beforeImage.required) {return this.$messages.FORM_IMAGE_FIELD_REQUIRED;}
       if (this.$v.beforeImage.$dirty && !this.$v.beforeImage.sizeValidator) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
       return false;
     },
@@ -121,26 +159,7 @@ export const beforeImageInvalid = {
 export const afterImageInvalid = {
   computed: {
     afterImageInvalid() {
-      if (this.$v.afterImage.$dirty && !this.$v.afterImage.required) {return this.$messages.FORM_IMAGE_FIELD_REQUIRED;}
       if (this.$v.afterImage.$dirty && !this.$v.afterImage.sizeValidator) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
-      return false;
-    },
-  }
-}
-
-export const profileStoryBeforeImageInvalid = {
-  computed: {
-    beforeImageInvalid() {
-      if (this.$v.beforeImage.$dirty && !this.$v.beforeImage.imageSizeValidator) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
-      return false;
-    },
-  }
-}
-
-export const profileStoryAfterImageInvalid = {
-  computed: {
-    afterImageInvalid() {
-      if (this.$v.afterImage.$dirty && !this.$v.afterImage.imageSizeValidator) {return this.$messages.FORM_IMAGE_FIELD_BIG;}
       return false;
     },
   }

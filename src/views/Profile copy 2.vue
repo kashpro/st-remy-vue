@@ -7,7 +7,7 @@
       <div class="editor profile__editor">
         <h2 class="profile__head2">Редактор истории</h2>
         <div class="profile__line"></div>
-        <ProfileStory></ProfileStory>
+        <ProfileStory :story="{}"></ProfileStory>
         <!-- <form class="editor__form">
           <div class="editor__box1">
             <ImageField class="editor__imagefield" text="Фотография №1 (тогда)" id="before" imagePath="img/stremy-01.jpg" :small="beforeImageInvalid"></ImageField>
@@ -96,13 +96,14 @@
     // },
     data() {
       return {
-        // desc: "",
+        desc: "",
         hash: "#stories",
-        // beforeYear: 1941,
-        // afterYear: 1945,
-        // tempDesc: "lorem ipsum" + Math.random(),
-        // beforeImage: null,
-        // afterImage: null,
+
+        beforeYear: 1941,
+        afterYear: 1945,
+        tempDesc: "lorem ipsum" + Math.random(),
+        beforeImage: null,
+        afterImage: null,
 
       }
     },
@@ -117,41 +118,41 @@
     // methods: {
       
     // },
-    // methods: {
-    //   // temp1(e) {
-    //   //   this.beforeImage = e.target.files[0];
-    //   // },
-    //   // temp2(e) {
-    //   //   this.afterImage = e.target.files[0];
-    //   // },
-    //   async sendStory(draft) {
-    //     // if (this.$v.$invalid) {
-    //     //   this.$v.$touch();
-    //     //   return;
-    //     // }
-    //     try {
-    //       const data = new FormData();
-    //       data.append("desc", this.tempDesc);
-    //       data.append("draft", draft);
-    //       data.append("imageBefore", this.beforeImage);
-    //       data.append("imageAfter", this.afterImage);
-    //       data.append("yearBefore", this.beforeYear);
-    //       data.append("yearAfter", this.afterYear);
+    methods: {
+      temp1(e) {
+        this.beforeImage = e.target.files[0];
+      },
+      temp2(e) {
+        this.afterImage = e.target.files[0];
+      },
+      async sendStory(draft) {
+        // if (this.$v.$invalid) {
+        //   this.$v.$touch();
+        //   return;
+        // }
+        try {
+          const data = new FormData();
+          data.append("desc", this.tempDesc);
+          data.append("draft", draft);
+          data.append("imageBefore", this.beforeImage);
+          data.append("imageAfter", this.afterImage);
+          data.append("yearBefore", this.beforeYear);
+          data.append("yearAfter", this.afterYear);
 
-    //       const response = await this.$store.dispatch("sendStory", data);
-    //       // this.$store.dispatch("setValue", {key: "beforeImage", value: null});
-    //       // this.$store.dispatch("setValue", {key: "afterImage", value: null});
-    //       // this.$store.dispatch("setValue", {key: "beforeYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
-    //       // this.$store.dispatch("setValue", {key: "afterYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
-    //       // this.desc = "";
-    //       // this.$v.$reset();
-    //       const message = draft ? this.$messages.DRAFT_CREATED : this.$messages.HISTORY_CREATED;
-    //       this.$store.dispatch("openAlert", {type: "success", text: message});
-    //     } catch(err) {
-    //       apiErrorHandler.call(this, err);
-    //     }
-    //   },
-    // },
+          const response = await this.$store.dispatch("sendStory", data);
+          // this.$store.dispatch("setValue", {key: "beforeImage", value: null});
+          // this.$store.dispatch("setValue", {key: "afterImage", value: null});
+          // this.$store.dispatch("setValue", {key: "beforeYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
+          // this.$store.dispatch("setValue", {key: "afterYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
+          // this.desc = "";
+          // this.$v.$reset();
+          const message = draft ? this.$messages.DRAFT_CREATED : this.$messages.HISTORY_CREATED;
+          this.$store.dispatch("openAlert", {type: "success", text: message});
+        } catch(err) {
+          apiErrorHandler.call(this, err);
+        }
+      },
+    },
     async mounted() {
       try {
         await this.$store.dispatch("getUserStories");

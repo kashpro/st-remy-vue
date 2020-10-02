@@ -24,7 +24,10 @@ export default new Vuex.Store({
     replaceStory: (state, data) => {
       // state.userStories[data.index] = data.data;
       state.userStories.splice(data.index, 1, data.data);
-    }
+    },
+    addStory: (state, data) => {
+      state.userStories.unshift(data);
+    },
   },
   actions: {
     setValue: ({commit}, data) => {
@@ -71,14 +74,11 @@ export default new Vuex.Store({
     replaceStory: ({commit, getters}, data) => {
       const id = data.id;
       const userStories = getters.userStories;
-      // console.log(id);
-      // console.log(userStories);
       const index = userStories.findIndex( (story) => story.id === data.id );
-      // console.log(index);
-      // console.log(data);
-      // console.log(userStories[index]);
       commit("replaceStory", {data:data, index: index});
-
+    },
+    addStory: ({commit}, data) => {
+      commit("addStory", data);
     },
     getUserStories: async ({commit}) => {
       try {
