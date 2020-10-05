@@ -17,8 +17,8 @@
               <div class="story__head">История дружбы:</div>
               <div class="story__share">
                 <ul class="story__social">
-                  <li><a class="social-link social-link--ok social-link--mr15" title="Одноклассники" :href="okShareLinkCreate(winner.history.id)">ok.ru</a></li>
-                  <li><a class="social-link social-link--vk" title="Вконтакте" :href="vkShareLinkCreate(winner.history.id)">vk.com</a></li>
+                  <li><a class="social-link social-link--ok social-link--mr15" target="blank" title="Одноклассники" :href="okShareLinkCreate(winner.history.id)">ok.ru</a></li>
+                  <li><a class="social-link social-link--vk" target="blank" title="Вконтакте" :href="vkShareLinkCreate(winner.history.id)">vk.com</a></li>
                 </ul>
               </div>
               <p class="story__text">{{ winner.history.desc }}</p>

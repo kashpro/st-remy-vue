@@ -14,8 +14,8 @@
           <div class="gallery__box1">
             <div class="gallery__share">
               <ul class="gallery__social">
-                <li><a class="social-link social-link--ok social-link--mr15" title="Одноклассники" :href="okShareLinkCreate(story.id)">ok.ru</a></li>
-                <li><a class="social-link social-link--vk" title="Вконтакте" :href="vkShareLinkCreate(story.id)">vk.com</a></li>
+                <li><a class="social-link social-link--ok social-link--mr15" title="Одноклассники" target="blank" :href="okShareLinkCreate(story.id)">ok.ru</a></li>
+                <li><a class="social-link social-link--vk" title="Вконтакте" target="blank" :href="vkShareLinkCreate(story.id)">vk.com</a></li>
               </ul>
             </div>
           </div>

@@ -8,8 +8,8 @@
       </div>
       <div class="footer__social">
         <SocialLink class="social-link--contacts social-link--mr40" title="Контакты" href="" @click.prevent.native="goToFeedback">Контакты</SocialLink>
-        <SocialLink class="social-link--ok social-link--mr15" title="Одноклассники" href="https://ok.ru">Одноклассники</SocialLink>
-        <SocialLink class="social-link--vk" title="Вконтакте" href="https://vk.com">Вконтакте</SocialLink>
+        <SocialLink class="social-link--ok social-link--mr15" target="blank" title="Одноклассники" :href="promoOkLink">Одноклассники</SocialLink>
+        <SocialLink class="social-link--vk" target="blank" title="Вконтакте" :href="promoVkLink">Вконтакте</SocialLink>
       </div>
     </div>
   </footer>
@@ -21,6 +21,12 @@
   export default {
     name: "Footer",
     components: {Nav},
+    data() {
+      return {
+        promoVkLink: CONFIG.PROMO_VK_LINK,
+        promoOkLink: CONFIG.PROMO_OK_LINK,
+      };
+    },
     methods: {
       goToFeedback() {
         this.$router.push({path: "/", hash: "#feedback"}).catch(() => {});

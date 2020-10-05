@@ -8,8 +8,8 @@
       <div class="story__head">История дружбы:</div>
       <div class="story__share">
         <ul class="story__social">
-          <li><a class="social-link social-link--ok social-link--mr15" title="Одноклассники" :href="modalData.okLink">ok.ru</a></li>
-          <li><a class="social-link social-link--vk" title="Вконтакте" :href="modalData.vkLink">vk.com</a></li>
+          <li><a class="social-link social-link--ok social-link--mr15" target="blank" title="Одноклассники" :href="modalData.okLink">ok.ru</a></li>
+          <li><a class="social-link social-link--vk" target="blank" title="Вконтакте" :href="modalData.vkLink">vk.com</a></li>
         </ul>
       </div>
       <p class="story__text">{{ modalData.text }}</p>
