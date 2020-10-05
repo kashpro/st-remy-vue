@@ -96,6 +96,9 @@
         margin-bottom: 10px;
         font-size: 18px;
       }
+      @media (max-width: 575px) {
+        text-align: center;
+      }
     }
     &__text {
       margin: 15px;

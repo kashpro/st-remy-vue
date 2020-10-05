@@ -214,6 +214,7 @@
       font-size: 20px;
       font-weight: 700;
       color: #d8bd67;
+      text-align: center;
     }
     &__stripe {
       background: url("../assets/images/stripe.png") center no-repeat;

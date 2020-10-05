@@ -15,5 +15,8 @@
     font-weight: 700;
     font-size: 32px;
     color: #d0b87d;
+    @media (max-width: 575px) {
+      font-size: 24px;
+    }
   }
 </style>

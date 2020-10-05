@@ -97,6 +97,9 @@
       @media (max-width: 991px) {
         margin-bottom: 0;
       }
+      @media (max-width: 575px) {
+        margin-bottom: 15px;
+      }
     }
     &__social {
       width: 120px;

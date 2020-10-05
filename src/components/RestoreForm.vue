@@ -60,6 +60,9 @@
       width: 357px;
       margin: 0 auto;
       margin-bottom: 40px;
+      @media (max-width: 575px) {
+        width: 100%;
+      }
     }
   }
 </style>

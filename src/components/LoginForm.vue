@@ -68,6 +68,9 @@
   .logform {
     &__modal-input {
       flex: 0 1 47%;
+      @media (max-width: 575px) {
+        flex: 0 1 100%;
+      }
     }
     &__modal-head {
       margin-bottom: 30px;

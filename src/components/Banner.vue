@@ -52,6 +52,10 @@
         font-size: 60px;
         margin-bottom: 25px;
       }
+      @media (max-width: 767px) {
+        font-size: 48px;
+        text-align: center;
+      }
     }
     &__text {
       max-width: 680px;

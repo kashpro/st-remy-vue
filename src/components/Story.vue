@@ -38,6 +38,9 @@
       max-width: 620px;
       margin: 0 auto;
     }
+    @media (max-width: 575px) {
+      max-width: 100%;
+    }
     &__image {
       flex-shrink: 0;
       width: 500px;
@@ -57,6 +60,14 @@
         @media (max-width: 991px) {
           width: 620px;
           height: 620px;
+        }
+        @media (max-width: 767px) {
+          width: 540px;
+          height: 540px;
+        }
+        @media (max-width: 575px) {
+          width: 100%;
+          height: auto;
         }
       }
       img {
@@ -81,8 +92,10 @@
       font-size: 16px;
       flex-grow: 1;
       max-height: 249px;
-      overflow-x: auto;
+      // overflow-x: auto;
+      overflow-y: auto;
       margin-bottom: 20px;
+      word-wrap: break-word;
       @media (max-width: 991px) {
         order: 5;
       }

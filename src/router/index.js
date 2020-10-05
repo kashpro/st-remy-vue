@@ -35,7 +35,14 @@ const routes = [
     meta: {layout: "HomeLayout", auth: true},
     component: () => import('@/views/Profile.vue'),
   },
-  { 
+  {
+    path: '/story/:id',
+    props: true,
+    name: 'Story',
+    meta: {layout: "HomeLayout"},
+    component: () => import('@/views/SingleStory.vue'),
+  },
+  {
     path: '*',
     meta: {layout: null,},
     component: () => import('@/views/Page404.vue'),

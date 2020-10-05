@@ -153,6 +153,9 @@
     &__theme {
       position: absolute;
       bottom: 0;
+      @media (max-width: 575px) {
+        font-size: 14px;
+      }
     }
     &__btn {
       margin: 0 auto;

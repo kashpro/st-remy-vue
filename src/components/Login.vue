@@ -31,7 +31,7 @@
     },
     methods: {
       openLoginForm() {
-        this.$store.dispatch("openModal", {type: "LoginForm",});
+        this.$store.dispatch("openModal", {type: "LoginForm"});
         // this.$store.dispatch("openCommonModal", {type: "LoginForm",});
       },
       closeUserMenuKeyboard(e) {

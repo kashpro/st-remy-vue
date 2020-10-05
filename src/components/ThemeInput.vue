@@ -56,6 +56,9 @@ export default {
       transition: all 0.5s ease;
       max-height: 100px;
       overflow: hidden;
+      @media (max-width: 767px) {
+        max-height: 200px;
+      }
       &--collapse {
         max-height: 0;
       }
@@ -64,10 +67,19 @@ export default {
       font-size: 14px;
       cursor: pointer;
       margin: 0 15px 15px 15px;
+      @media (max-width: 575px) {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
       &:hover {
         text-decoration: underline;
         color: #ffffff;
         opacity: 0.75;
+      }
+      p {
+        width: 100%;
+        text-align: right;
       }
     }
   }

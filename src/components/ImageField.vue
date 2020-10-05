@@ -132,6 +132,14 @@
         height: 350px;
         width: 350px;
       }
+      @media (max-width: 767px) {
+        height: 540px;
+        width: 540px;
+      }
+      @media (max-width: 575px) {
+        height: 100%;
+        width: auto;
+      }
       &--enabled {
         cursor: pointer;
         &:hover {
@@ -169,6 +177,9 @@
       left: 50%;
       bottom: 100px;
       color: #000000;
+      @media (max-width: 575px) {
+        font-size: 16px;
+      }
     }
     // &__select-text {
     //   margin-right: 15px;

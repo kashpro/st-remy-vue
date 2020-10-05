@@ -1,5 +1,5 @@
 export function apiErrorHandler(err) {
-  console.log(err.response.data);
+  // console.log(err.response.data);
   // ошибка 413, нет respose
   if (!err.response) {
     this.$store.dispatch("openAlert", {type: "error", text: this.$messages.ALERT_SERVER_ERROR});

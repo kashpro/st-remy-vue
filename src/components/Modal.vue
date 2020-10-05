@@ -69,6 +69,10 @@
       padding: 70px;
       border-radius: 5px;
       box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.21), 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+      @media (max-width: 991px) {
+        width: 95vw;
+        padding: 50px 30px;
+      }
     }
     &__close {
       top: 40px;
@@ -77,6 +81,10 @@
       height: 40px;
       cursor: pointer;
       position: absolute;
+      @media (max-width: 991px) {
+        top: 15px;
+        right: 15px;
+      }
       &:before, &::after {
         transition: all 0.1s ease;
         position: absolute;

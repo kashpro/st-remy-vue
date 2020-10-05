@@ -13,6 +13,8 @@ export default new Vuex.Store({
     beforeYear: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
     afterYear: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
     userStories: [],
+    allStories: [],
+    winners: [],
   },
   mutations: {
     setValue: (state, data) => {
@@ -21,13 +23,23 @@ export default new Vuex.Store({
     setUserStories: (state, stories) => {
       state.userStories = stories;
     },
-    replaceStory: (state, data) => {
+    setAllStories: (state, stories) => {
+      state.allStories = stories;
+    },
+    replaceUserStory: (state, data) => {
       // state.userStories[data.index] = data.data;
       state.userStories.splice(data.index, 1, data.data);
+    },
+    replaceStory: (state, data) => {
+      // state.userStories[data.index] = data.data;
+      state.allStories.splice(data.index, 1, data.data);
     },
     addStory: (state, data) => {
       state.userStories.unshift(data);
     },
+    setWinners: (state, data) => {
+      state.winners = data;
+    }
   },
   actions: {
     setValue: ({commit}, data) => {
@@ -58,6 +70,28 @@ export default new Vuex.Store({
         throw err;
       }
     },
+    sendVoice: async (_, data) => {
+      try {
+        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_SEND_VOICE}`, data, {
+          timeout: CONFIG.SERVER_API_TIMEOUT,
+          headers: {
+            Authorization: `Token ${localStorage.getItem("token")}`,
+          },
+        });
+        return response;
+      } catch(err) {
+        throw err;
+      }
+    },
+    getSingleStory: async (_, id) => {
+      try {
+        let response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_CREATE_HISTORY}${id}`);
+        console.log(response);
+        return response;
+      } catch(err) {
+        throw err;
+      }
+    },
     updateStory: async (_, payload) => {
       try {
         let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_UPDATE_HISTORY}${payload.id}`, payload.data, {
@@ -71,14 +105,38 @@ export default new Vuex.Store({
         throw err;
       }
     },
-    replaceStory: ({commit, getters}, data) => {
+    replaceUserStory: ({commit, getters}, data) => {
       const id = data.id;
       const userStories = getters.userStories;
       const index = userStories.findIndex( (story) => story.id === data.id );
+      commit("replaceUserStory", {data:data, index: index});
+    },
+    replaceStory: ({commit, getters}, data) => {
+      const id = data.id;
+      const allStories = getters.allStories;
+      const index = allStories.findIndex( (story) => story.id === data.id );
       commit("replaceStory", {data:data, index: index});
     },
     addStory: ({commit}, data) => {
       commit("addStory", data);
+    },
+    getAllStories: async ({commit}) => {
+      try {
+        let response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_ALL_STORIES}`/*, {headers: {Authorization: `Token ${localStorage.getItem("token")}`}}*/);
+        console.log(response.data); //ТАЙМАУТ
+        commit("setAllStories", response.data.results);
+      } catch(err) {
+        throw err;
+      }
+    },
+    getWinners: async ({commit}) => {
+      try {
+        let response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_WINNERS}`/*, {headers: {Authorization: `Token ${localStorage.getItem("token")}`}}*/);
+        console.log(response.data); //ТАЙМАУТ
+        commit("setWinners", response.data.results);
+      } catch(err) {
+        throw err;
+      }
     },
     getUserStories: async ({commit}) => {
       try {
@@ -96,6 +154,8 @@ export default new Vuex.Store({
     beforeYear: state => state.beforeYear,
     afterYear: state => state.afterYear,
     userStories: state => state.userStories,
+    allStories: state => state.allStories,
+    winners: state => state.winners,
   },
   modules: {
     auth,

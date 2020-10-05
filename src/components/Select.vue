@@ -88,6 +88,16 @@
     @media (max-width: 1719px) {
       font-size: 14px;
     }
+    @media (max-width: 991px) {
+      font-size: 11px;
+    }
+    @media (max-width: 767px) {
+      font-size: 14px;
+    }
+    @media (max-width: 575px) {
+      font-size: 16px;
+      text-align: center;
+    }
     &__text {
       margin-right: 15px;
     }

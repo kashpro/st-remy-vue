@@ -80,6 +80,9 @@ export default {
         max-width: 100%;
         margin-bottom: 40px;
       }
+      @media (max-width: 575px) {
+        font-size: 24px;
+      }
     }
     &__text {
       line-height: 27px;
@@ -113,10 +116,20 @@ export default {
     &__images {
       display: flex;
       justify-content: space-between;
+      @media (max-width: 575px) {
+        flex-direction: column;
+        align-items: center;
+      }
       img {
         border: 6px solid #cfb66b;
         max-width: 48%;
         object-fit: cover;
+        @media (max-width: 575px) {
+          max-width: 100%;
+          &:first-child {
+            margin-bottom: 15px;
+          }
+        }
       }
     }
   }

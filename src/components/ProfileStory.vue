@@ -123,7 +123,7 @@
           this.beforeYear = null;
           this.afterYear = null;
           this.$v.$reset();
-          this.$store.dispatch("replaceStory", response.data);//в респонсе объект обновленной истории. В складе заменить историю
+          this.$store.dispatch("replaceUserStory", response.data);//в респонсе объект обновленной истории. В складе заменить историю
           const message = draft ? this.$messages.DRAFT_CREATED : this.$messages.HISTORY_CREATED;
           this.$store.dispatch("openAlert", {type: "success", text: message});
         } catch(err) {
@@ -150,6 +150,16 @@
       @media (max-width: 1719px) {
         font-size: 14px;
       }
+      @media (max-width: 991px) {
+        font-size: 11px;
+      }
+      @media (max-width: 767px) {
+        font-size: 14px;
+      }
+      @media (max-width: 575px) {
+        font-size: 16px;
+        text-align: center;
+      }
     }
     &__chip {
       margin-bottom: 10px;
@@ -173,6 +183,10 @@
       align-items: center;
       display: flex;
       flex-direction: column;
+      @media (max-width: 767px) {
+        flex: 1 1 100%;
+      }
+
     }
     &__description {
       position: relative;
@@ -218,10 +232,22 @@
       flex: 1 1 100%;
       display: flex;
       justify-content: center;
+      @media (max-width: 767px) {
+        flex-direction: column;
+      }
     }
     &__btn {
       &:not(:last-child) {
         margin-right: 25px;
+      }
+      @media (max-width: 767px) {
+        &:not(:last-child) {
+          margin-right: 0px;
+          margin-bottom: 10px;
+        }
+      }
+      @media (max-width: 575px) {
+        padding: 10px;
       }
     }
   }

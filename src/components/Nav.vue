@@ -33,10 +33,16 @@
       }
     }
     &__item {
+      @media (max-width: 575px) {
+        font-size: 10px;
+      }
       &:not(:last-child) {
         margin-right: 50px;
         @media (max-width: 1719px) {
           margin-right: 35px;
+        }
+        @media (max-width: 575px) {
+          margin-right: 10px;
         }
       }
 

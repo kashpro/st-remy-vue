@@ -33,6 +33,8 @@ const messages = {
     "Нет ответа по обратной связи",
     "Прошу связаться со мной",
   ],
+  GALLERY_VOICE_MODAL_HEAD: "Мы за честную дружбу и честный конкурс!",
+  GALLERY_VOICE_MODAL_TEXT: "Вы не можете голосовать за свою историю, хоть мы и понимаем, что она вам очень нравится.",
   ALERT_LOGOUT_SUCCESS: "Вы успешно вышли",
   ALERT_SERVER_ERROR: "Внутренняя ошибка сервера",
   FEEDBACK_SENT: "Ваше сообщение успешно отправлено",
@@ -40,6 +42,8 @@ const messages = {
   HISTORY_CREATED: "Ваша история отправлена на модерацию",
   DRAFT_CREATED: "Черновик сохранен",
   REQUEST_TOO_LARGE: "Размер запроса слишком большой",
+  VOICE_REJECT: "Вы уже голосовали за эту историю",
+  VOICE_ACCEPT: "Выш голос принят!",
 };
 
 export default {

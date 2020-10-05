@@ -105,6 +105,9 @@
   .regform {
     &__modal-input {
       flex: 0 1 47%;
+      @media (max-width: 575px) {
+        flex: 0 1 100%;
+      }
     }
     &__modal-head {
       margin-bottom: 30px;
@@ -165,10 +168,10 @@
         }
       }
     }
-    &__modal-social {
-      flex: 0 1 47%;
-      margin-top: 15px;
-    }
+    // &__modal-social {
+    //   flex: 0 1 47%;
+    //   margin-top: 15px;
+    // }
     &__modal-link {
       margin-right: 15px;
     }

@@ -4,14 +4,16 @@ export default {
   data() {
     return {
       page: +this.$route.query.page || 1,
-      pageSize: CONFIG.PAGINATION_PROFILE_PER_PAGE,
+      pageSize: 0,
       pageCount: 0,
       allItems: [],
       items: [],
     };
   },
   methods: {
-    setupPagination(allItems) {
+    setupPagination(allItems, pageSize, hash) {
+      this.hash = hash;
+      this.pageSize = pageSize;
       this.allItems = _.chunk(allItems, this.pageSize);
       this.pageCount = _.size(this.allItems);
       this.items = this.allItems[this.page - 1] || this.allItems[0];

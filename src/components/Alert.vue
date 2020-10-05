@@ -61,6 +61,9 @@
     border-bottom: 1px solid white;
     &__text {
       font-size: 16px;
+      @media (max-width: 767px) {
+        font-size: 13px;
+      }
     }
     &--show {
       top: 0;

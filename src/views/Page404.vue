@@ -78,6 +78,9 @@
       @media (max-width: 991px) and (max-height: 545px) {
         margin-bottom: 10px;
       }
+      @media (max-width: 575px) {
+        text-align: center;
+      }
     }
   }
 </style>

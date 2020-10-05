@@ -40,7 +40,7 @@
 
 
       </div>
-      <div class="profile__stories-box">
+      <div class="profile__stories-box" v-if="userStories.length > 0">
         <h2 class="profile__head2" id="stories">Мои истории дружбы</h2>
         <ul class="profile__list">
           <!-- <li v-for="story in userStories" class="profile__item" :key="story.id">
@@ -53,6 +53,7 @@
           </li>
         </ul>
         <paginate
+          v-if="pageCount > 1"
           v-model="page"
           :pageCount="pageCount"
           :clickHandler="pageChangeHandler"
@@ -97,7 +98,7 @@
     data() {
       return {
         // desc: "",
-        hash: "#stories",
+        //hash: "#stories",
         // beforeYear: 1941,
         // afterYear: 1945,
         // tempDesc: "lorem ipsum" + Math.random(),
@@ -155,7 +156,7 @@
     async mounted() {
       try {
         await this.$store.dispatch("getUserStories");
-        this.setupPagination(this.userStories);
+        this.setupPagination(this.userStories, CONFIG.PAGINATION_PROFILE_PER_PAGE, "#stories");
       } catch(err) {
         apiErrorHandler.call(this, err);
       }
@@ -163,7 +164,7 @@
     watch: {
       userStories() {
         // console.log("Watch");
-        this.setupPagination(this.userStories);
+        this.setupPagination(this.userStories, CONFIG.PAGINATION_PROFILE_PER_PAGE, "#stories");
       }
     }
   }
@@ -171,13 +172,13 @@
 
 <style lang="scss">
   .profile {
-    @media (max-width: 1719px) {
-      margin-bottom: 40px;
-    }
     position: relative;
     z-index: 15;
     margin-top: 120px;
     margin-bottom: 320px;
+    @media (max-width: 1719px) {
+      margin-bottom: 40px;
+    }
     &__head {
       font-size: 36px;
       font-family: "PT Serif", serif;
@@ -198,6 +199,9 @@
       font-weight: 700;
       color: #cbb073;
       margin-bottom: 50px;
+      @media (max-width: 575px) {
+        font-size: 24px;
+      }
     }
     &__head2 {
       font-family: "PT Serif", serif;
@@ -213,8 +217,11 @@
     }
     &__item {
       &:not(:last-child) {
-      margin-bottom: 75px;
+        margin-bottom: 75px;
+      }
     }
+    &__stories-box {
+      margin-top: 75px;
     }
   // .editor {
   //   margin-bottom: 100px;
