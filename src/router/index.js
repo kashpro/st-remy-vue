@@ -51,7 +51,7 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  base: process.env.NODE_ENV === "production" ? "/06-stremy/" : "/",
+  base: process.env.NODE_ENV === "production" ? "./" : "/",
   mode: "history",
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
