@@ -28,19 +28,19 @@ Vue.use(messagePlugin);
 
 /* Global components */
 import Button from "@/components/global/Button.vue";
-import ModalInput from "@/components/global/ModalInput.vue";
-import ModalHead from "@/components/global/ModalHead.vue";
-import ModalForm from "@/components/global/ModalForm.vue";
-// import ModalSocial from "@/components/global/ModalSocial.vue";
-import ModalLink from "@/components/global/ModalLink.vue";
-import SocialLink from "@/components/global/SocialLink.vue";
-Vue.component("ModalInput", ModalInput);
-Vue.component("ModalHead", ModalHead);
-Vue.component("ModalForm", ModalForm);
-// Vue.component("ModalSocial", ModalSocial);
-Vue.component("ModalLink", ModalLink);
-Vue.component("SocialLink", SocialLink);
 Vue.component("Button", Button);
+import ModalInput from "@/components/global/ModalInput.vue";
+Vue.component("ModalInput", ModalInput);
+import ModalHead from "@/components/global/ModalHead.vue";
+Vue.component("ModalHead", ModalHead);
+import ModalForm from "@/components/global/ModalForm.vue";
+Vue.component("ModalForm", ModalForm);
+import ModalLink from "@/components/global/ModalLink.vue";
+Vue.component("ModalLink", ModalLink);
+import SocialLink from "@/components/global/SocialLink.vue";
+Vue.component("SocialLink", SocialLink);
+// import ModalSocial from "@/components/global/ModalSocial.vue";
+// Vue.component("ModalSocial", ModalSocial);
 
 Vue.config.productionTip = false;
 

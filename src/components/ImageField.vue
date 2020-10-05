@@ -32,7 +32,7 @@
         return this.id === "before" ? "Фотография №1 (тогда)" : "Фотография №2 (сейчас)";
       },
       imagePath() {
-        return this.id === "before" ? `${this.publicPath}img/stremy-01.jpg` : `${this.publicPath}img/stremy-02.jpg`;
+        return this.id === "before" ? `${this.publicPath}static/img/stremy-01.jpg` : `${this.publicPath}static/img/stremy-02.jpg`;
       },
       fileFromServer() {
         if (this.story) {
