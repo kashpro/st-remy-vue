@@ -14,7 +14,7 @@ import store from './store';
 
 /* Utils & Plugins */
 import development from '@/utils/development.util.js';
-if (process.env.NODE_ENV === "production") {development.addWindowStatsElement();}
+if (process.env.NODE_ENV !== "production") {development.addWindowStatsElement();}
 import messagePlugin from '@/utils/messages.util.js';
 Vue.use(messagePlugin);
 import Paginate from 'vuejs-paginate';
