@@ -188,7 +188,7 @@
       }
     }
     &__text {
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-weight: 700;
       font-size: 24px;
       margin-bottom: 20px;
@@ -207,10 +207,10 @@
       resize: none;
       padding: 20px 25px;
       border: none;
-      background-color: #ffffff;
+      background-color: var(--light-bg-color);
       border-radius: 5px;
       height: 300px;
-      color: #000000;
+      color: var(--dark-text-color);
       margin-bottom: 75px;
       &::placeholder {
         color: rgba(#000000, 0.5);

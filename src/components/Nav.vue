@@ -49,14 +49,14 @@
       position: relative;
       display: block;
       opacity: 0.75;
-      color: #ffffff;
+      color: var(--common-text-color);
       transition: all 0.2s ease;
       &::before {
         transition: all 0.2s ease;
         position: absolute;
         display: block;
         content: "";
-        background-color: #ccb16f;
+        background-color: var(--prime-color);
         width: calc(100% + 20px);
         height: 0px;
         bottom: -18px;

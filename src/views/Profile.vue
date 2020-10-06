@@ -84,9 +84,9 @@
     }
     &__head {
       font-size: 36px;
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-weight: 700;
-      color: #cbb073;
+      color: var(--prime-color);
       text-align: center;
       margin-bottom: 25px;
     }
@@ -98,16 +98,16 @@
     }
     &__name {
       font-size: 30px;
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-weight: 700;
-      color: #cbb073;
+      color: var(--prime-color);
       margin-bottom: 50px;
       @media (max-width: 575px) {
         font-size: 24px;
       }
     }
     &__head2 {
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-weight: 700;
     }
     &__line {

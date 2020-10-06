@@ -134,9 +134,9 @@
     }
     &__head {
       font-size: 36px;
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-weight: 700;
-      color: #cbb073;
+      color: var(--prime-color);
       text-align: center;
       margin-bottom: 25px;
       @media (max-width: 991px) {
@@ -175,7 +175,7 @@
     &__image {
       width: 500px;
       height: 500px;
-      border: 6px solid #cbb073;
+      border: 6px solid var(--prime-color);
       margin-bottom: 25px;
       line-height: 0;
       cursor: pointer;
@@ -197,7 +197,7 @@
         height: 100%;
       }
       &:hover {
-        border: 6px solid #ffffff;
+        border: 6px solid var(--light-bg-color);
         filter: brightness(1.2);
       }
       img {
@@ -205,7 +205,7 @@
         height: 50%;
         object-fit: cover;
         &:first-child {
-          border-bottom: 1px solid #ffffff;
+          border-bottom: 1px solid var(--light-bg-color);
         }
       }
     }
@@ -214,7 +214,7 @@
       margin-bottom: 10px;
     }
     &__author {
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-weight: 700;
       font-size: 26px;
       margin-bottom: 20px;
@@ -240,7 +240,7 @@
     }
     &__social {
       padding: 5px;
-      background-color: #000000;
+      background-color: var(--common-bg-color);
       opacity: 0;
       transition: all 0.2s ease;
       position: absolute;
@@ -252,7 +252,7 @@
     &__btn {
       &:hover {
         svg {
-          fill: #000000;
+          fill: var(--common-bg-color);
         }
       }
       svg {
@@ -261,7 +261,7 @@
         top: 2px;
         width: 16px;
         height: 16px;
-        fill: #ffffff;
+        fill: var(--light-bg-color);
         margin-left: 10px;
       }
     }

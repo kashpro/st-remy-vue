@@ -13,8 +13,8 @@
     justify-content: center;
     align-items: center;
     padding: 10px 15px;
-    color: #ffffff;
-    background: #363636;
+    color: var(--common-text-color);
+    background-color: #363636;
     border-radius: 5px;
     cursor: pointer;
     @media (max-width: 767px) {
@@ -36,7 +36,7 @@
     }
     &:hover {
       background: linear-gradient(to right,#876c4a 0,#f9e0b4 48%,#876c4a 100%);
-      color: #000000;
+      color: var(--dark-text-color);
     }
     &--disabled {
       color: #565656;
@@ -48,7 +48,7 @@
     }
     &--active {
       color: #363636;
-      background: #ffffff;
+      background-color: var(--light-bg-color);
     }
   }
 }

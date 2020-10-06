@@ -59,17 +59,17 @@
     }
     &__icon {
       margin-top: auto;
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-weight: 700;
       font-size: 30px;
-      color: #d0b780;
+      color: var(--prime-color);
       width: 85px;
       height: 85px;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 50%;
-      border: 2px solid #d0b780;
+      border: 2px solid var(--prime-color);
       margin-bottom: 35px;
       @media (max-width: 1279px) {
         margin-bottom: 0;
@@ -80,7 +80,7 @@
       }
     }
     &__head {
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-weight: 700;
       font-size: 48px;
       margin-bottom: 35px;
@@ -124,10 +124,10 @@
     }
     &__input {
       padding: 12px 10px 12px 18px;
-      border: 1px solid #cdb66b;
+      border: 1px solid var(--prime-color);
       border-radius: 5px;
       background-color: transparent;
-      color: #ffffff;
+      color: var(--common-text-color);
       margin-bottom: 35px;
       &::placeholder {
         color: rgba(#ffffff, 0.5);

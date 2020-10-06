@@ -71,10 +71,10 @@
     }
     &__name {
       cursor: pointer;
-      color: #cbb073;
+      color: var(--prime-color);
       transition: all 0.2s ease;
       &:hover {
-        color: #ffffff;
+        color: var(--common-text-color);
       }
       @media (max-width: 1719px) {
         font-size: 16px;
@@ -92,14 +92,14 @@
       transition: all 0.2s ease;
       cursor: pointer;
       padding: 10px 30px;
-      color: #cbb073;
+      color: var(--prime-color);
       background-color: #363636;
       text-align: center;
       &:not(:last-child) {
-        border-bottom: 1px solid #cbb073;
+        border-bottom: 1px solid var(--prime-color);
       }
       &:hover {
-        color: #ffffff;
+        color: var(--common-text-color);
       }
     }
   }

@@ -24,11 +24,11 @@
 
 body {
   font-size: 18px;
-  font-family: "Gotham Pro", sans-serif;
+  font-family: var(--prime-font);
   font-weight: 400;
   font-style: normal;
-  color: #ffffff;
-  background-color: #000000;
+  color: var(--common-text-color);
+  background-color: var(--common-bg-color);
 }
 
 img {

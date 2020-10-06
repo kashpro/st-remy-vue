@@ -80,7 +80,7 @@
     &__head {
       font-size: 30px;
       font-weight: 700;
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       margin-bottom: 50px;
       text-align: center;
     }
@@ -127,10 +127,10 @@
       padding: 20px 25px;
       border: none;
       border-radius: 5px;
-      background-color: #cdb66b;
-      color: #000000;
+      background-color: var(--prime-color);
+      color: var(--dark-text-color);
       &::placeholder {
-        color: #ffffff;
+        color: var(--common-text-color);
       }
     }
     &__box1 {
@@ -143,11 +143,11 @@
       padding: 20px 25px 100px 25px;
       border: none;
       border-radius: 5px;
-      background-color: #cdb66b;
+      background-color: var(--prime-color);
       height: 300px;
-      color: #000000;
+      color: var(--dark-text-color);
       &::placeholder {
-        color: #ffffff;
+        color: var(--common-text-color);
       }
     }
     &__theme {

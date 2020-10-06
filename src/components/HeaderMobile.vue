@@ -114,7 +114,6 @@
       }
     }
     &__close {
-      // background-color: #109;
       width: 30px;
       height: 30px;
       position: relative;
@@ -126,7 +125,7 @@
         transform: translate(-50%, -50%) rotate(45deg);
         top: 50%;
         left: 50%;
-        background-color: #ffffff;
+        background-color: var(--light-bg-color);
       }
       &::before {
         transform: translate(-50%, -50%) rotate(45deg);
@@ -161,13 +160,13 @@
       position: relative;
       width: 100%;
       height: 4px;
-      background-color: #fff;
+      background-color: var(--light-bg-color);
     }
     &__menu {
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #000000;
+      background-color: var(--common-bg-color);
       width: 100vw;
       max-width: 100%;
       height: 100vh;
@@ -189,18 +188,18 @@
       }
     }
     &__link {
-      color: #ffffff;
+      color: var(--common-text-color);
       cursor: pointer;
       &--active {
-        color: #d8bd67;
+        color: var(--prime-color);
       }
     }
     &__link2 {
-      color: #ffffff;
+      color: var(--common-text-color);
       cursor: pointer;
       margin-bottom: 30px;
       &--active {
-        color: #d8bd67;
+        color: var(--prime-color);
       }
     }
     &__box2 {
@@ -210,10 +209,10 @@
     }
     &__name {
       margin-bottom: 30px;
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-size: 20px;
       font-weight: 700;
-      color: #d8bd67;
+      color: var(--prime-color);
       text-align: center;
     }
     &__stripe {

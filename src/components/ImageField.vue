@@ -117,7 +117,7 @@
       height: 592px;
       transition: all 0.2s ease;
       margin-bottom: 15px;
-      border: 6px solid #cbb073;
+      border: 6px solid var(--prime-color);
       @media (max-width: 1719px) {
         height: 500px;
         width: 500px;
@@ -169,7 +169,7 @@
       transform: translateX(-50%);
       left: 50%;
       bottom: 100px;
-      color: #000000;
+      color: var(--dark-text-color);
       @media (max-width: 575px) {
         font-size: 16px;
       }

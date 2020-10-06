@@ -63,7 +63,7 @@
       transform: translate(-50%, -50%);
       top: 40%;
       left: 50%;
-      background-color: #000000;
+      background-color: var(--common-bg-color);
       width: 900px;
       padding: 70px;
       border-radius: 5px;
@@ -91,7 +91,7 @@
         content: "";
         width: 40px;
         height: 3px;
-        background-color: #ffffff;
+        background-color: var(--light-bg-color);
         border-radius: 1px;
         left: 50%;
         top: 50%;
@@ -104,7 +104,7 @@
       }
       &:hover {
         &::before, &::after {
-          background-color: #cbb073;
+          background-color: var(--prime-color);
         }
       }
     }

@@ -66,8 +66,8 @@
       }
     }
     &__head {
-      color: #cbb073;
-      font-family: "PT Serif", serif;
+      color: var(--prime-color);
+      font-family: var(--second-font);
       font-size: 36px;
       font-weight: bold;
       margin-bottom: 75px;

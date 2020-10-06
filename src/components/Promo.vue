@@ -43,10 +43,10 @@ export default {
       }
     }
     &__phraze {
-      color: #d8bd67;
+      color: var(--prime-color);
       font-size: 14px;
       font-weight: 700;
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       max-width: 200px;
       flex-shrink: 0;
       margin-right: 120px;
@@ -58,21 +58,21 @@ export default {
       }
     }
     &__link {
-      color: #d8bd67;
+      color: var(--prime-color);
       text-decoration: underline;
       transition: all 0.2s ease;
       &:hover {
-        color: #ffffff;
+        color: var(--common-text-color);
       }
     }
     &__box2 {
       max-width: 950px;
     }
     &__head {
-      color: #d8bd67;
+      color: var(--prime-color);
       font-size: 30px;
       font-weight: 700;
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       max-width: 700px;
       margin-bottom: 60px;
       line-height: 40px;
@@ -121,7 +121,7 @@ export default {
         align-items: center;
       }
       img {
-        border: 6px solid #cfb66b;
+        border: 6px solid var(--prime-color);
         max-width: 48%;
         object-fit: cover;
         @media (max-width: 575px) {

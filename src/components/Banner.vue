@@ -45,7 +45,7 @@
     &__head {
       font-size: 72px;
       text-transform: uppercase;
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       margin-bottom: 40px;
       @media (max-width: 1719px) {
         font-size: 60px;

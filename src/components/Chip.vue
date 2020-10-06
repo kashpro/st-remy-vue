@@ -29,7 +29,7 @@
   .chip {
     border-radius: 3px;
     background-color: #95f;
-    color: #000000;
+    color: var(--dark-text-color);
     padding: 5px 10px;
     &--mod {
       background-color: #f90;

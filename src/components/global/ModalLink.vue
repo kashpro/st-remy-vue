@@ -19,7 +19,7 @@
     padding: 0;
     cursor: pointer;
     &:hover {
-      color: #ffffff;
+      color: var(--common-text-color);
     }
   }
 </style>

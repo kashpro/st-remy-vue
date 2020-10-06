@@ -1,7 +1,7 @@
 /* Styles */
 import "normalize.css/normalize.css";
-import "@/scss/vars.scss";
 import "@/scss/fonts.scss";
+import "@/scss/vars.scss";
 import "@/scss/global.scss";
 import "@/scss/pagination.scss";
 import "slick-carousel/slick/slick.scss";

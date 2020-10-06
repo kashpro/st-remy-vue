@@ -11,10 +11,10 @@
 <style lang="scss">
    .modal-head {
     text-align: center;
-    font-family: "PT Serif", serif;
+    font-family: var(--second-font);
     font-weight: 700;
     font-size: 32px;
-    color: #d0b87d;
+    color: var(--prime-color);
     @media (max-width: 575px) {
       font-size: 24px;
     }

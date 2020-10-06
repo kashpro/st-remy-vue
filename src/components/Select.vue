@@ -113,7 +113,7 @@
         transition: all 0.2s ease;
         width: 12px;
         height: 12px;
-        fill: #ffffff;
+        fill: var(--light-bg-color);;
       }
     }
     &__list {
@@ -127,8 +127,8 @@
     }
     &__item {
       text-align: center;
-      border-bottom: 1px solid #ffffff;
-      background-color: #000000;
+      border-bottom: 1px solid var(--light-bg-color);
+      background-color: var(--common-bg-color);
       padding: 3px 5px;
       cursor: pointer;
       &:hover {
@@ -137,7 +137,7 @@
     }
     &__face {
       cursor: pointer;
-      border-bottom: 1px solid #ffffff;
+      border-bottom: 1px solid var(--light-bg-color);
     }
   }
 </style>

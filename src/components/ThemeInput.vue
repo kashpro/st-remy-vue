@@ -70,7 +70,7 @@ export default {
       }
       &:hover {
         text-decoration: underline;
-        color: #ffffff;
+        color: var(--common-text-color);
         opacity: 0.75;
       }
       p {

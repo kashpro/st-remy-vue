@@ -83,9 +83,9 @@
     }
     &__head {
       font-size: 36px;
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-weight: 700;
-      color: #cbb073;
+      color: var(--prime-color);
       text-align: center;
       margin-bottom: 25px;
     }
@@ -105,7 +105,7 @@
       margin-bottom: 15px;
     }
     &__status {
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-weight: 700;
     }
     &__line {

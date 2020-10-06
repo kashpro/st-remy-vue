@@ -46,7 +46,7 @@
       width: 500px;
       height: 500px;
       line-height: 0;
-      border: 6px solid #cbb073;
+      border: 6px solid var(--prime-color);
       margin-right: 30px;
       @media (max-width: 991px) {
         max-width: 720px;
@@ -75,12 +75,12 @@
         height: 50%;
         object-fit: cover;
         &:first-child {
-          border-bottom: 1px solid #ffffff;
+          border-bottom: 1px solid var(--light-bg-color);
         }
       }
     }
     &__head {
-      font-family: "PT Serif", serif;
+      font-family: var(--second-font);
       font-weight: 700;
       font-size: 24px;
       margin-bottom: 20px;
@@ -138,7 +138,7 @@
     }
     &__social {
       padding: 5px;
-      background-color: #000000;
+      background-color: var(--common-bg-color);
       opacity: 0;
       transition: all 0.2s ease;
       position: absolute;

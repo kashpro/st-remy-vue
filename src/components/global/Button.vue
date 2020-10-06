@@ -17,12 +17,12 @@
   display: block;
   padding: 10px 50px;
   border-radius: 5px;
-  color: #ffffff;
+  color: var(--common-text-color);
   background: #363636;
   cursor: pointer;
   &:hover {
     background: linear-gradient(to right,#876c4a 0,#f9e0b4 48%,#876c4a 100%);
-    color: #000000;
+    color: var(--dark-text-color);
   }
   &--secondary {
     background-color: transparent;

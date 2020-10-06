@@ -149,7 +149,7 @@
         position: absolute;
         left: -20px;
         top: 4px;
-        background-color: #ffffff;
+        background-color: var(--light-bg-color);
         transition: all 0.2s ease; 
         opacity: 0;
       }
