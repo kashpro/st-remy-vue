@@ -22,7 +22,6 @@
     props: ["id", "small", "story", "rotator"],
     components: {Chip},
     computed: {
-      // ...mapGetters(["beforeImage", "afterImage"]),
       image() {
         if (this.file) {
           return window.URL.createObjectURL(this.file);
@@ -95,7 +94,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    // align-items: center;
     &__label-text {
       margin-bottom: 10px;
     }
@@ -115,16 +113,12 @@
       line-height: 0;
       border-radius: 10px;
       overflow: hidden;
-      // max-width: 592px;
-      // max-height: 592px;
       width: 592px;
       height: 592px;
       transition: all 0.2s ease;
       margin-bottom: 15px;
       border: 6px solid #cbb073;
       @media (max-width: 1719px) {
-        // max-width: 500px;
-        // max-height: 500px;
         height: 500px;
         width: 500px;
       }
@@ -170,7 +164,6 @@
     }
     &__image-text {
       opacity: 1;
-      //  -webkit-text-stroke: 1px #ffffff;
       transition: all 0.2s ease;
       position: absolute;
       transform: translateX(-50%);
@@ -181,8 +174,5 @@
         font-size: 16px;
       }
     }
-    // &__select-text {
-    //   margin-right: 15px;
-    // }
   }
 </style>

@@ -1,5 +1,6 @@
 /* Styles */
 import "normalize.css/normalize.css";
+import "@/scss/vars.scss";
 import "@/scss/fonts.scss";
 import "@/scss/global.scss";
 import "@/scss/pagination.scss";
@@ -11,20 +12,17 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import Vuelidate from "vuelidate";
-Vue.use(Vuelidate);
-
-import VueMeta from "vue-meta";
-Vue.use(VueMeta);
-
-import Paginate from 'vuejs-paginate';
-Vue.component('paginate', Paginate);
-
 /* Utils & Plugins */
 import development from '@/utils/development.util.js';
-development.addWindowStatsElement();
+if (process.env.NODE_ENV === "production") {development.addWindowStatsElement();}
 import messagePlugin from '@/utils/messages.util.js';
 Vue.use(messagePlugin);
+import Paginate from 'vuejs-paginate';
+Vue.component('paginate', Paginate);
+import VueMeta from "vue-meta";
+Vue.use(VueMeta);
+import Vuelidate from "vuelidate";
+Vue.use(Vuelidate);
 
 /* Global components */
 import Button from "@/components/global/Button.vue";

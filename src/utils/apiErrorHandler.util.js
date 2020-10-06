@@ -1,16 +1,12 @@
 export function apiErrorHandler(err) {
-  // console.log(err.response.data);
-  // ошибка 413, нет respose
   if (!err.response) {
     this.$store.dispatch("openAlert", {type: "error", text: this.$messages.ALERT_SERVER_ERROR});
       return;
   }
-  // ошибка 500, в err.response.data будет html-страница с логом ошибки, ее не парсим
   if (err.response.status === 500) {
     this.$store.dispatch("openAlert", {type: "error", text: this.$messages.ALERT_SERVER_ERROR});
     return;
   }
-  //остальные ошибки
   let messages = parseObject(err.response.data);
   messages = messages.join("<br>");
   this.$store.dispatch("openAlert", {type: "error", text: messages});

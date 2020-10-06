@@ -9,8 +9,8 @@
         <div class="story__head">История дружбы:</div>
         <div class="story__share">
           <ul class="story__social">
-            <li><a class="social-link social-link--ok social-link--mr15" title="Одноклассники" :href="okShareLinkCreate(story.id)">ok.ru</a></li>
-            <li><a class="social-link social-link--vk" title="Вконтакте" :href="vkShareLinkCreate(story.id)">vk.com</a></li>
+            <li><a class="social-link social-link--ok social-link--mr15" target="blank" title="Одноклассники" :href="okShareLinkCreate(story.id)">ok.ru</a></li>
+            <li><a class="social-link social-link--vk" target="blank" title="Вконтакте" :href="vkShareLinkCreate(story.id)">vk.com</a></li>
           </ul>
         </div>
         <p class="story__text">{{ story.desc }}</p>
@@ -23,11 +23,11 @@
 
 <script>
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
-  import share from "@/utils/share.mixin.js";
+  import share from "@/mixins/share.mixin.js";
 
   export default {
     name: "SingleStory",
-     mixins: [share],
+    mixins: [share],
     props: ["id"],
     data() {
       return {
@@ -39,7 +39,6 @@
         let response = await this.$store.dispatch("getSingleStory", this.id);
         this.story = response.data;
       } catch(err) {
-        // alert(err);
         apiErrorHandler.call(this, err);
       }
     },

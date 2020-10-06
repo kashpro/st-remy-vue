@@ -44,7 +44,7 @@
 
 <script>
   import {mapGetters} from "vuex";
-  import logout from "@/utils/logout.mixin.js";
+  import logout from "@/mixins/logout.mixin.js";
 
   export default {
     name: "HeaderMobile",
@@ -69,7 +69,7 @@
         this.isMenuOpen = false;
       },
       closeMenuKeyboard(e) {
-        if (e.code === "Escape" || e.keyCode === 27) { //e.keyCode - deprecated
+        if (e.code === "Escape" || e.keyCode === 27) { // e.keyCode - deprecated
           this.closeMenu();
         }
       },
@@ -78,7 +78,7 @@
       isMenuOpen() {
         if (this.isMenuOpen) {
           window.addEventListener("keyup", this.closeMenuKeyboard);
-          setTimeout(() => {document.addEventListener("click", this.closeMenu);}, 0); //this.$nextTick - не подходит
+          setTimeout(() => {document.addEventListener("click", this.closeMenu);}, 0);
         } else {
           window.removeEventListener("keyup", this.closeMenuKeyboard);
           document.removeEventListener("click", this.closeMenu);

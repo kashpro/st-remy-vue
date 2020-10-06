@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import MetaInfo from "@/utils/metaInfo.mixin.js";
+  import MetaInfo from "@/mixins/metaInfo.mixin.js";
 
   export default {
     name: "Start",
@@ -115,7 +115,6 @@
       margin-bottom: 50px;
       @media (max-width: 1279px) {
         margin-bottom: 20px;
-        // margin-top: 0;
       }
     }
     &__form {

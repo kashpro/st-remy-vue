@@ -10,7 +10,7 @@
   import Banner from "@/components/Banner.vue";
   import Promo from "@/components/Promo.vue";
   import Feedback from "@/components/Feedback.vue";
-  import MetaInfo from "@/utils/metaInfo.mixin.js";
+  import MetaInfo from "@/mixins/metaInfo.mixin.js";
 
   export default {
     name: "Home",

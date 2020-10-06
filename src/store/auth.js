@@ -11,7 +11,9 @@ export default {
   actions: {
     registerUser: async (_, data) => {
       try {
-        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_REGISTER_API}`, data, {timeout: CONFIG.SERVER_API_TIMEOUT});
+        const response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_REGISTER_API}`, data, {
+          timeout: CONFIG.SERVER_API_TIMEOUT,
+        });
         return response;
       } catch(err) {
         throw err;
@@ -22,7 +24,9 @@ export default {
     },
     loginUser: async (_, data) => {
       try {
-        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_LOGIN_API}`, data, {timeout: CONFIG.SERVER_API_TIMEOUT});
+        const response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_LOGIN_API}`, data, {
+          timeout: CONFIG.SERVER_API_TIMEOUT,
+        });
         return response;
       } catch(err) {
         throw err;
@@ -30,7 +34,7 @@ export default {
     },
     getUserInfo: async (_, token) => {
       try {
-        let response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_USER_INFO_API}`, {
+        const response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_USER_INFO_API}`, {
           timeout: CONFIG.SERVER_API_TIMEOUT,
           headers: {Authorization: `Token ${token}`},
         });
@@ -41,7 +45,7 @@ export default {
     },
     logout: async (_, token) => {
       try {
-        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_LOGOUT_API}`, null, {
+        const response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_LOGOUT_API}`, null, {
           timeout: CONFIG.SERVER_API_TIMEOUT,
           headers: {Authorization: `Token ${token}`},
         });
@@ -52,7 +56,9 @@ export default {
     },
     sendRestore: async (_, data) => {
       try {
-        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_RESTORE_PASS_API}`, data, {timeout: CONFIG.SERVER_API_TIMEOUT});
+        const response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_RESTORE_PASS_API}`, data, {
+          timeout: CONFIG.SERVER_API_TIMEOUT,
+        });
         return response;
       } catch(err) {
         throw err;

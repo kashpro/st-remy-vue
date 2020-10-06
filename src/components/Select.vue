@@ -17,8 +17,6 @@
 </template>
 
 <script>
-  // import {mapGetters} from "vuex";
-
   export default {
     name: "Select",
     props: ["id", "story"],
@@ -31,15 +29,10 @@
         }
          
       },
-      // ...mapGetters(["beforeYear", "afterYear"]),
-      // current() {
-      //   return this[this.key];
-      // },
     },
     data() {
       return {
-        current: null,//CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE,
-        // key: this.id + "Year",
+        current: null,
         max: new Date().getFullYear() + 1,
         min: CONFIG.IMAGE_DATE_SELECT_MIN_VALUE,
         isOpen: false,
@@ -54,11 +47,9 @@
         this.isOpen = false;
         this.current = value;
         this.$emit("input", value);
-        // const key = this.id + "Year";
-        // this.$store.dispatch("setValue", {value: value, key: this.key});
       },
       closeSelectKeyboard(e) {
-        if (e.code === "Escape" || e.keyCode === 27) { //e.keyCode - deprecated
+        if (e.code === "Escape" || e.keyCode === 27) {
           this.closeSelect();
         }
       },
@@ -67,13 +58,10 @@
       }
     },
     watch: {
-      // currentYear() {
-      //   this.current = this.currentYear;
-      // },
       isOpen() {
         if (this.isOpen) {
           window.addEventListener("keyup", this.closeSelectKeyboard);
-          setTimeout(() => {document.addEventListener("click", this.closeSelect);}, 0); //this.$nextTick - не подходит
+          setTimeout(() => {document.addEventListener("click", this.closeSelect);}, 0);
         } else {
           window.removeEventListener("keyup", this.closeSelectKeyboard);
           document.removeEventListener("click", this.closeSelect);

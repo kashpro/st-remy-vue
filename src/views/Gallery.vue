@@ -49,11 +49,11 @@
 </template>
 
 <script>
-  import MetaInfo from "@/utils/metaInfo.mixin.js";
+  import MetaInfo from "@/mixins/metaInfo.mixin.js";
   import {mapGetters} from "vuex";
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
-  import pagination from "@/utils/pagination.mixin.js";
-  import share from "@/utils/share.mixin.js";
+  import pagination from "@/mixins/pagination.mixin.js";
+  import share from "@/mixins/share.mixin.js";
 
   export default {
     name: "Gallery",
@@ -81,9 +81,8 @@
             type: "Message",
             data: {text: text},
           });
-          this.$store.dispatch("replaceStory", response.data);//в респонсе объект обновленной истории. В складе заменить историю
+          this.$store.dispatch("replaceStory", response.data);
           this.setupPagination(this.allStories, CONFIG.PAGINATION_GALLERY_PER_PAGE, "#gallery");
-          //this.$store.dispatch("openAlert", {type: "success", text: this.$messages.FEEDBACK_SENT});
         } catch(err) {
           if (err.response.data.message) {
             this.$store.dispatch("openModal", {
@@ -196,7 +195,6 @@
        @media (max-width: 575px) {
         width: 100%;
         height: 100%;
-        // height: 300px;
       }
       &:hover {
         border: 6px solid #ffffff;

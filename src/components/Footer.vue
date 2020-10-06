@@ -39,8 +39,8 @@
 <style lang="scss">
   .footer {
     margin-top: -370px;
-    position: relative; //?
-    z-index: 0; //?
+    position: relative; 
+    z-index: 0;
     height: 650px;
     background-image: url("../assets/images/bottle.png");
     background-repeat: no-repeat;

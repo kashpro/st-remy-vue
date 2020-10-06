@@ -1,17 +1,17 @@
 /* development colors */
-$temp1: rgba(#ff0032, 0.3); // pink
-$temp2: rgba(#00ff32, 0.3); // green
-$temp3: rgba(#6464ff, 0.3); // blue
-$temp4: rgba(#ffff32, 0.3); // yellow
-$temp5: rgba(#ff32ff, 0.3); // magenta
-$temp6: rgba(#32ffff, 0.3); // cyan
+// $temp1: rgba(#ff0032, 0.3); // pink
+// $temp2: rgba(#00ff32, 0.3); // green
+// $temp3: rgba(#6464ff, 0.3); // blue
+// $temp4: rgba(#ffff32, 0.3); // yellow
+// $temp5: rgba(#ff32ff, 0.3); // magenta
+// $temp6: rgba(#32ffff, 0.3); // cyan
 
-.c1 {background-color: $temp1;} // pink
-.c2 {background-color: $temp2;} // green
-.c3 {background-color: $temp3;} // blue
-.c4 {background-color: $temp4;} // yellow
-.c5 {background-color: $temp5;} // magenta
-.c6 {background-color: $temp6;} // cyan
+// .c1 {background-color: $temp1;} // pink
+// .c2 {background-color: $temp2;} // green
+// .c3 {background-color: $temp3;} // blue
+// .c4 {background-color: $temp4;} // yellow
+// .c5 {background-color: $temp5;} // magenta
+// .c6 {background-color: $temp6;} // cyan
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -73,7 +73,6 @@ body {
 }
 
 .container {
-  // background-color: $temp1;
   margin: 0 auto;
   width: 100%;
   max-width: 1600px;
@@ -96,15 +95,6 @@ body {
     padding-right: 10px;
   }
 }
-
-// .hide {
-//   display: none !important;
-// }
-
-// .fade {
-//   visibility: hidden !important;
-//   opacity: 0 !important;
-// }
 
 .visually-hidden {
   position: absolute;

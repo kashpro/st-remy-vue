@@ -15,8 +15,8 @@
 </template>
 
 <script>
-  import {email, required,} from "vuelidate/lib/validators";
-  import {emailInvalid, passwordInvalidForLogin} from "@/utils/validations.mixin.js";
+  import {email, required} from "vuelidate/lib/validators";
+  import {emailInvalid, passwordInvalidForLogin} from "@/mixins/validations.mixin.js";
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
   export default {
@@ -49,13 +49,13 @@
             email: this.email,
             password: this.password,
           };
-          const loginResponse = await this.$store.dispatch("loginUser", loginData); //залогинились
-          const response = await this.$store.dispatch("getUserInfo", loginResponse.data.auth_token); //получили юзер-инфо
-          localStorage.setItem("token", loginResponse.data.auth_token); //сохранили токен
-          this.$store.dispatch("setUserInfo", response.data); //сохранили юзер-инфо
-          this.$store.dispatch("closeModal"); //закрыли модалку
+          const loginResponse = await this.$store.dispatch("loginUser", loginData);
+          const response = await this.$store.dispatch("getUserInfo", loginResponse.data.auth_token);
+          localStorage.setItem("token", loginResponse.data.auth_token);
+          this.$store.dispatch("setUserInfo", response.data);
+          this.$store.dispatch("closeModal");
           localStorage.setItem("lastLoginEmail", this.email);
-          this.$router.push("/profile");  //редирект на профайл
+          this.$router.push("/profile");
         } catch(err) {
            apiErrorHandler.call(this, err);
         }
@@ -80,10 +80,8 @@
     }
     &__btn {
       margin: 0 auto;
-      // margin-bottom: 20px;
     }
     &__box1 {
-      // flex: 0 1 47%;
       flex: 0 1 100%;
       margin-top: 25px;
       display: flex;

@@ -25,7 +25,7 @@
 <script>
   import {email, required, minLength} from "vuelidate/lib/validators";
   import {phoneValidator, birthValidator, booleanValidator} from "@/utils/validators.util.js";
-  import {firstnameInvalid, secondnameInvalid, emailInvalid, passwordInvalid, phoneInvalid, birthInvalid} from "@/utils/validations.mixin.js";
+  import {firstnameInvalid, secondnameInvalid, emailInvalid, passwordInvalid, phoneInvalid, birthInvalid} from "@/mixins/validations.mixin.js";
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
   export default {
@@ -87,12 +87,12 @@
             email: this.email,
             password: this.password,
           };
-          const registerResponse = await this.$store.dispatch("registerUser", regData);//зарегали юзера
-          const loginResponse = await this.$store.dispatch("loginUser", loginData);//залогинились
-          localStorage.setItem("token", loginResponse.data.auth_token); //сохранили токен   
-          this.$store.dispatch("setUserInfo", registerResponse.data); //сохранили юзер-инфо
-          this.$store.dispatch("closeModal");//закрыли модалку
-          this.$router.push("/profile"); //редирект на профайл
+          const registerResponse = await this.$store.dispatch("registerUser", regData);
+          const loginResponse = await this.$store.dispatch("loginUser", loginData);
+          localStorage.setItem("token", loginResponse.data.auth_token); 
+          this.$store.dispatch("setUserInfo", registerResponse.data);
+          this.$store.dispatch("closeModal");
+          this.$router.push("/profile");
         } catch(err) {
           apiErrorHandler.call(this, err);
         }
@@ -117,13 +117,10 @@
     }
     &__btn {
       margin: 0 auto;
-      // margin-bottom: 20px;
       margin-top: 25px;
     }
     &__box1 {
-      // flex: 0 1 47%;
       flex: 0 1 100%;
-      // margin-top: 25px;
       display: flex;
       flex-direction: column;
     }
@@ -168,10 +165,6 @@
         }
       }
     }
-    // &__modal-social {
-    //   flex: 0 1 47%;
-    //   margin-top: 15px;
-    // }
     &__modal-link {
       margin-right: 15px;
     }

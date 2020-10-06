@@ -49,11 +49,11 @@
 </template>
 
 <script>
-  import MetaInfo from "@/utils/metaInfo.mixin.js";
+  import MetaInfo from "@/mixins/metaInfo.mixin.js";
   import {mapGetters} from "vuex";
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
-  import pagination from "@/utils/pagination.mixin.js";
-  import share from "@/utils/share.mixin.js";
+  import pagination from "@/mixins/pagination.mixin.js";
+  import share from "@/mixins/share.mixin.js";
 
   export default {
     name: "Winners",
@@ -107,7 +107,6 @@
     &__status {
       font-family: "PT Serif", serif;
       font-weight: 700;
-      // margin-bottom: 15px;
     }
     &__line {
       background: url("../assets/images/stripe.png") center no-repeat;

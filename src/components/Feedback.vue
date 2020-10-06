@@ -26,7 +26,7 @@
 <script>
   import ThemeInput from "@/components/ThemeInput.vue";
   import {email, required} from "vuelidate/lib/validators";
-  import {nameInvalid, emailInvalid, messageInvalid, themeInvalid} from "@/utils/validations.mixin.js";
+  import {nameInvalid, emailInvalid, messageInvalid, themeInvalid} from "@/mixins/validations.mixin.js";
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
   export default {

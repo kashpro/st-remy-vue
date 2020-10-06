@@ -1,6 +1,5 @@
 <template>
   <div class="register">
-    <!-- <button class="btn register__btn" @click="openRegisterForm">Зарегистрироваться</button> -->
     <Button class="register__btn" @click.native="openRegisterForm">Зарегистрироваться</Button>
     <!-- <span class="register__text">Войти через социальные сети:</span>
     <ul class="register__list">

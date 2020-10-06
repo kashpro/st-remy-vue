@@ -4,14 +4,12 @@
     <ul class="theme__list" :class="{'theme__list--collapse': !isOpen}">
       <li v-for="(theme, index) in themes" :key="index" class="theme__item" @click="selectTheme(theme)"><p>{{ theme }}</p></li>
     </ul>
-    <!-- <input type="hidden" :name="name" :value="current"> -->
   </div>
 </template>
 
 <script>
 export default {
   name: "ThemeInput",
-  // props: ["name"],
   data() {
     return {
       current: "",
@@ -37,8 +35,6 @@ export default {
   .theme {
     padding: 20px 15px 5px 25px;
     width: 100%;
-    // background-color: red;
-    // height: 20px; 
     border-radius: 5px;
     &__head {
       text-align: right;

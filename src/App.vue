@@ -22,10 +22,10 @@
     },
     components: {HomeLayout, Alert, Modal},
     async beforeMount() {
-      if (localStorage.getItem("token")) { //токен есть в локал-сторадже?
+      if (localStorage.getItem("token")) {
         try {
-          const response = await this.$store.dispatch("getUserInfo", localStorage.getItem("token")); //проверем токен
-          this.$store.dispatch("setUserInfo", response.data);//сохранили юзер-инфо
+          const response = await this.$store.dispatch("getUserInfo", localStorage.getItem("token"));
+          this.$store.dispatch("setUserInfo", response.data);
         } catch(err) {
           localStorage.removeItem("token");
         }

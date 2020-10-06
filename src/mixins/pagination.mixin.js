@@ -8,6 +8,7 @@ export default {
       pageCount: 0,
       allItems: [],
       items: [],
+      hash: "",
     };
   },
   methods: {

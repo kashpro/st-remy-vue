@@ -5,7 +5,6 @@
       <li class="nav__item"><a class="nav__link" :href="rulesFileLink" target="blank">Правила конкурса</a></li>
       <li class="nav__item"><router-link class="nav__link" active-class="nav__link--active" to="/gallery">Галерея</router-link></li>
       <li class="nav__item"><router-link class="nav__link" active-class="nav__link--active" to="/winners">Победители</router-link></li>
-      <!-- <li class="nav__item"><a class="nav__link" href="/admin.html" target="blank">Админ</a></li> -->
     </ul>
   </nav>
 </template>
@@ -45,7 +44,6 @@
           margin-right: 10px;
         }
       }
-
     }
     &__link {
       position: relative;

@@ -27,7 +27,6 @@
   .banner {
     position: relative;
     z-index: 1;
-    // height: 1080px;
     height: 56.25vw;
     z-index: 1;
     margin-bottom: 100px;

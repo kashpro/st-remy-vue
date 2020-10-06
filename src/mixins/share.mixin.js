@@ -4,7 +4,7 @@ export default {
       return `${CONFIG.VK_SHARE_LINK}url=${location.origin}/story/${id}`;
     },
     okShareLinkCreate(id) {
-      return `${CONFIG.OK_SHARE_LINK}url=${location.origin}/story/${id}`; //&title=TITLE&imageUrl=IMAGE_URL
+      return `${CONFIG.OK_SHARE_LINK}url=${location.origin}/story/${id}`;
     },
   },
 }

@@ -12,7 +12,7 @@
 
 <script>
   import {email, required} from "vuelidate/lib/validators";
-  import {emailInvalid} from "@/utils/validations.mixin.js";
+  import {emailInvalid} from "@/mixins/validations.mixin.js";
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
 
   export default {

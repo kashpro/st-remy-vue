@@ -7,13 +7,6 @@
     <div class="carousel__img carousel__img--5"></div>
     <div class="carousel__img carousel__img--6"></div>
     <div class="carousel__img carousel__img--7"></div>
-    <!-- <img src="@/assets/images/carousel-01.jpg">
-    <img src="@/assets/images/carousel-02.jpg">
-    <img src="@/assets/images/carousel-03.jpg">
-    <img src="@/assets/images/carousel-04.jpg">
-    <img src="@/assets/images/carousel-05.jpg">
-    <img src="@/assets/images/carousel-06.jpg">
-    <img src="@/assets/images/carousel-07.jpg"> -->
   </div>
 </template>
 

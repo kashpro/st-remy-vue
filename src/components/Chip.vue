@@ -20,7 +20,7 @@
           case "edit": return "Редактирование";
           default: return "Черновик";
         }
-      }
+      },
     },
   }
 </script>

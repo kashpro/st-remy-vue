@@ -27,11 +27,9 @@ export default new Vuex.Store({
       state.allStories = stories;
     },
     replaceUserStory: (state, data) => {
-      // state.userStories[data.index] = data.data;
       state.userStories.splice(data.index, 1, data.data);
     },
     replaceStory: (state, data) => {
-      // state.userStories[data.index] = data.data;
       state.allStories.splice(data.index, 1, data.data);
     },
     addStory: (state, data) => {
@@ -45,12 +43,11 @@ export default new Vuex.Store({
     setValue: ({commit}, data) => {
       commit("setValue", data);
     },
-    // setYear: ({commit}, data) => {
-    //   commit("setYear", data);
-    // },
     sendFeedback: async (_, data) => {
       try {
-        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_FEEDBACK_API}`, data, {timeout: CONFIG.SERVER_API_TIMEOUT});
+        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_FEEDBACK_API}`, data, {
+          timeout: CONFIG.SERVER_API_TIMEOUT,
+        });
         return response;
       } catch(err) {
         throw err;
@@ -58,7 +55,7 @@ export default new Vuex.Store({
     },
     sendStory: async (_, data) => {
       try {
-        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_CREATE_HISTORY}`, data, {
+        const response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_CREATE_HISTORY}`, data, {
           timeout: CONFIG.SERVER_API_TIMEOUT,
           headers: {
             Authorization: `Token ${localStorage.getItem("token")}`,
@@ -72,7 +69,7 @@ export default new Vuex.Store({
     },
     sendVoice: async (_, data) => {
       try {
-        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_SEND_VOICE}`, data, {
+        const response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_SEND_VOICE}`, data, {
           timeout: CONFIG.SERVER_API_TIMEOUT,
           headers: {
             Authorization: `Token ${localStorage.getItem("token")}`,
@@ -85,8 +82,7 @@ export default new Vuex.Store({
     },
     getSingleStory: async (_, id) => {
       try {
-        let response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_CREATE_HISTORY}${id}`);
-        console.log(response);
+        const response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_CREATE_HISTORY}${id}`);
         return response;
       } catch(err) {
         throw err;
@@ -94,13 +90,12 @@ export default new Vuex.Store({
     },
     updateStory: async (_, payload) => {
       try {
-        let response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_UPDATE_HISTORY}${payload.id}`, payload.data, {
+        const response = await axios.post(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_UPDATE_HISTORY}${payload.id}`, payload.data, {
           headers: {
             Authorization: `Token ${localStorage.getItem("token")}`,
           },
         });
        return response;
-        // commit("setUserStories", response.data.results);
       } catch(err) {
         throw err;
       }
@@ -122,8 +117,9 @@ export default new Vuex.Store({
     },
     getAllStories: async ({commit}) => {
       try {
-        let response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_ALL_STORIES}`/*, {headers: {Authorization: `Token ${localStorage.getItem("token")}`}}*/);
-        console.log(response.data); //ТАЙМАУТ
+        const response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_ALL_STORIES}`, {
+          timeout: CONFIG.SERVER_API_TIMEOUT,
+        });
         commit("setAllStories", response.data.results);
       } catch(err) {
         throw err;
@@ -131,8 +127,9 @@ export default new Vuex.Store({
     },
     getWinners: async ({commit}) => {
       try {
-        let response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_WINNERS}`/*, {headers: {Authorization: `Token ${localStorage.getItem("token")}`}}*/);
-        console.log(response.data); //ТАЙМАУТ
+        const response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_WINNERS}`, {
+          timeout: CONFIG.SERVER_API_TIMEOUT,
+        });
         commit("setWinners", response.data.results);
       } catch(err) {
         throw err;
@@ -140,8 +137,12 @@ export default new Vuex.Store({
     },
     getUserStories: async ({commit}) => {
       try {
-        let response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_USER_STORIES}`, {headers: {Authorization: `Token ${localStorage.getItem("token")}`}});
-        console.log(response); //ТАЙМАУТ
+        const response = await axios.get(`${CONFIG.SERVER_BASE}${CONFIG.SERVER_GET_USER_STORIES}`, {
+          timeout: CONFIG.SERVER_API_TIMEOUT,
+          headers: {
+            Authorization: `Token ${localStorage.getItem("token")}`,
+          }
+        });
         commit("setUserStories", response.data.results);
       } catch(err) {
         throw err;

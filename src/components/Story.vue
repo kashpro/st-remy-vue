@@ -92,7 +92,6 @@
       font-size: 16px;
       flex-grow: 1;
       max-height: 249px;
-      // overflow-x: auto;
       overflow-y: auto;
       margin-bottom: 20px;
       word-wrap: break-word;

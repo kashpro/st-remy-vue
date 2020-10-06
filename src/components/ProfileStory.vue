@@ -4,7 +4,6 @@
     <form class="profile-story__form">
       <div class="profile-story__box1">
         <ImageField class="profile-story__imagefield" id="before" :small="beforeImageInvalid" :story="story" :rotator="rotator" v-model="beforeImage"></ImageField>
-        <!-- <ImageField class="profile-story__imagefield" id="before" :small="story ? beforeImageInvalidSoft : beforeImageInvalidHard" :story="story" v-model="beforeImage"></ImageField> -->
         <Select v-if="story ? (story.draft === true || story.img_before.status === 'edit') : true" id="before" class="profile-story__select" :story="story" v-model="beforeYear"></Select>
         <div class="profile-story__replacer" v-else>Год, когда сделана фотография: {{ story ? story.img_before.date : "" }}</div>
       </div>
@@ -34,9 +33,9 @@
   import ImageField from "@/components/ImageField.vue";
   import Select from "@/components/Select.vue";
   import Chip from "@/components/Chip.vue";
-  import {/*sizeValidatorSoft, sizeValidatorHard,*/ sizeValidator} from "@/utils/validators.util.js";
+  import {sizeValidator} from "@/utils/validators.util.js";
   import {required, minLength, maxLength} from "vuelidate/lib/validators";
-  import {descInvalid, /*beforeImageInvalidHard, afterImageInvalidHard, beforeImageInvalidSoft, afterImageInvalidSoft,*/ beforeImageInvalid, afterImageInvalid} from "@/utils/validations.mixin.js";
+  import {descInvalid, beforeImageInvalid, afterImageInvalid} from "@/mixins/validations.mixin.js";
   import {apiErrorHandler} from "@/utils/apiErrorHandler.util.js";
   
 
@@ -47,17 +46,12 @@
         default: null,
       },
     },
-    // mixins: [pagination],
     components: {ImageField, Select, Chip},
-    mixins: [descInvalid, /*beforeImageInvalidHard, afterImageInvalidHard, beforeImageInvalidSoft, afterImageInvalidSoft,*/ beforeImageInvalid, afterImageInvalid],
+    mixins: [descInvalid, beforeImageInvalid, afterImageInvalid],
     validations: {
       desc: {required, minLength: minLength(CONFIG.STORY_DESC_MIN_LENGTH), maxLength:maxLength(CONFIG.STORY_DESC_MAX_LENGTH)},
       beforeImage: {sizeValidator},
       afterImage: {sizeValidator},
-      // beforeImage: {sizeValidatorHard},
-      // afterImage: {sizeValidatorHard},
-      // beforeImage: {sizeValidator: this.chooseValidator()},//function() {return this.story ? {sizeValidatorSoft} : {sizeValidatorHard}},
-      // afterImage: {sizeValidator: this.chooseValidator()},//function() {return this.story ? {sizeValidatorSoft} : {sizeValidatorHard}},
     },
     computed: {
       isUnlocked() {
@@ -80,8 +74,6 @@
     },
     methods: {
       chooseValidator() {
-        console.log(sizeValidatorSoft);
-        console.log(sizeValidatorHard);
         return this.story ? sizeValidatorSoft : sizeValidatorHard;
       },
       async createStory(draft) {
@@ -101,7 +93,7 @@
           this.desc = "";
           this.rotator = !this.rotator;
           this.$v.$reset();
-          this.$store.dispatch("addStory", response.data);//в респонсе объект новой истории. В складе добавить в начало историю
+          this.$store.dispatch("addStory", response.data);
           const message = draft ? this.$messages.DRAFT_CREATED : this.$messages.HISTORY_CREATED;
           this.$store.dispatch("openAlert", {type: "success", text: message});
         } catch(err) {
@@ -123,7 +115,7 @@
           this.beforeYear = null;
           this.afterYear = null;
           this.$v.$reset();
-          this.$store.dispatch("replaceUserStory", response.data);//в респонсе объект обновленной истории. В складе заменить историю
+          this.$store.dispatch("replaceUserStory", response.data);
           const message = draft ? this.$messages.DRAFT_CREATED : this.$messages.HISTORY_CREATED;
           this.$store.dispatch("openAlert", {type: "success", text: message});
         } catch(err) {
@@ -146,7 +138,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    &__replacer { //стили такие же как у .select
+    &__replacer { // стили такие же как у .select
       @media (max-width: 1719px) {
         font-size: 14px;
       }
@@ -167,9 +159,6 @@
       margin-right: 20px;
       margin-left: 20px;
     }
-    &__comment {
-
-    }
     &__form {
       display: flex;
       flex-wrap: wrap;
@@ -186,7 +175,6 @@
       @media (max-width: 767px) {
         flex: 1 1 100%;
       }
-
     }
     &__description {
       position: relative;
@@ -252,33 +240,3 @@
     }
   }
 </style>
-
-
-async sendStory(draft) {
-        // if (this.$v.$invalid) {
-        //   this.$v.$touch();
-        //   return;
-        // }
-        try {
-          const data = new FormData();
-          data.append("desc", this.tempDesc);
-          data.append("draft", draft);
-          data.append("imageBefore", this.beforeImage);
-          data.append("imageAfter", this.afterImage);
-          data.append("yearBefore", this.beforeYear);
-          data.append("yearAfter", this.afterYear);
-
-          const response = await this.$store.dispatch("sendStory", data);
-          // this.$store.dispatch("setValue", {key: "beforeImage", value: null});
-          // this.$store.dispatch("setValue", {key: "afterImage", value: null});
-          // this.$store.dispatch("setValue", {key: "beforeYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
-          // this.$store.dispatch("setValue", {key: "afterYear", value: CONFIG.IMAGE_DATE_SELECT_INITIAL_VALUE});
-          // this.desc = "";
-          // this.$v.$reset();
-          const message = draft ? this.$messages.DRAFT_CREATED : this.$messages.HISTORY_CREATED;
-          this.$store.dispatch("openAlert", {type: "success", text: message});
-        } catch(err) {
-          apiErrorHandler.call(this, err);
-        }
-      },
-    },

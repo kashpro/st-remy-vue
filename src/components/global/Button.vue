@@ -25,7 +25,7 @@
     color: #000000;
   }
   &--secondary {
-    background-color:transparent;
+    background-color: transparent;
     border: 1px solid rgba(#ffffff, 0.5);
     &:hover {
       border: 1px solid transparent;

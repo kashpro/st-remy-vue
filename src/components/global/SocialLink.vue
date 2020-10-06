@@ -11,7 +11,6 @@
 <style lang="scss">
   .social-link {
     opacity: 0.75;
-    // transition: all 0.2s ease;
     display: block;
     width: 18px;
     height: 18px;
@@ -20,11 +19,9 @@
     background-repeat: no-repeat;
     &--contacts {
       background-image: url("../../assets/images/contacts.png");
-      // margin-right: 40px;
     }
     &--ok {
       background-image: url("../../assets/images/ok.png");
-      // margin-right: 15px;
     }
     &--vk {
       background-image: url("../../assets/images/vk.png");

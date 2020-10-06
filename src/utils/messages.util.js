@@ -25,7 +25,6 @@ const messages = {
   FORM_THEME_FIELD_REQUIRED: "Поле 'Тема' обязательно",
   FORM_IMAGE_FIELD_REQUIRED: "Поле 'Image' обязательно",
   FORM_IMAGE_FIELD_BIG: "Загрузите картинку не более 5 мб",
-  // FORM_IMAGE_FIELD_BIG: "Размер файла не должен превышать 5 мб",
   FEEDBACK_THEMES: [
     "Как зарегистрироваться на сайте",
     "Технические проблемы с сайтом",

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import MetaInfo from "@/utils/metaInfo.mixin.js";
+  import MetaInfo from "@/mixins/metaInfo.mixin.js";
 
   export default {
     name: "Page404",
@@ -29,7 +29,6 @@
     height: 100vh;
     &__container {
       display: flex;
-      // flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100%;

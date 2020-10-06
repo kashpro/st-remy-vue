@@ -15,6 +15,7 @@
     <script>
       /* Глобальный конфиг, можно править без пересборки */
       const CONFIG = {
+        APP_NAME: "St Remy",
         RULES_FILE_LINK: "https://st-remy.django.the-uweb.ru/static/lorem-ipsum.pdf",
         PROMO_VK_LINK: "https://vk.com/4friendsforever",
         PROMO_OK_LINK: "https://ok.ru/group/55479726243847",
@@ -22,6 +23,22 @@
         STORY_DESC_MAX_LENGTH: 4000,
         PASSWORD_MIN_LENGTH: 8,
         START_DEFAULT_BIRTH_DATE: "2005-01-01",
+        IMAGE_DATE_SELECT_MIN_VALUE: 1920,
+        IMAGE_DATE_SELECT_INITIAL_VALUE: 2000,
+        IMAGE_MAX_SIZE: 5242880,
+        VK_SHARE_LINK: "https://vk.com/share.php?",
+        OK_SHARE_LINK: "https://connect.ok.ru/offer?",
+        PAGINATION_PROFILE_PER_PAGE: 3,
+        PAGINATION_GALLERY_PER_PAGE: 6,
+        PAGINATION_WINNERS_PER_PAGE: 3,
+        VIEWS_META_NAMES: {
+          "Gallery": "Галерея",
+          "Home": "Главная",
+          "Page404": "Не найдено",
+          "Profile": "Профиль",
+          "Start": "Старт",
+          "Winners": "Победители",
+        },
         SERVER_BASE: "https://st-remy.django.the-uweb.ru",
         SERVER_REGISTER_API: "/auth/users/",
         SERVER_LOGIN_API: "/auth/token/login/",
@@ -36,23 +53,6 @@
         SERVER_GET_WINNERS: "/api/v1/winner/?limit=100000&offset=0",
         SERVER_SEND_VOICE: "/api/v1/voice/",
         SERVER_API_TIMEOUT: 10000,
-        IMAGE_DATE_SELECT_MIN_VALUE: 1920,
-        IMAGE_DATE_SELECT_INITIAL_VALUE: 2000,
-        IMAGE_MAX_SIZE: 5242880,
-        APP_NAME: "St Remy",
-        VK_SHARE_LINK: "https://vk.com/share.php?",
-        OK_SHARE_LINK: "https://connect.ok.ru/offer?",
-        PAGINATION_PROFILE_PER_PAGE: 3,
-        PAGINATION_GALLERY_PER_PAGE: 6,
-        PAGINATION_WINNERS_PER_PAGE: 3,
-        VIEWS_META_NAMES: {
-          "Gallery": "Галерея",
-          "Home": "Главная",
-          "Page404": "Не найдено",
-          "Profile": "Профиль",
-          "Start": "Старт",
-          "Winners": "Победители",
-        },
       };
     </script>
     <!-- built files will be auto injected -->

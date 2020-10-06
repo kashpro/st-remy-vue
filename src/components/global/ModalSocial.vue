@@ -16,11 +16,9 @@
 
 <style lang="scss">
   .modal-social {
-    // flex: 0 1 47%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // margin-top: 15px;
     &__text {
       text-align: center;
       margin-bottom: 20px;
